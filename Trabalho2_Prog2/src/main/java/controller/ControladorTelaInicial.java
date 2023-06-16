@@ -17,6 +17,7 @@ import model.Album;
 import model.Pessoa;
 import view.TelaInicial;
 import view.TelaListaFaixas;
+import view.TelaPerfil;
 
 /**
  *
@@ -203,7 +204,16 @@ public class ControladorTelaInicial {
         telaInicial.adicionarAcaoBotaoAnterior(acao -> {
             acaoAnterior();
         });
+        telaInicial.adicionarAcaoFotoPerfil(acao -> {
+            acaoFotoPerfil();
+        });
 
+    }
+
+    public void acaoFotoPerfil() {
+        ControladorTelaPerfil controladorTelaPerfil = new ControladorTelaPerfil(new TelaPerfil(), telaInicial, pessoa);
+        controladorTelaPerfil.exibirTela();
+        telaInicial.fecharTela();
     }
 
     public void acaoAnterior() {
@@ -225,48 +235,53 @@ public class ControladorTelaInicial {
         Album albumSelected = albDao.getAlbumNome(telaInicial.getNomeAlbum_1().getText());
         ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaInicial, albumSelected);
         controladorTelaListaFaixas.exibirTela();
-       telaInicial.fecharTela();
-   
+        telaInicial.fecharTela();
+
     }
+
     public void acaoAlbum_2() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaInicial.getNomeAlbum_2().getText());
         ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaInicial, albumSelected);
         controladorTelaListaFaixas.exibirTela();
-       telaInicial.fecharTela();
-   
+        telaInicial.fecharTela();
+
     }
+
     public void acaoAlbum_3() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaInicial.getNomeAlbum_3().getText());
         ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaInicial, albumSelected);
         controladorTelaListaFaixas.exibirTela();
-       telaInicial.fecharTela();
-   
+        telaInicial.fecharTela();
+
     }
+
     public void acaoAlbum_4() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaInicial.getNomeAlbum_4().getText());
         ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaInicial, albumSelected);
         controladorTelaListaFaixas.exibirTela();
-       telaInicial.fecharTela();
-   
+        telaInicial.fecharTela();
+
     }
+
     public void acaoAlbum_5() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaInicial.getNomeAlbum_5().getText());
         ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaInicial, albumSelected);
         controladorTelaListaFaixas.exibirTela();
-       telaInicial.fecharTela();
-   
+        telaInicial.fecharTela();
+
     }
+
     public void acaoAlbum_6() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaInicial.getNomeAlbum_6().getText());
         ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaInicial, albumSelected);
         controladorTelaListaFaixas.exibirTela();
-       telaInicial.fecharTela();
-   
+        telaInicial.fecharTela();
+
     }
 
     public void exibirTela() {

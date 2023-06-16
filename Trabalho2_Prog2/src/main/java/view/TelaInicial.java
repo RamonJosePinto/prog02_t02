@@ -20,151 +20,159 @@ public class TelaInicial extends javax.swing.JFrame {
     public TelaInicial() {
         initComponents();
     }
-
+    
+    public void adicionarAcaoFotoPerfil(ActionListener acao) {
+        btnFotoPerfil.addActionListener(acao);
+    }
+    
     public void adicionarAcaoBotaoAlbum_1(ActionListener acao) {
         btnAlbum_1.addActionListener(acao);
     }
-
+    
     public void adicionarAcaoBotaoAlbum_2(ActionListener acao) {
         btnAlbum_2.addActionListener(acao);
     }
-
+    
     public void adicionarAcaoBotaoAlbum_3(ActionListener acao) {
         btnAlbum_3.addActionListener(acao);
     }
-
+    
     public void adicionarAcaoBotaoAlbum_4(ActionListener acao) {
         btnAlbum_4.addActionListener(acao);
     }
-
+    
     public void adicionarAcaoBotaoAlbum_5(ActionListener acao) {
         btnAlbum_5.addActionListener(acao);
     }
-
+    
     public void adicionarAcaoBotaoAlbum_6(ActionListener acao) {
         btnAlbum_6.addActionListener(acao);
     }
     
-    public void adicionarAcaoBotaoProximo(ActionListener acao){
+    public void adicionarAcaoBotaoProximo(ActionListener acao) {
         btnProxima.addActionListener(acao);
     }
     
-    public void adicionarAcaoBotaoAnterior(ActionListener acao){
+    public void adicionarAcaoBotaoAnterior(ActionListener acao) {
         btnAnterior.addActionListener(acao);
     }
-
+    
     public JButton getAlbum_1() {
         return btnAlbum_1;
     }
-
+    
     public JButton getAlbum_2() {
         return btnAlbum_2;
     }
-
+    
     public JButton getAlbum_3() {
         return btnAlbum_3;
     }
-
+    
     public JButton getAlbum_4() {
         return btnAlbum_4;
     }
-
+    
     public JButton getAlbum_5() {
         return btnAlbum_5;
     }
-
+    
     public JButton getAlbum_6() {
         return btnAlbum_6;
     }
-
+    
     public JLabel getNomeAlbum_1() {
         return lbNomeAlbum_1;
     }
+
     public JLabel getNomeAlbum_2() {
         return lbNomeAlbum_2;
     }
+
     public JLabel getNomeAlbum_3() {
         return lbNomeAlbum_3;
     }
+
     public JLabel getNomeAlbum_4() {
         return lbNomeAlbum_4;
     }
+
     public JLabel getNomeAlbum_5() {
         return lbNomeAlbum_5;
     }
+
     public JLabel getNomeAlbum_6() {
         return lbNomeAlbum_6;
     }
-
-
+    
     public JLabel getNomeArtista_1() {
         return lbNomeArtista_1;
     }
-
+    
     public JLabel getNomeArtista_2() {
         return lbNomeArtista_2;
     }
-
+    
     public JLabel getNomeArtista_3() {
         return lbNomeArtista_3;
     }
-
+    
     public JLabel getNomeArtista_4() {
         return lbNomeArtista_4;
     }
-
+    
     public JLabel getNomeArtista_5() {
         return lbNomeArtista_5;
     }
-
+    
     public JLabel getNomeArtista_6() {
         return lbNomeArtista_6;
     }
-
+    
     public JLabel getAnoLancamento_1() {
         return lbAnoLancamento_1;
     }
-
+    
     public JLabel getAnoLancamento_2() {
         return lbAnoLancamento_2;
     }
-
+    
     public JLabel getAnoLancamento_3() {
         return lbAnoLancamento_3;
     }
-
+    
     public JLabel getAnoLancamento_4() {
         return lbAnoLancamento_4;
     }
-
+    
     public JLabel getAnoLancamento_5() {
         return lbAnoLancamento_5;
     }
-
+    
     public JLabel getAnoLancamento_6() {
         return lbAnoLancamento_6;
     }
-
+    
     public void setNomePessoaLogada(String nome) {
         lbNomePessoaLogada.setText(nome);
     }
     
-    public JButton getBotaoAnterior(){
+    public JButton getBotaoAnterior() {
         return btnAnterior;
     }
     
-    public JButton getBotaoProxima(){
+    public JButton getBotaoProxima() {
         return btnProxima;
     }
     
-    public void setLbPagina(String text){
+    public void setLbPagina(String text) {
         lbPagina.setText(text);
     }
-
+    
     public void exibirTela() {
         setVisible(true);
     }
-
+    
     public void fecharTela() {
         setVisible(false);
     }
