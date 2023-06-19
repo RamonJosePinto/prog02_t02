@@ -42,6 +42,12 @@ public class TelaListaFaixas extends javax.swing.JFrame {
     public void adicionarAcaoBotaoVoltar(ActionListener acao){
         btnVoltar.addActionListener(acao);
     }
+    public void adicionarAcaoBotaoVerReviews(ActionListener acao){
+        btnVerReviews1.addActionListener(acao);
+    }
+    public void adicionarAcaoBotaoFazerReviews(ActionListener acao){
+        btnFazerReview.addActionListener(acao);
+    }
      public void exibirTela(){
         setVisible(true);
     }

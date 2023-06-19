@@ -10,7 +10,9 @@ import model.Album;
 import model.Artista;
 import model.Faixa;
 import model.Pessoa;
+import view.TelaCadastroReview;
 import view.TelaListaFaixas;
+import view.TelaReviews;
 
 /**
  *
@@ -66,18 +68,36 @@ public class ControladorTelaListaFaixas {
         telaListaFaixas.adicionarAcaoBotaoVoltar(acao -> {
             acaoVoltar();
         });
+        telaListaFaixas.adicionarAcaoBotaoVerReviews(acao -> {
+            acaoVerReviews();
+        });
+        telaListaFaixas.adicionarAcaoBotaoFazerReviews(acao -> {
+            acaoFazerReviews();
+        });
     }
 
     public void acaoVoltar() {
         fecharTela();
         telaAnterior.setVisible(true);
     }
-    
-    public void exibirTela(){
+
+    public void acaoVerReviews() {
+        ControladorTelaReviews controladorTelaReviews = new ControladorTelaReviews(new TelaReviews(), this.alb, telaListaFaixas);
+        controladorTelaReviews.exibirTela();
+        fecharTela();
+    }
+
+    public void acaoFazerReviews() {
+        ControladorTelaCadastroReview controladorTelaCadastroReview = new ControladorTelaCadastroReview(new TelaCadastroReview(), alb, telaAnterior);
+        controladorTelaCadastroReview.exibirTela();
+        fecharTela();
+    }
+
+    public void exibirTela() {
         telaListaFaixas.exibirTela();
     }
-    
-    public void fecharTela(){
+
+    public void fecharTela() {
         telaListaFaixas.fecharTela();
     }
 

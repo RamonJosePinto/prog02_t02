@@ -4,6 +4,9 @@
  */
 package view;
 
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Usuario
@@ -16,9 +19,37 @@ public class TelaCadastroReview extends javax.swing.JFrame {
     public TelaCadastroReview() {
         initComponents();
     }
-    
-    public void exibirTela(){
+
+    public void setNomeAlbum(String text) {
+        lbNomeAlbum.setText(text);
+    }
+
+    public void exibirTela() {
         setVisible(true);
+    }
+    
+    public void fecharTela(){
+        setVisible(false);
+    }
+    
+    public void adicionarAcaoBotaoVoltar(ActionListener acao){
+        btnCancelar.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoBotaoEnviar(ActionListener acao){
+        btnEnviar.addActionListener(acao);
+    }
+    
+    public String getDescricao(){
+        return txtDescricao.getText();
+    }
+    
+    public int getNota(){
+        return (int) spnNota.getValue();
+    }
+    
+    public void exibirMensagem(String msg){
+        JOptionPane.showMessageDialog(null, msg);
     }
 
     /**
@@ -30,21 +61,118 @@ public class TelaCadastroReview extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnEnviar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtDescricao = new javax.swing.JTextArea();
+        spnNota = new javax.swing.JSpinner();
+        lbNota = new javax.swing.JLabel();
+        lbAvaliando = new javax.swing.JLabel();
+        lbOpiniaoAlbum = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JButton();
+        lbNomeAlbum = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnEnviar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEnviar.setText("Enviar");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarActionPerformed(evt);
+            }
+        });
+
+        txtDescricao.setColumns(20);
+        txtDescricao.setRows(5);
+        jScrollPane1.setViewportView(txtDescricao);
+
+        lbNota.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbNota.setText("Nota:");
+
+        lbAvaliando.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbAvaliando.setText("Avaliando");
+        lbAvaliando.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        lbOpiniaoAlbum.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbOpiniaoAlbum.setText("Sua opinião sobre o álbum:");
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        lbNomeAlbum.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbNomeAlbum.setText("<nome do album>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spnNota)
+                    .addComponent(lbNota, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbOpiniaoAlbum)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(50, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbAvaliando)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbNomeAlbum)
+                .addGap(83, 83, 83))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbAvaliando)
+                    .addComponent(lbNomeAlbum))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addComponent(lbNota)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(spnNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(lbOpiniaoAlbum)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(83, 83, 83)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(291, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+//        // TODO add your handling code here:
+//        int nota = (int) spnNota.getValue();
+//        System.out.println(nota);
+//        String descricao = txtDescricao.getText();
+//        ReviewDAO daoReview = new ReviewDAO();
+//        // gravar review
+//        Review review = new Review((Reviewer) Pessoa.getUsuarioLogado(), alb, nota, descricao);
+//        ReviewDAO reviewDao = new ReviewDAO();
+//        reviewDao.salvarReview(review);
+//        // apresnetar joptionpane
+//        JOptionPane.showMessageDialog(null, "Review Cadastrada com sucesso");
+//        janelaAnterior.setVisible(true);
+//        this.setVisible(false);
+    }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+//        janelaAnterior.setVisible(true);
+//        this.setVisible(false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -82,5 +210,14 @@ public class TelaCadastroReview extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEnviar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbAvaliando;
+    private javax.swing.JLabel lbNomeAlbum;
+    private javax.swing.JLabel lbNota;
+    private javax.swing.JLabel lbOpiniaoAlbum;
+    private javax.swing.JSpinner spnNota;
+    private javax.swing.JTextArea txtDescricao;
     // End of variables declaration//GEN-END:variables
 }
