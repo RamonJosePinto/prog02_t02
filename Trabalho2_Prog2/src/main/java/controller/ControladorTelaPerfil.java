@@ -23,6 +23,7 @@ import model.Pessoa;
 import model.Pessoa.TipoPessoa;
 import model.Review;
 import model.Reviewer;
+import view.TelaCadastroAlbum;
 import view.TelaInicial;
 import view.TelaListaFaixas;
 import view.TelaPerfil;
@@ -321,6 +322,14 @@ public class ControladorTelaPerfil {
         telaPerfil.adicionarAcaoBotaoAlbum_6(acao -> {
             acaoAlbum_6();
         });
+        telaPerfil.adicionarAcaoBotaoCadastrarAlbum(acao -> {
+            acaoCadastrarAlbum();
+        });
+    }
+
+    public void acaoCadastrarAlbum() {
+        ControladorCadastroAlbum controladorCadastroAlbum = new ControladorCadastroAlbum(new TelaCadastroAlbum());
+        controladorCadastroAlbum.exibirTela();
     }
 
     public void acaoAlbum_1() {

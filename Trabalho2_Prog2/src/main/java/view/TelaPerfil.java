@@ -65,6 +65,10 @@ public class TelaPerfil extends javax.swing.JFrame {
         lbReviewsValor.setText(text);
     }
     
+    public void adicionarAcaoBotaoCadastrarAlbum(ActionListener acao){
+        btnAdicionarAlbum.addActionListener(acao);
+    }
+    
     public void adicionarAcaoBotaoAlbum_1(ActionListener acao) {
         btnAlbum_1.addActionListener(acao);
     }
@@ -218,7 +222,7 @@ public class TelaPerfil extends javax.swing.JFrame {
     }
     
     public void exibirBotaoAdicionarAlbum() {
-        setVisible(true);
+        btnAdicionarAlbum.setVisible(true);
     }
     
     public void exbirTela() {
