@@ -4,8 +4,8 @@
  */
 package model;
 
-
 import dao.PessoaDAO;
+import exception.PessoaInexistenteException;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,7 +23,7 @@ public abstract class Pessoa {
     protected int idPessoa;
     protected static int geradorIdPessoa = 0;
     protected static Pessoa usuarioLogado;
-    
+
     public Pessoa(String username, String email, String senha, String nome, TipoPessoa tipoPessoa) {
         this.idPessoa = ++geradorIdPessoa;
         this.username = username;
@@ -32,25 +32,26 @@ public abstract class Pessoa {
         this.nome = nome;
         this.tipoPessoa = tipoPessoa;
     }
-    
+
     // Enum
     public enum TipoPessoa {
         ARTISTA,
         REVIEWER
     }
-    
-    public static Pessoa login(String email, String senha) {
+
+    public static Pessoa login(String email, String senha) throws PessoaInexistenteException {
         PessoaDAO dao = new PessoaDAO();
         Pessoa p = dao.getPessoaEmail(email);
-        
+
         if ((p != null) && (p.getSenha().equals(senha))) {
             Pessoa.usuarioLogado = p;
             return usuarioLogado;
         } else {
-            return null;
+            throw new PessoaInexistenteException("Usuário não encontrado");
+            //return null;
         }
     }
-    
+
     public abstract int contarReviews();
 
     public String getUsername() {
@@ -109,9 +110,9 @@ public abstract class Pessoa {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        
+
         final Pessoa other = (Pessoa) obj;
-        
+
         if (!Objects.equals(this.username, other.username)) {
             return false;
         }

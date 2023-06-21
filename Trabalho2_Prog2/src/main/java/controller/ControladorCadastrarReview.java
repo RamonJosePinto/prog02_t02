@@ -17,13 +17,13 @@ import view.TelaCadastroReview;
  *
  * @author Usuario
  */
-public class ControladorTelaCadastroReview {
+public class ControladorCadastrarReview {
 
     private TelaCadastroReview telaCadastroReview;
     private Album alb;
     private JFrame janelaAnterior;
 
-    public ControladorTelaCadastroReview(TelaCadastroReview telaCadastroReview, Album alb, JFrame janelaAnterior) {
+    public ControladorCadastrarReview(TelaCadastroReview telaCadastroReview, Album alb, JFrame janelaAnterior) {
         this.telaCadastroReview = telaCadastroReview;
         this.alb = alb;
         this.janelaAnterior = janelaAnterior;

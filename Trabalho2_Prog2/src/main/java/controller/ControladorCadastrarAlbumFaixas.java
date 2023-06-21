@@ -13,13 +13,13 @@ import view.TelaCadastroAlbumFaixas;
  *
  * @author Usuario
  */
-public class ControladorCadastroAlbumFaixas {
+public class ControladorCadastrarAlbumFaixas {
 
     private TelaCadastroAlbumFaixas telaCadastroAlbumFaixas;
     private Album alb;
     private int contNumero = 1;
 
-    public ControladorCadastroAlbumFaixas(TelaCadastroAlbumFaixas telaCadastroAlbumFaixas, Album alb) {
+    public ControladorCadastrarAlbumFaixas(TelaCadastroAlbumFaixas telaCadastroAlbumFaixas, Album alb) {
         this.telaCadastroAlbumFaixas = telaCadastroAlbumFaixas;
         this.alb = alb;
 

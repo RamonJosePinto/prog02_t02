@@ -328,7 +328,7 @@ public class ControladorTelaPerfil {
     }
 
     public void acaoCadastrarAlbum() {
-        ControladorCadastroAlbum controladorCadastroAlbum = new ControladorCadastroAlbum(new TelaCadastroAlbum());
+        ControladorCadastrarAlbum controladorCadastroAlbum = new ControladorCadastrarAlbum(new TelaCadastroAlbum());
         controladorCadastroAlbum.exibirTela();
     }
 

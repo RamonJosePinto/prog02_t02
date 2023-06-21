@@ -16,11 +16,12 @@ import view.TelaCadastroAlbumFaixas;
  *
  * @author Usuario
  */
-public class ControladorCadastroAlbum {
+public class ControladorCadastrarAlbum {
 
     private TelaCadastroAlbum telaCadastroAlbum;
-
-    public ControladorCadastroAlbum(TelaCadastroAlbum telaCadastroAlbum) {
+    private Album alb;
+            
+    public ControladorCadastrarAlbum(TelaCadastroAlbum telaCadastroAlbum) {
         this.telaCadastroAlbum = telaCadastroAlbum;
         inicializarBotoes();
     }
@@ -32,9 +33,9 @@ public class ControladorCadastroAlbum {
         telaCadastroAlbum.adicionarAcaoBotaoEnviar(acao -> {
             acaoEnviar();
         });
-        telaCadastroAlbum.adicionarAcaoBotaoCadastrarFaixas(acao -> {
-            acaoCadastrarFaixas();
-        });
+//        telaCadastroAlbum.adicionarAcaoBotaoCadastrarFaixas(acao -> {
+//            acaoCadastrarFaixas();
+//        });
     }
 
     public void acaoCancelar() {
@@ -78,7 +79,7 @@ public class ControladorCadastroAlbum {
             Artista art = (Artista) Pessoa.getUsuarioLogado();
             Album.setAlbumCadastrando(new Album(titulo, anoLan, art));
 
-            ControladorCadastroAlbumFaixas controladorCadastroAlbumFaixas = new ControladorCadastroAlbumFaixas(new TelaCadastroAlbumFaixas(), Album.getAlbumCadastrando());
+            ControladorCadastrarAlbumFaixas controladorCadastroAlbumFaixas = new ControladorCadastrarAlbumFaixas(new TelaCadastroAlbumFaixas(), Album.getAlbumCadastrando());
             controladorCadastroAlbumFaixas.exibirTela();
         }
     }

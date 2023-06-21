@@ -5,6 +5,9 @@
 package controller;
 
 import dao.PessoaDAO;
+import exception.PessoaInexistenteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Artista;
 import model.Pessoa;
@@ -17,11 +20,12 @@ import view.TelaLogin;
  *
  * @author Usuario
  */
-public class ControladorTelaCadastrarPessoa {
+public class ControladorCadastrarPessoa {
+
     private TelaCadastrarPessoa telaCadastrarPessoa;
     private Pessoa pessoa;
 
-    public ControladorTelaCadastrarPessoa(TelaCadastrarPessoa telaCadastrarPessoa, Pessoa pessoa) {
+    public ControladorCadastrarPessoa(TelaCadastrarPessoa telaCadastrarPessoa, Pessoa pessoa) {
         this.telaCadastrarPessoa = telaCadastrarPessoa;
         this.pessoa = pessoa;
 
@@ -66,19 +70,22 @@ public class ControladorTelaCadastrarPessoa {
             }
 
             if (jaCadastrado == false) {
-                pDao.salvarPessoa(novaPessoa);
+                try {
+     
+                    pDao.salvarPessoa(novaPessoa);
 
-                System.out.println(pDao.getListaPessoas());
+                    System.out.println(pDao.getListaPessoas());
+                    System.out.println(novaPessoa.toString());
 
-                System.out.println(novaPessoa.toString());
-
-                if (Pessoa.login(email, senha) == null) {
-                    telaCadastrarPessoa.exibirMensagem("Erro ao logar pessoa.");
-                } else {
+          
+                    Pessoa.login(email, senha);
+                 
                     telaCadastrarPessoa.exibirMensagem("Cadastro realizado com sucesso!");
                     ControladorTelaInicial controladorTelaInicial = new ControladorTelaInicial(new TelaInicial());
                     controladorTelaInicial.exibirTela();
                     telaCadastrarPessoa.fecharTela();
+                } catch (PessoaInexistenteException ex) {
+                    telaCadastrarPessoa.exibirMensagem(ex.getMessage());
                 }
             }
         }
