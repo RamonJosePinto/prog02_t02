@@ -7,6 +7,8 @@ package controller;
 import java.awt.event.ActionListener;
 import model.Album;
 import model.Faixa;
+import model.table.FaixasTableModel;
+import view.TelaCadastroAlbum;
 import view.TelaCadastroAlbumFaixas;
 
 /**
@@ -61,6 +63,9 @@ public class ControladorCadastrarAlbumFaixas {
 
             } else {
                 fecharTela();
+                ControladorCadastrarAlbum controladorCadastroAlbum = new ControladorCadastrarAlbum(new TelaCadastroAlbum(), new FaixasTableModel(this.alb.getFaixas()), this.alb);
+                controladorCadastroAlbum.preencherInformacaoAposCadastroFaixa();
+                controladorCadastroAlbum.exibirTela();
             }
 
         }
@@ -68,6 +73,9 @@ public class ControladorCadastrarAlbumFaixas {
 
     public void acaoVoltar() {
         fecharTela();
+        ControladorCadastrarAlbum controladorCadastroAlbum = new ControladorCadastrarAlbum(new TelaCadastroAlbum(), new FaixasTableModel(this.alb.getFaixas()), this.alb);
+        controladorCadastroAlbum.preencherInformacaoAposCadastroFaixa();
+        controladorCadastroAlbum.exibirTela();
     }
 
 }

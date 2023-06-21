@@ -52,12 +52,14 @@ public class ControladorCadastrarReview {
         reviewDao.salvarReview(review);
         // apresnetar joptionpane
         telaCadastroReview.exibirMensagem("Review Cadastrada com sucesso");
-        janelaAnterior.setVisible(true);
+        ControladorJFrame controladorJFrame = new ControladorJFrame(janelaAnterior);
+        controladorJFrame.ExibirTela();
         fecharTela();
     }
 
     public void acaoVoltar() {
-        janelaAnterior.setVisible(true);
+        ControladorJFrame controladorJFrame = new ControladorJFrame(janelaAnterior);
+        controladorJFrame.ExibirTela();
         fecharTela();
 
     }

@@ -6,6 +6,7 @@ package view;
 
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import model.table.FaixasTableModel;
 
 /**
  *
@@ -19,41 +20,54 @@ public class TelaListaFaixas extends javax.swing.JFrame {
     public TelaListaFaixas() {
         initComponents();
     }
-    
-    public JButton getBotaoFazerReview(){
+
+    public JButton getBotaoFazerReview() {
         return btnFazerReview;
     }
-    
-    public void setNomeAlbum(String nome){
+
+    public void setNomeAlbum(String nome) {
         lbNomeAlbum.setText(nome);
     }
-    public void setNomeArtista(String nome){
-         lbArtistaNome.setText(nome);
+
+    public void setNomeArtista(String nome) {
+        lbArtistaNome.setText(nome);
     }
-    public void setFaixasArea(String text){
-        txtFaixasArea.setText(text);
+//    public void setFaixasArea(String text){
+//        txtFaixasArea.setText(text);
+//    }
+
+    public void setScoreAlbum(String text) {
+        lbScore.setText(text);
     }
-    public void setScoreAlbum(String text){
-         lbScore.setText(text);
+
+    public void setValorAlbum(String text) {
+        lbReviewsValor.setText(text);
     }
-    public void setValorAlbum(String text){
-         lbReviewsValor.setText(text);
+
+    public void setTableModel(FaixasTableModel faixasTableModel) {
+        jTable.setModel(faixasTableModel);
     }
-    public void adicionarAcaoBotaoVoltar(ActionListener acao){
+
+    public void adicionarAcaoBotaoVoltar(ActionListener acao) {
         btnVoltar.addActionListener(acao);
     }
-    public void adicionarAcaoBotaoVerReviews(ActionListener acao){
+
+    public void adicionarAcaoBotaoVerReviews(ActionListener acao) {
         btnVerReviews1.addActionListener(acao);
     }
-    public void adicionarAcaoBotaoFazerReviews(ActionListener acao){
+
+    public void adicionarAcaoBotaoFazerReviews(ActionListener acao) {
         btnFazerReview.addActionListener(acao);
     }
-     public void exibirTela(){
+
+    public void exibirTela() {
         setVisible(true);
     }
-      public void fecharTela(){
+
+    public void fecharTela() {
         setVisible(false);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,11 +84,11 @@ public class TelaListaFaixas extends javax.swing.JFrame {
         lbScoreValor = new javax.swing.JLabel();
         lbReviewsLabel = new javax.swing.JLabel();
         lbReviewsValor = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtFaixasArea = new javax.swing.JTextArea();
         btnVoltar = new javax.swing.JButton();
         btnFazerReview = new javax.swing.JButton();
         btnVerReviews1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,10 +122,6 @@ public class TelaListaFaixas extends javax.swing.JFrame {
         lbReviewsValor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbReviewsValor.setText("Reviews");
 
-        txtFaixasArea.setColumns(20);
-        txtFaixasArea.setRows(5);
-        jScrollPane1.setViewportView(txtFaixasArea);
-
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,6 +142,19 @@ public class TelaListaFaixas extends javax.swing.JFrame {
                 btnVerReviews1ActionPerformed(evt);
             }
         });
+
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -162,16 +185,16 @@ public class TelaListaFaixas extends javax.swing.JFrame {
                                 .addGap(18, 18, 18))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(88, 88, 88)
+                                .addComponent(btnFazerReview, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(88, 88, 88))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnVerReviews1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnVerReviews1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addGap(18, 18, 18))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(106, 106, 106)
-                .addComponent(btnFazerReview, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 106, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,15 +216,15 @@ public class TelaListaFaixas extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbReviewsLabel)
                             .addComponent(lbReviewsValor))))
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVerReviews1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnFazerReview, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -268,13 +291,13 @@ public class TelaListaFaixas extends javax.swing.JFrame {
     private javax.swing.JButton btnFotoPerfil1;
     private javax.swing.JButton btnVerReviews1;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable;
     private javax.swing.JLabel lbArtistaNome;
     private javax.swing.JLabel lbNomeAlbum;
     private javax.swing.JLabel lbReviewsLabel;
     private javax.swing.JLabel lbReviewsValor;
     private javax.swing.JLabel lbScore;
     private javax.swing.JLabel lbScoreValor;
-    private javax.swing.JTextArea txtFaixasArea;
     // End of variables declaration//GEN-END:variables
 }

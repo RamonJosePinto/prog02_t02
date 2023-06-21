@@ -330,15 +330,15 @@ public class ControladorTelaPerfil {
     }
 
     public void acaoCadastrarAlbum() {
-        FaixaDAO fDAO = new FaixaDAO();
-        ControladorCadastrarAlbum controladorCadastroAlbum = new ControladorCadastrarAlbum(new TelaCadastroAlbum(), new FaixasTableModel(fDAO.getListaFaixas()));
+        Album novoAlb = new Album();
+        ControladorCadastrarAlbum controladorCadastroAlbum = new ControladorCadastrarAlbum(new TelaCadastroAlbum(), new FaixasTableModel(novoAlb.getFaixas()), novoAlb);
         controladorCadastroAlbum.exibirTela();
     }
 
     public void acaoAlbum_1() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaPerfil.getNomeAlbum_1().getText());
-        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaPerfil, albumSelected);
+        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaPerfil, albumSelected, new FaixasTableModel(albumSelected.getFaixas()));
         controladorTelaListaFaixas.exibirTela();
         telaPerfil.fecharTela();
 
@@ -347,7 +347,7 @@ public class ControladorTelaPerfil {
     public void acaoAlbum_2() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaPerfil.getNomeAlbum_2().getText());
-        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaPerfil, albumSelected);
+        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaPerfil, albumSelected, new FaixasTableModel(albumSelected.getFaixas()));
         controladorTelaListaFaixas.exibirTela();
         telaPerfil.fecharTela();
 
@@ -356,7 +356,7 @@ public class ControladorTelaPerfil {
     public void acaoAlbum_3() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaPerfil.getNomeAlbum_3().getText());
-        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaPerfil, albumSelected);
+        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaPerfil, albumSelected, new FaixasTableModel(albumSelected.getFaixas()));
         controladorTelaListaFaixas.exibirTela();
         telaPerfil.fecharTela();
 
@@ -365,7 +365,7 @@ public class ControladorTelaPerfil {
     public void acaoAlbum_4() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaPerfil.getNomeAlbum_4().getText());
-        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaPerfil, albumSelected);
+        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaPerfil, albumSelected, new FaixasTableModel(albumSelected.getFaixas()));
         controladorTelaListaFaixas.exibirTela();
         telaPerfil.fecharTela();
 
@@ -374,7 +374,7 @@ public class ControladorTelaPerfil {
     public void acaoAlbum_5() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaPerfil.getNomeAlbum_5().getText());
-        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaPerfil, albumSelected);
+        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaPerfil, albumSelected, new FaixasTableModel(albumSelected.getFaixas()));
         controladorTelaListaFaixas.exibirTela();
         telaPerfil.fecharTela();
 
@@ -383,7 +383,7 @@ public class ControladorTelaPerfil {
     public void acaoAlbum_6() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaPerfil.getNomeAlbum_6().getText());
-        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaPerfil, albumSelected);
+        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaPerfil, albumSelected, new FaixasTableModel(albumSelected.getFaixas()));
         controladorTelaListaFaixas.exibirTela();
         telaPerfil.fecharTela();
 

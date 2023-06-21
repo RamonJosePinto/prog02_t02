@@ -22,15 +22,17 @@ public class ControladorCadastrarAlbum {
     private TelaCadastroAlbum telaCadastroAlbum;
     private FaixasTableModel faixasTableModel;
     private Album alb;
-            
-    public ControladorCadastrarAlbum(TelaCadastroAlbum telaCadastroAlbum, FaixasTableModel faixasTableModel) {
+
+    public ControladorCadastrarAlbum(TelaCadastroAlbum telaCadastroAlbum, FaixasTableModel faixasTableModel, Album alb) {
         this.telaCadastroAlbum = telaCadastroAlbum;
         this.faixasTableModel = faixasTableModel;
+        this.alb = alb;
+
         setTableModel();
         inicializarBotoes();
     }
-    
-    public void setTableModel(){
+
+    public void setTableModel() {
         telaCadastroAlbum.setTableModel(this.faixasTableModel);
     }
 
@@ -41,9 +43,9 @@ public class ControladorCadastrarAlbum {
         telaCadastroAlbum.adicionarAcaoBotaoEnviar(acao -> {
             acaoEnviar();
         });
-//        telaCadastroAlbum.adicionarAcaoBotaoCadastrarFaixas(acao -> {
-//            acaoCadastrarFaixas();
-//        });
+        telaCadastroAlbum.adicionarAcaoBotaoCadastrarFaixa(acao -> {
+            acaoCadastrarFaixas();
+        });
     }
 
     public void acaoCancelar() {
@@ -60,18 +62,18 @@ public class ControladorCadastrarAlbum {
             String titulo = telaCadastroAlbum.getTituloAlbum();
             int anoLan = Integer.parseInt(telaCadastroAlbum.getAnoLancamentoAlbum());
             AlbumDAO albDao = new AlbumDAO();
-            albDao.salvarAlbum(Album.getAlbumCadastrando());
+            albDao.salvarAlbum(this.alb);
             telaCadastroAlbum.exibirMensagem("Album Cadastrado com sucesso");
             int opcao = telaCadastroAlbum.exibirMensagemConfirmacao("Você deseja cadastrar outro album?", "Confirmação");
             if (telaCadastroAlbum.opcaoSelecionada(opcao)) {
                 telaCadastroAlbum.setTituloAlbum("");
                 telaCadastroAlbum.setAnoLancamentoAlbum("");
                 Faixa.faixaCadastrando.clear();
-                Album.setAlbumCadastrando();
+                //Album.setAlbumCadastrando();
 
             } else {
                 Faixa.faixaCadastrando.clear();
-                Album.setAlbumCadastrando();
+                //Album.setAlbumCadastrando();
                 fecharTela();
 
             }
@@ -85,19 +87,25 @@ public class ControladorCadastrarAlbum {
             String titulo = telaCadastroAlbum.getTituloAlbum();
             int anoLan = Integer.parseInt(telaCadastroAlbum.getAnoLancamentoAlbum());
             Artista art = (Artista) Pessoa.getUsuarioLogado();
-            Album.setAlbumCadastrando(new Album(titulo, anoLan, art));
+            this.alb = (new Album(titulo, anoLan, art));
 
-            ControladorCadastrarAlbumFaixas controladorCadastroAlbumFaixas = new ControladorCadastrarAlbumFaixas(new TelaCadastroAlbumFaixas(), Album.getAlbumCadastrando());
+            ControladorCadastrarAlbumFaixas controladorCadastroAlbumFaixas = new ControladorCadastrarAlbumFaixas(new TelaCadastroAlbumFaixas(), this.alb);
             controladorCadastroAlbumFaixas.exibirTela();
+            fecharTela();
         }
     }
 
     public void fecharTela() {
         telaCadastroAlbum.fecharTela();
     }
-    
-    public void exibirTela(){
+
+    public void exibirTela() {
         telaCadastroAlbum.exibirTela();
+    }
+    
+    public void preencherInformacaoAposCadastroFaixa(){
+        telaCadastroAlbum.setTituloAlbum(this.alb.getTitulo());
+        telaCadastroAlbum.setAnoLancamentoAlbum(Integer.toString(this.alb.getAnoLancamento()));
     }
 
 }

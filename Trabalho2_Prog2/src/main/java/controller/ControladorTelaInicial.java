@@ -15,6 +15,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import model.Album;
 import model.Pessoa;
+import model.table.FaixasTableModel;
 import view.TelaInicial;
 import view.TelaListaFaixas;
 import view.TelaPerfil;
@@ -233,7 +234,7 @@ public class ControladorTelaInicial {
     public void acaoAlbum_1() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaInicial.getNomeAlbum_1().getText());
-        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaInicial, albumSelected);
+        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaInicial, albumSelected, new FaixasTableModel(albumSelected.getFaixas()));
         controladorTelaListaFaixas.exibirTela();
         telaInicial.fecharTela();
 
@@ -242,7 +243,7 @@ public class ControladorTelaInicial {
     public void acaoAlbum_2() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaInicial.getNomeAlbum_2().getText());
-        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaInicial, albumSelected);
+        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaInicial, albumSelected, new FaixasTableModel(albumSelected.getFaixas()));
         controladorTelaListaFaixas.exibirTela();
         telaInicial.fecharTela();
 
@@ -251,7 +252,7 @@ public class ControladorTelaInicial {
     public void acaoAlbum_3() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaInicial.getNomeAlbum_3().getText());
-        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaInicial, albumSelected);
+        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaInicial, albumSelected, new FaixasTableModel(albumSelected.getFaixas()));
         controladorTelaListaFaixas.exibirTela();
         telaInicial.fecharTela();
 
@@ -260,7 +261,7 @@ public class ControladorTelaInicial {
     public void acaoAlbum_4() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaInicial.getNomeAlbum_4().getText());
-        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaInicial, albumSelected);
+        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaInicial, albumSelected, new FaixasTableModel(albumSelected.getFaixas()));
         controladorTelaListaFaixas.exibirTela();
         telaInicial.fecharTela();
 
@@ -269,7 +270,7 @@ public class ControladorTelaInicial {
     public void acaoAlbum_5() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaInicial.getNomeAlbum_5().getText());
-        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaInicial, albumSelected);
+        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaInicial, albumSelected, new FaixasTableModel(albumSelected.getFaixas()));
         controladorTelaListaFaixas.exibirTela();
         telaInicial.fecharTela();
 
@@ -278,7 +279,7 @@ public class ControladorTelaInicial {
     public void acaoAlbum_6() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaInicial.getNomeAlbum_6().getText());
-        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaInicial, albumSelected);
+        ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaInicial, albumSelected, new FaixasTableModel(albumSelected.getFaixas()));
         controladorTelaListaFaixas.exibirTela();
         telaInicial.fecharTela();
 

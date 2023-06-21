@@ -10,6 +10,7 @@ import model.Album;
 import model.Artista;
 import model.Faixa;
 import model.Pessoa;
+import model.table.FaixasTableModel;
 import view.TelaCadastroReview;
 import view.TelaListaFaixas;
 import view.TelaReviews;
@@ -23,15 +24,18 @@ public class ControladorTelaListaFaixas {
     private JFrame telaAnterior;
     private TelaListaFaixas telaListaFaixas;
     private static Album alb;
+    private FaixasTableModel faixasTableModel;
 
-    public ControladorTelaListaFaixas(TelaListaFaixas telaListaFaixas, JFrame telaAnterior, Album alb) {
+    public ControladorTelaListaFaixas(TelaListaFaixas telaListaFaixas, JFrame telaAnterior, Album alb, FaixasTableModel faixasTableModel) {
         this.telaListaFaixas = telaListaFaixas;
         this.telaAnterior = telaAnterior;
         this.alb = alb;
+        this.faixasTableModel = faixasTableModel;
 
         verificarUsuario();
         carregarDetalhesAlbum();
         inicializarBotoes();
+        setTableModel();
     }
 
     public void verificarUsuario() {
@@ -40,13 +44,17 @@ public class ControladorTelaListaFaixas {
         }
     }
 
+    public void setTableModel() {
+        telaListaFaixas.setTableModel(this.faixasTableModel);
+    }
+
     public void carregarDetalhesAlbum() {
         int score = alb.calcularScore();
         int reviews = alb.contarReviews();
 
         telaListaFaixas.setNomeAlbum(alb.getTitulo());
         telaListaFaixas.setNomeArtista(alb.getArtista().getNome());
-        telaListaFaixas.setFaixasArea(apresentarFaixas());
+//        telaListaFaixas.setFaixasArea(apresentarFaixas());
         telaListaFaixas.setScoreAlbum((score < 0 ? "SN" : Integer.toString(score)));
         telaListaFaixas.setValorAlbum((reviews < 0 ? "SN" : Integer.toString(reviews)));
     }
@@ -78,7 +86,8 @@ public class ControladorTelaListaFaixas {
 
     public void acaoVoltar() {
         fecharTela();
-        telaAnterior.setVisible(true);
+        ControladorJFrame controladorJFrame = new ControladorJFrame(telaAnterior);
+        controladorJFrame.ExibirTela();
     }
 
     public void acaoVerReviews() {

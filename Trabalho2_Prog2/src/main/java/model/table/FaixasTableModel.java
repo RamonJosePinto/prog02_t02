@@ -39,6 +39,11 @@ public class FaixasTableModel extends AbstractTableModel {
     }
 
     @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return true;
+    }
+
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Faixa faixa = this.faixas.get(rowIndex);
         String valor = null;

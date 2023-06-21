@@ -162,7 +162,8 @@ public class ControladorTelaReviews {
 
     public void acaoVoltar() {
         fecharTela();
-        janelaAnterior.setVisible(true);
+        ControladorJFrame controladorJFrame = new ControladorJFrame(janelaAnterior);
+        controladorJFrame.ExibirTela();
     }
 
     public void acaoComboBox() {
