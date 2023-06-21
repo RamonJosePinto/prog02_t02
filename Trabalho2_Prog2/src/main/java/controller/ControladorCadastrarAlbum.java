@@ -9,6 +9,7 @@ import model.Album;
 import model.Artista;
 import model.Faixa;
 import model.Pessoa;
+import model.table.FaixasTableModel;
 import view.TelaCadastroAlbum;
 import view.TelaCadastroAlbumFaixas;
 
@@ -19,11 +20,18 @@ import view.TelaCadastroAlbumFaixas;
 public class ControladorCadastrarAlbum {
 
     private TelaCadastroAlbum telaCadastroAlbum;
+    private FaixasTableModel faixasTableModel;
     private Album alb;
             
-    public ControladorCadastrarAlbum(TelaCadastroAlbum telaCadastroAlbum) {
+    public ControladorCadastrarAlbum(TelaCadastroAlbum telaCadastroAlbum, FaixasTableModel faixasTableModel) {
         this.telaCadastroAlbum = telaCadastroAlbum;
+        this.faixasTableModel = faixasTableModel;
+        setTableModel();
         inicializarBotoes();
+    }
+    
+    public void setTableModel(){
+        telaCadastroAlbum.setTableModel(this.faixasTableModel);
     }
 
     public void inicializarBotoes() {

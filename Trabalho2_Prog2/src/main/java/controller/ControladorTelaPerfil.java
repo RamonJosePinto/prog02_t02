@@ -5,6 +5,7 @@
 package controller;
 
 import dao.AlbumDAO;
+import dao.FaixaDAO;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,6 +24,7 @@ import model.Pessoa;
 import model.Pessoa.TipoPessoa;
 import model.Review;
 import model.Reviewer;
+import model.table.FaixasTableModel;
 import view.TelaCadastroAlbum;
 import view.TelaInicial;
 import view.TelaListaFaixas;
@@ -328,7 +330,8 @@ public class ControladorTelaPerfil {
     }
 
     public void acaoCadastrarAlbum() {
-        ControladorCadastrarAlbum controladorCadastroAlbum = new ControladorCadastrarAlbum(new TelaCadastroAlbum());
+        FaixaDAO fDAO = new FaixaDAO();
+        ControladorCadastrarAlbum controladorCadastroAlbum = new ControladorCadastrarAlbum(new TelaCadastroAlbum(), new FaixasTableModel(fDAO.getListaFaixas()));
         controladorCadastroAlbum.exibirTela();
     }
 

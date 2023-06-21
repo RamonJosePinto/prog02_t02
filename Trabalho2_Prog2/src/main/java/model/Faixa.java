@@ -12,7 +12,7 @@ import java.util.List;
  * @author guilh
  */
 public class Faixa {
-    
+
     private int idFaixa;
     private String nome;
     private Album album;
@@ -49,14 +49,21 @@ public class Faixa {
         this.duracao = duracao;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     @Override
     public String toString() {
         return "Faixa{" + "idFaixa=" + idFaixa + ", nome=" + nome + ", album=" + album + ", duracao=" + duracao + ", numero=" + numero + '}';
     }
-    
-    public String apresentarFaixas(){
-        return numero+"ª Faixa - "+nome+" / "+duracao+"min";
+
+    public String apresentarFaixas() {
+        return numero + "ª Faixa - " + nome + " / " + duracao + "min";
     }
-    
-    
+
 }
