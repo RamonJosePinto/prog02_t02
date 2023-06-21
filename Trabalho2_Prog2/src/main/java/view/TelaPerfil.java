@@ -5,8 +5,19 @@
 package view;
 
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import model.ManipularImagem;
 
 /**
  *
@@ -655,7 +666,23 @@ public class TelaPerfil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFotoPerfil2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFotoPerfil2ActionPerformed
+        JFileChooser fc = new JFileChooser();
+        int res = fc.showOpenDialog(null);
 
+        if (res == JFileChooser.APPROVE_OPTION) {
+            File arquivo = fc.getSelectedFile();
+            
+            try {
+                Files.copy(arquivo.toPath(), new File("images/teste").toPath(), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException ex) {
+                Logger.getLogger(TelaPerfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Você não selecionou nenhum arquivo.");
+        }
+        
+        //BufferedImage imagem = ManipularImagem.setImagemDimensao(arquivo.getAbsolutePath(), 160, 160);
     }//GEN-LAST:event_btnFotoPerfil2ActionPerformed
 
     private void btnAlbum_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlbum_1ActionPerformed
@@ -746,8 +773,6 @@ public class TelaPerfil extends javax.swing.JFrame {
     private javax.swing.JButton btnAlbum_5;
     private javax.swing.JButton btnAlbum_6;
     private javax.swing.JButton btnAnterior;
-    private javax.swing.JButton btnFotoPerfil;
-    private javax.swing.JButton btnFotoPerfil1;
     private javax.swing.JButton btnFotoPerfil2;
     private javax.swing.JButton btnProxima;
     private javax.swing.JButton btnVoltar;
