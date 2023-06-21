@@ -4,6 +4,7 @@
  */
 package repository;
 
+import exception.AlbumSemFaixaException;
 import java.util.List;
 import model.Album;
 
@@ -21,7 +22,7 @@ public interface AlbumRepositorio {
 
     public List<Album> getAlbunsArtista(int idArtista);
 
-    public void salvarAlbum(Album album);
+    public void salvarAlbum(Album album) throws AlbumSemFaixaException;
 
     public void carregarAlbums();
 }

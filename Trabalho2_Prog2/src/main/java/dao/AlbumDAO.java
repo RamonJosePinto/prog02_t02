@@ -4,6 +4,7 @@
  */
 package dao;
 
+import exception.AlbumSemFaixaException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Album;
@@ -45,8 +46,12 @@ public class AlbumDAO implements AlbumRepositorio {
     }
 
     @Override
-    public void salvarAlbum(Album album) {
-        albuns.add(album);
+    public void salvarAlbum(Album album) throws AlbumSemFaixaException {
+        if (album.getFaixas().size() != 0) {
+            albuns.add(album);
+        }else{
+            throw new AlbumSemFaixaException("Para cadastrar um album é preciso cadastrar pelo menos uma musica no mesmo");
+        }
     }
 
     @Override

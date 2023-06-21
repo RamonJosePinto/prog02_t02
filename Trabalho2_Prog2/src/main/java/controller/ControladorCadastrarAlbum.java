@@ -5,6 +5,9 @@
 package controller;
 
 import dao.AlbumDAO;
+import exception.AlbumSemFaixaException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Album;
 import model.Artista;
 import model.Faixa;
@@ -49,16 +52,14 @@ public class ControladorCadastrarAlbum {
     }
 
     public void acaoCancelar() {
-        Faixa.faixaCadastrando.clear();
+        //Faixa.faixaCadastrando.clear();
         fecharTela();
 
     }
 
     public void acaoEnviar() {
-        System.out.println(Faixa.faixaCadastrando);
-        if (Faixa.faixaCadastrando.size() == 0) {
-            telaCadastroAlbum.exibirMensagem("Para cadastrar um album é preciso cadastrar pelo menos uma musica no mesmo");
-        } else {
+        try {
+            //System.out.println(Faixa.faixaCadastrando);
             String titulo = telaCadastroAlbum.getTituloAlbum();
             int anoLan = Integer.parseInt(telaCadastroAlbum.getAnoLancamentoAlbum());
             AlbumDAO albDao = new AlbumDAO();
@@ -68,16 +69,19 @@ public class ControladorCadastrarAlbum {
             if (telaCadastroAlbum.opcaoSelecionada(opcao)) {
                 telaCadastroAlbum.setTituloAlbum("");
                 telaCadastroAlbum.setAnoLancamentoAlbum("");
-                Faixa.faixaCadastrando.clear();
+                //Faixa.faixaCadastrando.clear();
                 //Album.setAlbumCadastrando();
 
             } else {
-                Faixa.faixaCadastrando.clear();
+                //Faixa.faixaCadastrando.clear();
                 //Album.setAlbumCadastrando();
                 fecharTela();
 
             }
+        } catch (AlbumSemFaixaException ex) {
+            telaCadastroAlbum.exibirMensagem(ex.getMessage());
         }
+        
     }
 
     public void acaoCadastrarFaixas() {
