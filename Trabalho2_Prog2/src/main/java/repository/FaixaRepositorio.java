@@ -4,6 +4,7 @@
  */
 package repository;
 
+import exception.CampoVazioCadastroFaixaException;
 import java.util.List;
 import model.Album;
 import model.Faixa;
@@ -20,7 +21,7 @@ public interface FaixaRepositorio {
 
     public List<Faixa> getListaFaixas();
 
-    public void salvarFaixa(Faixa faixa);
+    public void salvarFaixa(Faixa faixa) throws CampoVazioCadastroFaixaException;
 
     public void carregarFaixa();
 }
