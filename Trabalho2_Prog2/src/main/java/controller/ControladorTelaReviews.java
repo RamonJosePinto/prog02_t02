@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import model.Album;
 import model.Review;
+import model.table.ReviewTableModel;
 import view.TelaReviews;
 
 /**
@@ -23,12 +24,14 @@ public class ControladorTelaReviews {
     private TelaReviews telaReviews;
     private Album alb;
     private JFrame janelaAnterior;
+    private ReviewTableModel reviewsTableModel;
     List<Review> reviewsDoAlbumAtual = new ArrayList();
 
-    public ControladorTelaReviews(TelaReviews telaReviews, Album alb, JFrame janelaAnterior) {
+    public ControladorTelaReviews(TelaReviews telaReviews, Album alb, JFrame janelaAnterior, ReviewTableModel reviewTableModel) {
         this.telaReviews = telaReviews;
         this.alb = alb;
         this.janelaAnterior = janelaAnterior;
+        this.reviewsTableModel = reviewTableModel;
 
         carregarComboBoxOrdenacao();
         apresentarInformacoes();
@@ -63,7 +66,9 @@ public class ControladorTelaReviews {
         reviewsDoAlbumAtual = new ReviewDAO().getReviewsAlbum(this.alb.getIdAlbum());
 
         ordenarReviews();
-        telaReviews.setTextArea(apresentarReviewAlbum(reviewsDoAlbumAtual));
+        setTableModel();
+//        telaReviews.setTextArea(apresentarReviewAlbum(reviewsDoAlbumAtual));
+
     }
 
     public String apresentarReviewAlbum(List<Review> reviews) {
@@ -76,6 +81,10 @@ public class ControladorTelaReviews {
         } else {
             return "Sem reviews cadastradas";
         }
+    }
+
+    public void setTableModel() {
+        telaReviews.setTableModel(this.reviewsTableModel);
     }
 
     private void ordenarReviews() {
@@ -168,7 +177,8 @@ public class ControladorTelaReviews {
 
     public void acaoComboBox() {
         ordenarReviews();
-        telaReviews.setTextArea(apresentarReviewAlbum(reviewsDoAlbumAtual));
+        //telaReviews.setTextArea(apresentarReviewAlbum(reviewsDoAlbumAtual));
+        setTableModel();
     }
 
 }

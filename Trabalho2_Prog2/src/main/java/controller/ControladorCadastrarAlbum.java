@@ -80,6 +80,8 @@ public class ControladorCadastrarAlbum {
             }
         } catch (AlbumSemFaixaException ex) {
             telaCadastroAlbum.exibirMensagem(ex.getMessage());
+        } catch(NumberFormatException ex){
+            telaCadastroAlbum.exibirMensagem("Por favor informe valores válidos para o ano de lançamento da faixa");
         }
         
     }

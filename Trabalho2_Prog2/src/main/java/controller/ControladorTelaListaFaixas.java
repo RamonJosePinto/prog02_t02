@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dao.ReviewDAO;
 import java.util.List;
 import javax.swing.JFrame;
 import model.Album;
@@ -11,6 +12,7 @@ import model.Artista;
 import model.Faixa;
 import model.Pessoa;
 import model.table.FaixasTableModel;
+import model.table.ReviewTableModel;
 import view.TelaCadastroReview;
 import view.TelaListaFaixas;
 import view.TelaReviews;
@@ -91,7 +93,7 @@ public class ControladorTelaListaFaixas {
     }
 
     public void acaoVerReviews() {
-        ControladorTelaReviews controladorTelaReviews = new ControladorTelaReviews(new TelaReviews(), this.alb, telaListaFaixas);
+        ControladorTelaReviews controladorTelaReviews = new ControladorTelaReviews(new TelaReviews(), this.alb, telaListaFaixas, new ReviewTableModel(new ReviewDAO().getReviewsAlbum(this.alb.getIdAlbum())));
         controladorTelaReviews.exibirTela();
         fecharTela();
     }

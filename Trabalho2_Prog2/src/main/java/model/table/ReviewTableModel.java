@@ -7,25 +7,27 @@ package model.table;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import model.Faixa;
+import model.Review;
 
 /**
  *
- * @author Pichau
+ * @author 10068610920
  */
-public class FaixasTableModel extends AbstractTableModel {
+public class ReviewTableModel extends AbstractTableModel {
 
-    private List<Faixa> faixas;
-    private final String[] nomeColunas = {"Nome", "Duração"};
-    private final int COLUNA_NOME = 0;
-    private final int COLUNA_DURACAO = 1;
-
-    public FaixasTableModel(List<Faixa> faixas) {
-        this.faixas = faixas;
+    public ReviewTableModel(List<Review> reviews) {
+        this.reviews = reviews;
     }
+
+    private List<Review> reviews;
+    private final String[] nomeColunas = {"Nome", "Nota", "Descrição"};
+    private final int COLUNA_NOME = 0;
+    private final int COLUNA_NOTA = 1;
+    private final int COLUNA_DESCRICAO = 2;
 
     @Override
     public int getRowCount() {
-        return faixas.size();
+        return reviews.size();
     }
 
     @Override
@@ -45,14 +47,17 @@ public class FaixasTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Faixa faixa = this.faixas.get(rowIndex);
+        Review review = this.reviews.get(rowIndex);
         String valor = null;
         switch (columnIndex) {
             case COLUNA_NOME:
-                valor = faixa.getNome();
+                valor = review.getReviewer().getNome();
                 break;
-            case COLUNA_DURACAO:
-                valor = Integer.toString(faixa.getDuracao());
+            case COLUNA_NOTA:
+                valor = Integer.toString(review.getNota());
+                break;
+            case COLUNA_DESCRICAO:
+                valor = review.getDescricao();
                 break;
         }
         return valor;

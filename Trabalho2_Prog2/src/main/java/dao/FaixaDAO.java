@@ -4,6 +4,7 @@
  */
 package dao;
 
+import exception.CampoVazioCadastroFaixaException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Album;
@@ -44,8 +45,12 @@ public class FaixaDAO implements FaixaRepositorio {
     }
 
     @Override
-    public void salvarFaixa(Faixa faixa) {
-        faixas.add(faixa);
+    public void salvarFaixa(Faixa faixa) throws CampoVazioCadastroFaixaException {
+        if (faixa.getNome().isEmpty() || Integer.toString(faixa.getDuracao()).isEmpty()) {
+            throw new CampoVazioCadastroFaixaException("Campo obrigatório de Nome ou Duração vazio");
+        } else {
+            faixas.add(faixa);
+        }
     }
 
     @Override

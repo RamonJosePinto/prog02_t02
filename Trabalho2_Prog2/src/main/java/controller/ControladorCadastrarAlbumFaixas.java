@@ -4,7 +4,11 @@
  */
 package controller;
 
+import dao.FaixaDAO;
+import exception.CampoVazioCadastroFaixaException;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Album;
 import model.Faixa;
 import model.table.FaixasTableModel;
@@ -46,15 +50,16 @@ public class ControladorCadastrarAlbumFaixas {
     }
 
     public void acaoCadastrar() {
-        if (telaCadastroAlbumFaixas.getNomeFaixa().isEmpty() || telaCadastroAlbumFaixas.getDuracaoFaixa().isEmpty()) {
-            telaCadastroAlbumFaixas.exibirMensagem("Informe o nome e duração da faixa para cadastra-la");
-        } else {
+        try {
             String nome = telaCadastroAlbumFaixas.getNomeFaixa();
             int duracao = Integer.parseInt(telaCadastroAlbumFaixas.getDuracaoFaixa());
             Faixa f = new Faixa(nome, alb, duracao, contNumero);
             contNumero++;
             alb.getFaixas().add(f);
-            Faixa.faixaCadastrando.add(f);
+            FaixaDAO faixaDAO = new FaixaDAO();
+            faixaDAO.salvarFaixa(f);
+            System.out.println(faixaDAO.getListaFaixas());
+            //Faixa.faixaCadastrando.add(f);
             telaCadastroAlbumFaixas.exibirMensagem("Faixa cadastrada com sucesso");
             int opcao = telaCadastroAlbumFaixas.exibirMensagemConfirmacao("Você deseja cadastrar outra faixa?", "Confirmação");
             if (telaCadastroAlbumFaixas.opcaoSelecionada(opcao)) {
@@ -68,6 +73,10 @@ public class ControladorCadastrarAlbumFaixas {
                 controladorCadastroAlbum.exibirTela();
             }
 
+        } catch (NumberFormatException ex) {
+            telaCadastroAlbumFaixas.exibirMensagem("Por favor informe valores válidos para o campo duração da faixa");
+        } catch (CampoVazioCadastroFaixaException ex) {
+            telaCadastroAlbumFaixas.exibirMensagem(ex.getMessage());
         }
     }
 

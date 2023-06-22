@@ -5,6 +5,7 @@
 package view;
 
 import java.awt.event.ActionListener;
+import model.table.ReviewTableModel;
 
 /**
  *
@@ -47,8 +48,11 @@ public class TelaReviews extends javax.swing.JFrame {
         cbOrdenacao.addItem(text);
     }
 
-    public void setTextArea(String text) {
-        txtReviews.setText(text);
+//    public void setTextArea(String text) {
+//        txtReviews.setText(text);
+//    }
+    public void setTableModel(ReviewTableModel reviewTableModel) {
+        jTable.setModel(reviewTableModel);
     }
 
     public String getItemSelecionadoComboBox() {
@@ -58,7 +62,8 @@ public class TelaReviews extends javax.swing.JFrame {
     public void adicionarAcaoBotaoVoltar(ActionListener acao) {
         btnVoltar.addActionListener(acao);
     }
-    public void adicionarAcaoComboBox(ActionListener acao){
+
+    public void adicionarAcaoComboBox(ActionListener acao) {
         cbOrdenacao.addActionListener(acao);
     }
 
@@ -80,13 +85,13 @@ public class TelaReviews extends javax.swing.JFrame {
         lbScore = new javax.swing.JLabel();
         cbOrdenacao = new javax.swing.JComboBox<>();
         lbReviewTitle = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtReviews = new javax.swing.JTextArea();
         btnVoltar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnFotoPerfil1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnFotoPerfil1.setBorder(javax.swing.BorderFactory.createLineBorder(null));
         btnFotoPerfil1.setFocusable(false);
         btnFotoPerfil1.setMaximumSize(new java.awt.Dimension(115, 115));
         btnFotoPerfil1.setMinimumSize(new java.awt.Dimension(115, 115));
@@ -125,17 +130,25 @@ public class TelaReviews extends javax.swing.JFrame {
         lbReviewTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbReviewTitle.setText("Reviews");
 
-        txtReviews.setEditable(false);
-        txtReviews.setColumns(20);
-        txtReviews.setRows(5);
-        jScrollPane1.setViewportView(txtReviews);
-
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVoltarActionPerformed(evt);
             }
         });
+
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -158,18 +171,18 @@ public class TelaReviews extends javax.swing.JFrame {
                                 .addComponent(lbScore))
                             .addComponent(lbNomeAlbum)
                             .addComponent(lbArtistaNome)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbReviewTitle)
                                     .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
@@ -195,8 +208,8 @@ public class TelaReviews extends javax.swing.JFrame {
                 .addComponent(cbOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
                 .addComponent(lbReviewTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -258,7 +271,8 @@ public class TelaReviews extends javax.swing.JFrame {
     private javax.swing.JButton btnFotoPerfil1;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cbOrdenacao;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable;
     private javax.swing.JLabel lbArtistaNome;
     private javax.swing.JLabel lbNomeAlbum;
     private javax.swing.JLabel lbReviewTitle;
@@ -266,6 +280,5 @@ public class TelaReviews extends javax.swing.JFrame {
     private javax.swing.JLabel lbReviewsValor;
     private javax.swing.JLabel lbScore;
     private javax.swing.JLabel lbScoreValor;
-    private javax.swing.JTextArea txtReviews;
     // End of variables declaration//GEN-END:variables
 }
