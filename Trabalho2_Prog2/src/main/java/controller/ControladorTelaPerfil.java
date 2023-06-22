@@ -6,6 +6,12 @@ package controller;
 
 import dao.AlbumDAO;
 import dao.FaixaDAO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -20,6 +26,7 @@ import model.Album;
 import model.AlbumComparatorScoreCrescente;
 import model.AlbumComparatorScoreDecrescente;
 import model.Artista;
+import model.ManipularImagem;
 import model.Pessoa;
 import model.Pessoa.TipoPessoa;
 import model.Review;
@@ -90,6 +97,8 @@ public class ControladorTelaPerfil {
             albuns = new ArrayList<>();
         }
 
+        inicializarImagemPefil();
+        
         // Grid de álbuns
         this.componentesAlbum = prepararGridAlbuns();
         ordenarAlbuns();
@@ -293,49 +302,65 @@ public class ControladorTelaPerfil {
         telaPerfil.exbirTela();
     }
 
-    public void inicializarBotoes() {
-        telaPerfil.adicionarAcaoBotaoProximo(acao -> {
-            acaoProximo();
-        });
-        telaPerfil.adicionarAcaoBotaoAnterior(acao -> {
-            acaoAnterior();
-        });
-        telaPerfil.adicionarAcaoComboBox(acao -> {
-            acaoComboBox();
-        });
-        telaPerfil.adicionarAcaoVoltar(acao -> {
-            acaoVoltar();
-        });
-        telaPerfil.adicionarAcaoBotaoAlbum_1(acao -> {
-            acaoAlbum_1();
-        });
-        telaPerfil.adicionarAcaoBotaoAlbum_2(acao -> {
-            acaoAlbum_2();
-        });
-        telaPerfil.adicionarAcaoBotaoAlbum_3(acao -> {
-            acaoAlbum_3();
-        });
-        telaPerfil.adicionarAcaoBotaoAlbum_4(acao -> {
-            acaoAlbum_4();
-        });
-        telaPerfil.adicionarAcaoBotaoAlbum_5(acao -> {
-            acaoAlbum_5();
-        });
-        telaPerfil.adicionarAcaoBotaoAlbum_6(acao -> {
-            acaoAlbum_6();
-        });
-        telaPerfil.adicionarAcaoBotaoCadastrarAlbum(acao -> {
-            acaoCadastrarAlbum();
-        });
+    private void inicializarBotoes() {
+        telaPerfil.adicionarAcaoBotaoPerfil(acao -> acaoAtualizarImagemPerfil());
+        telaPerfil.adicionarAcaoBotaoProximo(acao -> acaoProximo());
+        telaPerfil.adicionarAcaoBotaoAnterior(acao -> acaoAnterior());
+        telaPerfil.adicionarAcaoComboBox(acao -> acaoComboBox());
+        telaPerfil.adicionarAcaoVoltar(acao -> acaoVoltar());
+        telaPerfil.adicionarAcaoBotaoAlbum_1(acao -> acaoAlbum_1());
+        telaPerfil.adicionarAcaoBotaoAlbum_2(acao -> acaoAlbum_2());
+        telaPerfil.adicionarAcaoBotaoAlbum_3(acao -> acaoAlbum_3());
+        telaPerfil.adicionarAcaoBotaoAlbum_4(acao -> acaoAlbum_4());
+        telaPerfil.adicionarAcaoBotaoAlbum_5(acao -> acaoAlbum_5());
+        telaPerfil.adicionarAcaoBotaoAlbum_6(acao -> acaoAlbum_6());
+        telaPerfil.adicionarAcaoBotaoCadastrarAlbum(acao -> acaoCadastrarAlbum());
     }
 
-    public void acaoCadastrarAlbum() {
+    private void inicializarImagemPefil() {
+        File arquivo = this.pessoa.getPathImagemPerfil().toFile();
+        BufferedImage imagem = ManipularImagem.setImagemDimensao(arquivo.getAbsolutePath(), 160, 160);
+        telaPerfil.atualizarImagemPerfil(imagem);
+    }
+    
+    private void inicializarImagemPefil(Path pathImagem) {
+        File arquivo = pathImagem.toFile();
+        BufferedImage imagem = ManipularImagem.setImagemDimensao(arquivo.getAbsolutePath(), 160, 160);
+        telaPerfil.atualizarImagemPerfil(imagem);
+    }
+    
+    private void acaoAtualizarImagemPerfil() {
+        boolean imagemSubiu = false;
+        Path path = null;
+        File arquivo = telaPerfil.subirImagemPerfil();
+        
+        // Copia o arquivo e coloca na pasta images no projeto
+        if (arquivo != null) {
+            try {
+                path = Files.copy(arquivo.toPath(), new File("images/teste").toPath(), StandardCopyOption.REPLACE_EXISTING);
+                
+                if (!path.toString().isBlank())
+                    imagemSubiu = true;
+            } catch (IOException ex) {
+                imagemSubiu = false;
+            }
+        }
+        
+        if (imagemSubiu) {
+            this.pessoa.setPathImagemPerfil(path);
+            inicializarImagemPefil(path);
+        } else {
+            telaPerfil.exibirMensagem("Não foi possível fazer upload da imagem de perfil.");
+        }
+    }
+    
+    private void acaoCadastrarAlbum() {
         Album novoAlb = new Album();
         ControladorCadastrarAlbum controladorCadastroAlbum = new ControladorCadastrarAlbum(new TelaCadastroAlbum(), new FaixasTableModel(novoAlb.getFaixas()), novoAlb);
         controladorCadastroAlbum.exibirTela();
     }
 
-    public void acaoAlbum_1() {
+    private void acaoAlbum_1() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaPerfil.getNomeAlbum_1().getText());
         ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaPerfil, albumSelected, new FaixasTableModel(albumSelected.getFaixas()));
@@ -344,7 +369,7 @@ public class ControladorTelaPerfil {
 
     }
 
-    public void acaoAlbum_2() {
+    private void acaoAlbum_2() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaPerfil.getNomeAlbum_2().getText());
         ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaPerfil, albumSelected, new FaixasTableModel(albumSelected.getFaixas()));
@@ -353,7 +378,7 @@ public class ControladorTelaPerfil {
 
     }
 
-    public void acaoAlbum_3() {
+    private void acaoAlbum_3() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaPerfil.getNomeAlbum_3().getText());
         ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaPerfil, albumSelected, new FaixasTableModel(albumSelected.getFaixas()));
@@ -362,7 +387,7 @@ public class ControladorTelaPerfil {
 
     }
 
-    public void acaoAlbum_4() {
+    private void acaoAlbum_4() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaPerfil.getNomeAlbum_4().getText());
         ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaPerfil, albumSelected, new FaixasTableModel(albumSelected.getFaixas()));
@@ -371,7 +396,7 @@ public class ControladorTelaPerfil {
 
     }
 
-    public void acaoAlbum_5() {
+    private void acaoAlbum_5() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaPerfil.getNomeAlbum_5().getText());
         ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaPerfil, albumSelected, new FaixasTableModel(albumSelected.getFaixas()));
@@ -380,36 +405,35 @@ public class ControladorTelaPerfil {
 
     }
 
-    public void acaoAlbum_6() {
+    private void acaoAlbum_6() {
         AlbumDAO albDao = new AlbumDAO();
         Album albumSelected = albDao.getAlbumNome(telaPerfil.getNomeAlbum_6().getText());
         ControladorTelaListaFaixas controladorTelaListaFaixas = new ControladorTelaListaFaixas(new TelaListaFaixas(), telaPerfil, albumSelected, new FaixasTableModel(albumSelected.getFaixas()));
         controladorTelaListaFaixas.exibirTela();
         telaPerfil.fecharTela();
-
     }
 
-    public void acaoVoltar() {
+    private void acaoVoltar() {
         telaPerfil.fecharTela();
         ControladorTelaInicial controladorTelaInicial = new ControladorTelaInicial(new TelaInicial());
         controladorTelaInicial.exibirTela();
 
     }
 
-    public void acaoComboBox() {
+    private void acaoComboBox() {
         ordenarAlbuns();
         carregarGridAlbuns(0);
         controlarBotoesPaginacao();
     }
 
-    public void acaoAnterior() {
+    private void acaoAnterior() {
         paginaAtual--;
         int index = (paginaAtual - 1) * 6;
         carregarGridAlbuns(index);
         controlarBotoesPaginacao();
     }
 
-    public void acaoProximo() {
+    private void acaoProximo() {
         paginaAtual++;
         int index = (paginaAtual - 1) * 6;
         carregarGridAlbuns(index);

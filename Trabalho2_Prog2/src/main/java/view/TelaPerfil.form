@@ -41,7 +41,7 @@
                               <Component id="cbOrdenacao" min="-2" pref="115" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnFotoPerfil2" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnFotoPerfil" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lbReviewsLabel" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
@@ -159,7 +159,7 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                      <Component id="btnFotoPerfil2" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnFotoPerfil" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -246,7 +246,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="btnFotoPerfil2">
+    <Component class="javax.swing.JButton" name="btnFotoPerfil">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -265,7 +265,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFotoPerfil2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFotoPerfilActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lbUsernamePerfil">

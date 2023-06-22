@@ -4,20 +4,14 @@
  */
 package view;
 
+import java.awt.Image;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import model.ManipularImagem;
 
 /**
  *
@@ -48,6 +42,24 @@ public class TelaPerfil extends javax.swing.JFrame {
         lbReviewsValor.setVisible(true);
     }
     
+    public File subirImagemPerfil() {
+        JFileChooser fileChooser = new JFileChooser();
+        int resposta = fileChooser.showOpenDialog(null);
+
+        if (resposta == JFileChooser.APPROVE_OPTION)
+            return fileChooser.getSelectedFile();
+            
+        return null;
+    }
+    
+    public void atualizarImagemPerfil(Image imagem) {
+        this.btnFotoPerfil.setIcon(new ImageIcon(imagem));
+    }
+    
+    public void exibirMensagem(String mensagem) {
+        JOptionPane.showMessageDialog(null, mensagem);
+    }
+    
     public void adicionarOpcaoCombo(String item) {
         cbOrdenacao.addItem(item);
     }
@@ -74,6 +86,10 @@ public class TelaPerfil extends javax.swing.JFrame {
     
     public void setReviewsValor(String text) {
         lbReviewsValor.setText(text);
+    }
+    
+    public void adicionarAcaoBotaoPerfil(ActionListener acao) {
+        btnFotoPerfil.addActionListener(acao);
     }
     
     public void adicionarAcaoBotaoCadastrarAlbum(ActionListener acao){
@@ -253,7 +269,7 @@ public class TelaPerfil extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnFotoPerfil2 = new javax.swing.JButton();
+        btnFotoPerfil = new javax.swing.JButton();
         lbUsernamePerfil = new javax.swing.JLabel();
         lbNomePerfil = new javax.swing.JLabel();
         lbScoreLabel = new javax.swing.JLabel();
@@ -294,14 +310,14 @@ public class TelaPerfil extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnFotoPerfil2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnFotoPerfil2.setFocusable(false);
-        btnFotoPerfil2.setMaximumSize(new java.awt.Dimension(115, 115));
-        btnFotoPerfil2.setMinimumSize(new java.awt.Dimension(115, 115));
-        btnFotoPerfil2.setPreferredSize(new java.awt.Dimension(115, 115));
-        btnFotoPerfil2.addActionListener(new java.awt.event.ActionListener() {
+        btnFotoPerfil.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnFotoPerfil.setFocusable(false);
+        btnFotoPerfil.setMaximumSize(new java.awt.Dimension(115, 115));
+        btnFotoPerfil.setMinimumSize(new java.awt.Dimension(115, 115));
+        btnFotoPerfil.setPreferredSize(new java.awt.Dimension(115, 115));
+        btnFotoPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFotoPerfil2ActionPerformed(evt);
+                btnFotoPerfilActionPerformed(evt);
             }
         });
 
@@ -501,7 +517,7 @@ public class TelaPerfil extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cbOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnFotoPerfil2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnFotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbReviewsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -590,7 +606,7 @@ public class TelaPerfil extends javax.swing.JFrame {
                             .addComponent(lbReviewsValor)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(btnFotoPerfil2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnFotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
@@ -665,25 +681,27 @@ public class TelaPerfil extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnFotoPerfil2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFotoPerfil2ActionPerformed
-        JFileChooser fc = new JFileChooser();
-        int res = fc.showOpenDialog(null);
+    private void btnFotoPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFotoPerfilActionPerformed
+//        JFileChooser fc = new JFileChooser();
+//        int res = fc.showOpenDialog(null);
+//
+//        if (res == JFileChooser.APPROVE_OPTION) {
+//            File arquivo = fc.getSelectedFile();
+//            
+//            try {
+//                Files.copy(arquivo.toPath(), new File("images/teste").toPath(), StandardCopyOption.REPLACE_EXISTING);
+//                
+//            } catch (IOException ex) {
+//                Logger.getLogger(TelaPerfil.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Você não selecionou nenhum arquivo.");
+//        }
+//        
+//        //BufferedImage imagem = ManipularImagem.setImagemDimensao(arquivo.getAbsolutePath(), 160, 160);
 
-        if (res == JFileChooser.APPROVE_OPTION) {
-            File arquivo = fc.getSelectedFile();
-            
-            try {
-                Files.copy(arquivo.toPath(), new File("images/teste").toPath(), StandardCopyOption.REPLACE_EXISTING);
-            } catch (IOException ex) {
-                Logger.getLogger(TelaPerfil.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Você não selecionou nenhum arquivo.");
-        }
-        
-        //BufferedImage imagem = ManipularImagem.setImagemDimensao(arquivo.getAbsolutePath(), 160, 160);
-    }//GEN-LAST:event_btnFotoPerfil2ActionPerformed
+    }//GEN-LAST:event_btnFotoPerfilActionPerformed
 
     private void btnAlbum_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlbum_1ActionPerformed
 
@@ -773,7 +791,7 @@ public class TelaPerfil extends javax.swing.JFrame {
     private javax.swing.JButton btnAlbum_5;
     private javax.swing.JButton btnAlbum_6;
     private javax.swing.JButton btnAnterior;
-    private javax.swing.JButton btnFotoPerfil2;
+    private javax.swing.JButton btnFotoPerfil;
     private javax.swing.JButton btnProxima;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cbOrdenacao;

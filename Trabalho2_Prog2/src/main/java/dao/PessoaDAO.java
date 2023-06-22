@@ -4,6 +4,8 @@
  */
 package dao;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -51,14 +53,14 @@ public class PessoaDAO implements PessoaRepositorio{
 
     @Override
     public void carregarPessoas() {
-        pessoas.add(new Artista("art", "art", "123", "Linkin Park"));
+        pessoas.add(new Artista("art", "art", "123", "Linkin Park", Paths.get("images/teste")));
         pessoas.add(new Artista("joao123", "joao123@email.com", "12345", "João Silva"));
         pessoas.add(new Artista("maria456", "maria456@email.com", "67890", "Maria Souza"));
         pessoas.add(new Artista("pedro789", "pedro789@email.com", "24680", "Pedro Ferreira"));
         pessoas.add(new Artista("ana456", "ana456@email.com", "13579", "Ana Clara"));
         pessoas.add(new Artista("carlos123", "carlos123@email.com", "98765", "Carlos Santos"));
-
         pessoas.add(new Reviewer("ycholinho", "a", "a", "yCholinho"));
+        
         pessoas.add(new Reviewer("john123", "john123@email.com", "12345", "John Silva"));
         pessoas.add(new Reviewer("mary456", "mary456@email.com", "67890", "Mary Souza"));
         pessoas.add(new Reviewer("peter789", "peter789@email.com", "24680", "Peter Ferreira"));

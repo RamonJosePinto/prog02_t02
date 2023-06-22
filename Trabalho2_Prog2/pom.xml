@@ -11,5 +11,5 @@
         <maven.compiler.target>17</maven.compiler.target>
         <exec.mainClass>application.App</exec.mainClass>
     </properties>
-    <name>Trabalho2_Prog2-clone</name>
+    <name>Trabalho2_Prog2</name>
 </project>

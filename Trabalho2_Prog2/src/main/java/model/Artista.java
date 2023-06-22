@@ -3,6 +3,7 @@ package model;
 
 import dao.AlbumDAO;
 import dao.ReviewDAO;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -13,6 +14,10 @@ public class Artista extends Pessoa {
 
     public Artista(String username, String email, String senha, String nome) {
         super(username, email, senha, nome, TipoPessoa.ARTISTA);
+    }
+    
+    public Artista(String username, String email, String senha, String nome, Path pathImagemPerfil) {
+        super(username, email, senha, nome, TipoPessoa.ARTISTA, pathImagemPerfil);
     }
 
     public boolean cadastrarAlbum(Album album) {

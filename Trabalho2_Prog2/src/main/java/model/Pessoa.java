@@ -6,6 +6,7 @@ package model;
 
 import dao.PessoaDAO;
 import exception.PessoaInexistenteException;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,6 +24,7 @@ public abstract class Pessoa {
     protected int idPessoa;
     protected static int geradorIdPessoa = 0;
     protected static Pessoa usuarioLogado;
+    protected Path pathImagemPerfil;
 
     public Pessoa(String username, String email, String senha, String nome, TipoPessoa tipoPessoa) {
         this.idPessoa = ++geradorIdPessoa;
@@ -31,6 +33,16 @@ public abstract class Pessoa {
         this.senha = senha;
         this.nome = nome;
         this.tipoPessoa = tipoPessoa;
+    }
+    
+    public Pessoa(String username, String email, String senha, String nome, TipoPessoa tipoPessoa, Path pathImagemPerfil) {
+        this.idPessoa = ++geradorIdPessoa;
+        this.username = username;
+        this.email = email;
+        this.senha = senha;
+        this.nome = nome;
+        this.tipoPessoa = tipoPessoa;
+        this.pathImagemPerfil = pathImagemPerfil;
     }
 
     // Enum
@@ -84,6 +96,14 @@ public abstract class Pessoa {
 
     public static Pessoa getUsuarioLogado() {
         return usuarioLogado;
+    }
+
+    public Path getPathImagemPerfil() {
+        return pathImagemPerfil;
+    }
+    
+    public void setPathImagemPerfil(Path pathImagemPerfil) {
+        this.pathImagemPerfil = pathImagemPerfil;
     }
 
     @Override
