@@ -106,6 +106,8 @@ public class ControladorTelaReviews {
                         return 0;
                     }
                 });
+                this.reviewsTableModel = new ReviewTableModel(reviewsDoAlbumAtual);
+                 setTableModel();
                 break;
 
             case ("Mais antigos"):
@@ -123,6 +125,8 @@ public class ControladorTelaReviews {
                         return 0;
                     }
                 });
+                this.reviewsTableModel = new ReviewTableModel(reviewsDoAlbumAtual);
+                setTableModel();
                 break;
 
             case ("Maior score"):
@@ -140,6 +144,8 @@ public class ControladorTelaReviews {
                         return 0;
                     }
                 });
+                this.reviewsTableModel = new ReviewTableModel(reviewsDoAlbumAtual);
+                setTableModel();
                 break;
 
             case ("Menor score"):
@@ -157,6 +163,8 @@ public class ControladorTelaReviews {
                         return 0;
                     }
                 });
+                this.reviewsTableModel = new ReviewTableModel(reviewsDoAlbumAtual);
+                setTableModel();
                 break;
         }
     }
