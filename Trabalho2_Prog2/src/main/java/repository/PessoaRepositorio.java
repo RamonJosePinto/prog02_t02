@@ -21,6 +21,6 @@ public interface PessoaRepositorio {
 
     public void carregarPessoas();
 
-    public void salvarPessoa(Pessoa pessoa);
+    public boolean salvarPessoa(Pessoa pessoa);
 
 }

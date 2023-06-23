@@ -4,7 +4,6 @@
  */
 package model;
 
-
 import dao.ReviewDAO;
 import java.nio.file.Path;
 import java.util.List;
@@ -18,16 +17,24 @@ public class Reviewer extends Pessoa {
     public Reviewer(String username, String email, String senha, String nome) {
         super(username, email, senha, nome, TipoPessoa.REVIEWER);
     }
-    
+
+    public Reviewer(int id, String username, String email, String senha, String nome) {
+        super(id, username, email, senha, nome, TipoPessoa.REVIEWER);
+    }
+
     public Reviewer(String username, String email, String senha, String nome, Path pathImagemPerfil) {
         super(username, email, senha, nome, TipoPessoa.REVIEWER, pathImagemPerfil);
+    }
+
+    public void setIdPessoa(int idPessoa) {
+        this.idPessoa = idPessoa;
     }
 
     public List<Review> getReviews() {
         ReviewDAO daoReview = new ReviewDAO();
         return daoReview.getReviewsReviewer(idPessoa);
     }
-    
+
     @Override
     public int contarReviews() {
         ReviewDAO daoReview = new ReviewDAO();
@@ -36,6 +43,8 @@ public class Reviewer extends Pessoa {
         return reviewsReviewer.size();
     }
 
+    
+    
     @Override
     public String toString() {
         return "Reviewer{" + super.toString() + '}';

@@ -7,6 +7,7 @@ package application;
 import controller.ControladorTelaInicial;
 import controller.ControladorTelaLogin;
 import dao.AlbumDAO;
+import dao.Conexao;
 import dao.FaixaDAO;
 import dao.PessoaDAO;
 import dao.ReviewDAO;
@@ -31,6 +32,9 @@ public class App {
         reviewDAO.carregarReviews();
         faixaDAO.carregarFaixa();
 
+        Conexao.getConnection();
+        
+        
         ControladorTelaLogin controladorTelaLogin = new ControladorTelaLogin(new TelaLogin());
         controladorTelaLogin.exibirTela();
     }

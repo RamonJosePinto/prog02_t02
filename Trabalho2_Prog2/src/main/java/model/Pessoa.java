@@ -34,7 +34,16 @@ public abstract class Pessoa {
         this.nome = nome;
         this.tipoPessoa = tipoPessoa;
     }
-    
+
+    public Pessoa(int id, String username, String email, String senha, String nome, TipoPessoa tipoPessoa) {
+        this.idPessoa = id;
+        this.username = username;
+        this.email = email;
+        this.senha = senha;
+        this.nome = nome;
+        this.tipoPessoa = tipoPessoa;
+    }
+
     public Pessoa(String username, String email, String senha, String nome, TipoPessoa tipoPessoa, Path pathImagemPerfil) {
         this.idPessoa = ++geradorIdPessoa;
         this.username = username;
@@ -101,9 +110,13 @@ public abstract class Pessoa {
     public Path getPathImagemPerfil() {
         return pathImagemPerfil;
     }
-    
+
     public void setPathImagemPerfil(Path pathImagemPerfil) {
         this.pathImagemPerfil = pathImagemPerfil;
+    }
+
+    public void setIdPessoa(int idPessoa) {
+        this.idPessoa = idPessoa;
     }
 
     @Override
