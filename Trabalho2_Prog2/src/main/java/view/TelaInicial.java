@@ -5,7 +5,12 @@
 package view;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 /**
@@ -14,11 +19,99 @@ import javax.swing.JLabel;
  */
 public class TelaInicial extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaInicial
-     */
+    private List<Map> componentesAlbum = new ArrayList();
+    
     public TelaInicial() {
         initComponents();
+    }
+    
+    public void limparGridAlbuns() {
+        for (Map m : this.componentesAlbum) {
+            JButton btnAlbum = (JButton) m.get("btnAlbum");
+            JLabel lbNomeAlbum = (JLabel) m.get("lbNomeAlbum");
+            JLabel lbNomeArtista = (JLabel) m.get("lbNomeArtista");
+            JLabel lbAnoLancamento = (JLabel) m.get("lbAnoLancamento");
+
+            btnAlbum.setVisible(false);
+            lbNomeAlbum.setVisible(false);
+            lbNomeArtista.setVisible(false);
+            lbAnoLancamento.setVisible(false);
+        }
+    }
+    
+    public void /*List<Map>*/ prepararGridAlbuns() {
+        // Preenche Map com JComponent 
+        Map<String, JComponent> album_1 = new HashMap();
+        album_1.put("btnAlbum", this.btnAlbum_1);
+        album_1.put("lbNomeAlbum", this.lbNomeAlbum_1);
+        album_1.put("lbNomeArtista", this.lbNomeArtista_1);
+        album_1.put("lbAnoLancamento", this.lbAnoLancamento_1);
+
+        Map<String, JComponent> album_2 = new HashMap();
+        album_2.put("btnAlbum", this.btnAlbum_2);
+        album_2.put("lbNomeAlbum", this.lbNomeAlbum_2);
+        album_2.put("lbNomeArtista", this.lbNomeArtista_2);
+        album_2.put("lbAnoLancamento", this.lbAnoLancamento_2);
+
+        Map<String, JComponent> album_3 = new HashMap();
+        album_3.put("btnAlbum", this.btnAlbum_3);
+        album_3.put("lbNomeAlbum", this.lbNomeAlbum_3);
+        album_3.put("lbNomeArtista", this.lbNomeArtista_3);
+        album_3.put("lbAnoLancamento", this.lbAnoLancamento_3);
+
+        Map<String, JComponent> album_4 = new HashMap();
+        album_4.put("btnAlbum", this.btnAlbum_4);
+        album_4.put("lbNomeAlbum", this.lbNomeAlbum_4);
+        album_4.put("lbNomeArtista", this.lbNomeArtista_4);
+        album_4.put("lbAnoLancamento", this.lbAnoLancamento_4);
+
+        Map<String, JComponent> album_5 = new HashMap();
+        album_5.put("btnAlbum", this.btnAlbum_5);
+        album_5.put("lbNomeAlbum", this.lbNomeAlbum_5);
+        album_5.put("lbNomeArtista", this.lbNomeArtista_5);
+        album_5.put("lbAnoLancamento", this.lbAnoLancamento_5);
+
+        Map<String, JComponent> album_6 = new HashMap();
+        album_6.put("btnAlbum", this.btnAlbum_6);
+        album_6.put("lbNomeAlbum", this.lbNomeAlbum_6);
+        album_6.put("lbNomeArtista", this.lbNomeArtista_6);
+        album_6.put("lbAnoLancamento", this.lbAnoLancamento_6);
+        
+        componentesAlbum.add(album_1);
+        componentesAlbum.add(album_2);
+        componentesAlbum.add(album_3);
+        componentesAlbum.add(album_4);
+        componentesAlbum.add(album_5);
+        componentesAlbum.add(album_6);
+        //return componentesAlbum;
+    }
+    
+    public List<Map> getComponentesAlbum() {
+        return componentesAlbum;
+    }
+    
+    public String getNomeAlbum_1() {
+        return this.lbNomeAlbum_1.getText();
+    }
+    
+    public String getNomeAlbum_2() {
+        return this.lbNomeAlbum_2.getText();
+    }
+    
+    public String getNomeAlbum_3() {
+        return this.lbNomeAlbum_3.getText();
+    }
+    
+    public String getNomeAlbum_4() {
+        return this.lbNomeAlbum_4.getText();
+    }
+    
+    public String getNomeAlbum_5() {
+        return this.lbNomeAlbum_5.getText();
+    }
+    
+    public String getNomeAlbum_6() {
+        return this.lbNomeAlbum_6.getText();
     }
     
     public void adicionarAcaoFotoPerfil(ActionListener acao) {
@@ -57,102 +150,6 @@ public class TelaInicial extends javax.swing.JFrame {
         btnAnterior.addActionListener(acao);
     }
     
-    public JButton getAlbum_1() {
-        return btnAlbum_1;
-    }
-    
-    public JButton getAlbum_2() {
-        return btnAlbum_2;
-    }
-    
-    public JButton getAlbum_3() {
-        return btnAlbum_3;
-    }
-    
-    public JButton getAlbum_4() {
-        return btnAlbum_4;
-    }
-    
-    public JButton getAlbum_5() {
-        return btnAlbum_5;
-    }
-    
-    public JButton getAlbum_6() {
-        return btnAlbum_6;
-    }
-    
-    public JLabel getNomeAlbum_1() {
-        return lbNomeAlbum_1;
-    }
-
-    public JLabel getNomeAlbum_2() {
-        return lbNomeAlbum_2;
-    }
-
-    public JLabel getNomeAlbum_3() {
-        return lbNomeAlbum_3;
-    }
-
-    public JLabel getNomeAlbum_4() {
-        return lbNomeAlbum_4;
-    }
-
-    public JLabel getNomeAlbum_5() {
-        return lbNomeAlbum_5;
-    }
-
-    public JLabel getNomeAlbum_6() {
-        return lbNomeAlbum_6;
-    }
-    
-    public JLabel getNomeArtista_1() {
-        return lbNomeArtista_1;
-    }
-    
-    public JLabel getNomeArtista_2() {
-        return lbNomeArtista_2;
-    }
-    
-    public JLabel getNomeArtista_3() {
-        return lbNomeArtista_3;
-    }
-    
-    public JLabel getNomeArtista_4() {
-        return lbNomeArtista_4;
-    }
-    
-    public JLabel getNomeArtista_5() {
-        return lbNomeArtista_5;
-    }
-    
-    public JLabel getNomeArtista_6() {
-        return lbNomeArtista_6;
-    }
-    
-    public JLabel getAnoLancamento_1() {
-        return lbAnoLancamento_1;
-    }
-    
-    public JLabel getAnoLancamento_2() {
-        return lbAnoLancamento_2;
-    }
-    
-    public JLabel getAnoLancamento_3() {
-        return lbAnoLancamento_3;
-    }
-    
-    public JLabel getAnoLancamento_4() {
-        return lbAnoLancamento_4;
-    }
-    
-    public JLabel getAnoLancamento_5() {
-        return lbAnoLancamento_5;
-    }
-    
-    public JLabel getAnoLancamento_6() {
-        return lbAnoLancamento_6;
-    }
-    
     public void setNomePessoaLogada(String nome) {
         lbNomePessoaLogada.setText(nome);
     }
@@ -176,7 +173,7 @@ public class TelaInicial extends javax.swing.JFrame {
     public void fecharTela() {
         setVisible(false);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -232,11 +229,6 @@ public class TelaInicial extends javax.swing.JFrame {
         btnFotoPerfil.setMaximumSize(new java.awt.Dimension(80, 80));
         btnFotoPerfil.setMinimumSize(new java.awt.Dimension(80, 80));
         btnFotoPerfil.setPreferredSize(new java.awt.Dimension(80, 80));
-        btnFotoPerfil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFotoPerfilActionPerformed(evt);
-            }
-        });
 
         lbTituloAlbunsRecentes.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lbTituloAlbunsRecentes.setText("Álbuns mais recentes");
@@ -247,11 +239,6 @@ public class TelaInicial extends javax.swing.JFrame {
         btnAlbum_1.setMaximumSize(new java.awt.Dimension(80, 80));
         btnAlbum_1.setMinimumSize(new java.awt.Dimension(80, 80));
         btnAlbum_1.setPreferredSize(new java.awt.Dimension(80, 80));
-        btnAlbum_1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlbum_1ActionPerformed(evt);
-            }
-        });
 
         btnAlbum_2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAlbum_2.setFocusable(false);
@@ -259,11 +246,6 @@ public class TelaInicial extends javax.swing.JFrame {
         btnAlbum_2.setMaximumSize(new java.awt.Dimension(80, 80));
         btnAlbum_2.setMinimumSize(new java.awt.Dimension(80, 80));
         btnAlbum_2.setPreferredSize(new java.awt.Dimension(80, 80));
-        btnAlbum_2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlbum_2ActionPerformed(evt);
-            }
-        });
 
         btnAlbum_3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAlbum_3.setFocusable(false);
@@ -271,11 +253,6 @@ public class TelaInicial extends javax.swing.JFrame {
         btnAlbum_3.setMaximumSize(new java.awt.Dimension(80, 80));
         btnAlbum_3.setMinimumSize(new java.awt.Dimension(80, 80));
         btnAlbum_3.setPreferredSize(new java.awt.Dimension(80, 80));
-        btnAlbum_3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlbum_3ActionPerformed(evt);
-            }
-        });
 
         lbNomeAlbum_1.setText("lbNomeAlbum_1");
 
@@ -317,11 +294,6 @@ public class TelaInicial extends javax.swing.JFrame {
         btnAlbum_4.setMaximumSize(new java.awt.Dimension(80, 80));
         btnAlbum_4.setMinimumSize(new java.awt.Dimension(80, 80));
         btnAlbum_4.setPreferredSize(new java.awt.Dimension(80, 80));
-        btnAlbum_4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlbum_4ActionPerformed(evt);
-            }
-        });
 
         btnAlbum_5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAlbum_5.setFocusable(false);
@@ -329,11 +301,6 @@ public class TelaInicial extends javax.swing.JFrame {
         btnAlbum_5.setMaximumSize(new java.awt.Dimension(80, 80));
         btnAlbum_5.setMinimumSize(new java.awt.Dimension(80, 80));
         btnAlbum_5.setPreferredSize(new java.awt.Dimension(80, 80));
-        btnAlbum_5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlbum_5ActionPerformed(evt);
-            }
-        });
 
         btnAlbum_6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAlbum_6.setFocusable(false);
@@ -341,29 +308,14 @@ public class TelaInicial extends javax.swing.JFrame {
         btnAlbum_6.setMaximumSize(new java.awt.Dimension(80, 80));
         btnAlbum_6.setMinimumSize(new java.awt.Dimension(80, 80));
         btnAlbum_6.setPreferredSize(new java.awt.Dimension(80, 80));
-        btnAlbum_6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlbum_6ActionPerformed(evt);
-            }
-        });
 
         lbNomeAlbum_4.setText("lbNomeAlbum_4");
 
         btnProxima.setText("Próxima");
         btnProxima.setEnabled(false);
-        btnProxima.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProximaActionPerformed(evt);
-            }
-        });
 
         btnAnterior.setText("Anterior");
         btnAnterior.setEnabled(false);
-        btnAnterior.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnteriorActionPerformed(evt);
-            }
-        });
 
         lbPagina.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbPagina.setText("---");
@@ -505,74 +457,6 @@ public class TelaInicial extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnFotoPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFotoPerfilActionPerformed
-//        TelaPerfil telaPerfil = new TelaPerfil(Pessoa.getUsuarioLogado());
-//        telaPerfil.setVisible(true);
-//        this.setVisible(false);
-    }//GEN-LAST:event_btnFotoPerfilActionPerformed
-
-    private void btnAlbum_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlbum_1ActionPerformed
-//        AlbumDAO albDao = new AlbumDAO();
-//        Album albumSelected = albDao.getAlbumNome(lbNomeAlbum_1.getText());
-//        TelaListaFaixas telaListaFaixas = new TelaListaFaixas(albumSelected, this);
-//        telaListaFaixas.setVisible(true);
-//        this.setVisible(false);
-    }//GEN-LAST:event_btnAlbum_1ActionPerformed
-
-    private void btnAlbum_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlbum_2ActionPerformed
-//        AlbumDAO albDao = new AlbumDAO();
-//        Album albumSelected = albDao.getAlbumNome(lbNomeAlbum_2.getText());
-//        TelaListaFaixas telaListaFaixas = new TelaListaFaixas(albumSelected, this);
-//        telaListaFaixas.setVisible(true);
-//        this.setVisible(false);
-    }//GEN-LAST:event_btnAlbum_2ActionPerformed
-
-    private void btnAlbum_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlbum_3ActionPerformed
-//        AlbumDAO albDao = new AlbumDAO();
-//        Album albumSelected = albDao.getAlbumNome(lbNomeAlbum_3.getText());
-//        TelaListaFaixas telaListaFaixas = new TelaListaFaixas(albumSelected, this);
-//        telaListaFaixas.setVisible(true);
-//        this.setVisible(false);
-    }//GEN-LAST:event_btnAlbum_3ActionPerformed
-
-    private void btnAlbum_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlbum_4ActionPerformed
-//        AlbumDAO albDao = new AlbumDAO();
-//        Album albumSelected = albDao.getAlbumNome(lbNomeAlbum_4.getText());
-//        TelaListaFaixas telaListaFaixas = new TelaListaFaixas(albumSelected, this);
-//        telaListaFaixas.setVisible(true);
-//        this.setVisible(false);
-    }//GEN-LAST:event_btnAlbum_4ActionPerformed
-
-    private void btnAlbum_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlbum_5ActionPerformed
-//        AlbumDAO albDao = new AlbumDAO();
-//        Album albumSelected = albDao.getAlbumNome(lbNomeAlbum_5.getText());
-//        TelaListaFaixas telaListaFaixas = new TelaListaFaixas(albumSelected, this);
-//        telaListaFaixas.setVisible(true);
-//        this.setVisible(false);
-    }//GEN-LAST:event_btnAlbum_5ActionPerformed
-
-    private void btnAlbum_6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlbum_6ActionPerformed
-//        AlbumDAO albDao = new AlbumDAO();
-//        Album albumSelected = albDao.getAlbumNome(lbNomeAlbum_6.getText());
-//        TelaListaFaixas telaListaFaixas = new TelaListaFaixas(albumSelected, this);
-//        telaListaFaixas.setVisible(true);
-//        this.setVisible(false);
-    }//GEN-LAST:event_btnAlbum_6ActionPerformed
-
-    private void btnProximaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximaActionPerformed
-//        paginaAtual++;
-//        int index = (paginaAtual - 1) * 6;
-//        carregarGridAlbuns(index);
-//        controlarBotoesPaginacao();
-    }//GEN-LAST:event_btnProximaActionPerformed
-
-    private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
-//        paginaAtual--;
-//        int index = (paginaAtual - 1) * 6;
-//        carregarGridAlbuns(index);
-//        controlarBotoesPaginacao();
-    }//GEN-LAST:event_btnAnteriorActionPerformed
 
     /**
      * @param args the command line arguments

@@ -318,15 +318,24 @@ public class ControladorTelaPerfil {
     }
 
     private void inicializarImagemPefil() {
-        File arquivo = this.pessoa.getPathImagemPerfil().toFile();
-        BufferedImage imagem = ManipularImagem.setImagemDimensao(arquivo.getAbsolutePath(), 160, 160);
-        telaPerfil.atualizarImagemPerfil(imagem);
+        try {
+            File arquivo = pessoa.getPathImagemPerfil().toFile();
+            BufferedImage imagem = ManipularImagem.setImagemDimensao(arquivo.getAbsolutePath(), 160, 160);
+            telaPerfil.atualizarImagemPerfil(imagem);
+        } catch(Exception ex) {
+            telaPerfil.exibirMensagem("Não foi possível carregar sua imagem de perfil. Por favor, faça upload novamente.");
+        }
     }
     
     private void inicializarImagemPefil(Path pathImagem) {
-        File arquivo = pathImagem.toFile();
-        BufferedImage imagem = ManipularImagem.setImagemDimensao(arquivo.getAbsolutePath(), 160, 160);
-        telaPerfil.atualizarImagemPerfil(imagem);
+        try {
+            File arquivo = pathImagem.toFile();
+            BufferedImage imagem = ManipularImagem.setImagemDimensao(arquivo.getAbsolutePath(), 160, 160);
+            telaPerfil.atualizarImagemPerfil(imagem);
+        } catch(Exception ex) {
+            telaPerfil.exibirMensagem("Não foi possível carregar sua imagem de perfil. Por favor, faça upload novamente.");
+        }
+        
     }
     
     private void acaoAtualizarImagemPerfil() {
@@ -337,7 +346,7 @@ public class ControladorTelaPerfil {
         // Copia o arquivo e coloca na pasta images no projeto
         if (arquivo != null) {
             try {
-                path = Files.copy(arquivo.toPath(), new File("images/teste").toPath(), StandardCopyOption.REPLACE_EXISTING);
+                path = Files.copy(arquivo.toPath(), new File("images/pessoa/" + pessoa.getIdPessoa()).toPath(), StandardCopyOption.REPLACE_EXISTING);
                 
                 if (!path.toString().isBlank())
                     imagemSubiu = true;

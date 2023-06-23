@@ -315,11 +315,6 @@ public class TelaPerfil extends javax.swing.JFrame {
         btnFotoPerfil.setMaximumSize(new java.awt.Dimension(115, 115));
         btnFotoPerfil.setMinimumSize(new java.awt.Dimension(115, 115));
         btnFotoPerfil.setPreferredSize(new java.awt.Dimension(115, 115));
-        btnFotoPerfil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFotoPerfilActionPerformed(evt);
-            }
-        });
 
         lbUsernamePerfil.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         lbUsernamePerfil.setText("@");
@@ -365,11 +360,6 @@ public class TelaPerfil extends javax.swing.JFrame {
         btnAlbum_1.setMinimumSize(new java.awt.Dimension(80, 80));
         btnAlbum_1.setName("btnAlbum_1"); // NOI18N
         btnAlbum_1.setPreferredSize(new java.awt.Dimension(115, 115));
-        btnAlbum_1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlbum_1ActionPerformed(evt);
-            }
-        });
 
         btnAlbum_2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAlbum_2.setFocusable(false);
@@ -378,11 +368,6 @@ public class TelaPerfil extends javax.swing.JFrame {
         btnAlbum_2.setMinimumSize(new java.awt.Dimension(80, 80));
         btnAlbum_2.setName("btnAlbum_2"); // NOI18N
         btnAlbum_2.setPreferredSize(new java.awt.Dimension(115, 115));
-        btnAlbum_2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlbum_2ActionPerformed(evt);
-            }
-        });
 
         btnAlbum_3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAlbum_3.setFocusable(false);
@@ -391,11 +376,6 @@ public class TelaPerfil extends javax.swing.JFrame {
         btnAlbum_3.setMinimumSize(new java.awt.Dimension(80, 80));
         btnAlbum_3.setName("btnAlbum_3"); // NOI18N
         btnAlbum_3.setPreferredSize(new java.awt.Dimension(115, 115));
-        btnAlbum_3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlbum_3ActionPerformed(evt);
-            }
-        });
 
         lbNomeAlbum_1.setText("lbNomeAlbum_1");
 
@@ -403,19 +383,9 @@ public class TelaPerfil extends javax.swing.JFrame {
 
         btnProxima.setText("Próxima");
         btnProxima.setEnabled(false);
-        btnProxima.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProximaActionPerformed(evt);
-            }
-        });
 
         btnAnterior.setText("Anterior");
         btnAnterior.setEnabled(false);
-        btnAnterior.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnteriorActionPerformed(evt);
-            }
-        });
 
         lbNomeAlbum_5.setText("lbNomeAlbum_5");
 
@@ -440,11 +410,6 @@ public class TelaPerfil extends javax.swing.JFrame {
         btnAlbum_4.setMinimumSize(new java.awt.Dimension(115, 115));
         btnAlbum_4.setName("btnAlbum_4"); // NOI18N
         btnAlbum_4.setPreferredSize(new java.awt.Dimension(80, 80));
-        btnAlbum_4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlbum_4ActionPerformed(evt);
-            }
-        });
 
         btnAlbum_5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAlbum_5.setFocusable(false);
@@ -453,11 +418,6 @@ public class TelaPerfil extends javax.swing.JFrame {
         btnAlbum_5.setMinimumSize(new java.awt.Dimension(115, 115));
         btnAlbum_5.setName("btnAlbum_5"); // NOI18N
         btnAlbum_5.setPreferredSize(new java.awt.Dimension(80, 80));
-        btnAlbum_5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlbum_5ActionPerformed(evt);
-            }
-        });
 
         btnAlbum_6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAlbum_6.setFocusable(false);
@@ -466,18 +426,8 @@ public class TelaPerfil extends javax.swing.JFrame {
         btnAlbum_6.setMinimumSize(new java.awt.Dimension(115, 115));
         btnAlbum_6.setName("btnAlbum_6"); // NOI18N
         btnAlbum_6.setPreferredSize(new java.awt.Dimension(80, 80));
-        btnAlbum_6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlbum_6ActionPerformed(evt);
-            }
-        });
 
         btnAdicionarAlbum.setText("+ Adicionar Álbum");
-        btnAdicionarAlbum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdicionarAlbumActionPerformed(evt);
-            }
-        });
 
         lbPagina.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbPagina.setText("---");
@@ -486,17 +436,6 @@ public class TelaPerfil extends javax.swing.JFrame {
         lbExibindo.setText("<EXIBINDO AGORA>");
 
         btnVoltar.setText("Voltar");
-        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltarActionPerformed(evt);
-            }
-        });
-
-        cbOrdenacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbOrdenacaoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -680,72 +619,6 @@ public class TelaPerfil extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnFotoPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFotoPerfilActionPerformed
-//        JFileChooser fc = new JFileChooser();
-//        int res = fc.showOpenDialog(null);
-//
-//        if (res == JFileChooser.APPROVE_OPTION) {
-//            File arquivo = fc.getSelectedFile();
-//            
-//            try {
-//                Files.copy(arquivo.toPath(), new File("images/teste").toPath(), StandardCopyOption.REPLACE_EXISTING);
-//                
-//            } catch (IOException ex) {
-//                Logger.getLogger(TelaPerfil.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Você não selecionou nenhum arquivo.");
-//        }
-//        
-//        //BufferedImage imagem = ManipularImagem.setImagemDimensao(arquivo.getAbsolutePath(), 160, 160);
-
-    }//GEN-LAST:event_btnFotoPerfilActionPerformed
-
-    private void btnAlbum_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlbum_1ActionPerformed
-
-    }//GEN-LAST:event_btnAlbum_1ActionPerformed
-
-    private void btnAlbum_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlbum_2ActionPerformed
-
-    }//GEN-LAST:event_btnAlbum_2ActionPerformed
-
-    private void btnAlbum_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlbum_3ActionPerformed
-
-    }//GEN-LAST:event_btnAlbum_3ActionPerformed
-
-    private void btnProximaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximaActionPerformed
-
-    }//GEN-LAST:event_btnProximaActionPerformed
-
-    private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
-
-    }//GEN-LAST:event_btnAnteriorActionPerformed
-
-    private void btnAlbum_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlbum_4ActionPerformed
-
-    }//GEN-LAST:event_btnAlbum_4ActionPerformed
-
-    private void btnAlbum_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlbum_5ActionPerformed
-
-    }//GEN-LAST:event_btnAlbum_5ActionPerformed
-
-    private void btnAlbum_6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlbum_6ActionPerformed
-
-    }//GEN-LAST:event_btnAlbum_6ActionPerformed
-
-    private void btnAdicionarAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarAlbumActionPerformed
-
-    }//GEN-LAST:event_btnAdicionarAlbumActionPerformed
-
-    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-
-    }//GEN-LAST:event_btnVoltarActionPerformed
-
-    private void cbOrdenacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOrdenacaoActionPerformed
-
-    }//GEN-LAST:event_cbOrdenacaoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -264,9 +264,6 @@
           <Dimension value="[115, 115]"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFotoPerfilActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lbUsernamePerfil">
       <Properties>
@@ -381,9 +378,6 @@
           <Dimension value="[115, 115]"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlbum_1ActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnAlbum_2">
       <Properties>
@@ -407,9 +401,6 @@
           <Dimension value="[115, 115]"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlbum_2ActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnAlbum_3">
       <Properties>
@@ -433,9 +424,6 @@
           <Dimension value="[115, 115]"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlbum_3ActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lbNomeAlbum_1">
       <Properties>
@@ -452,18 +440,12 @@
         <Property name="text" type="java.lang.String" value="Pr&#xf3;xima"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProximaActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnAnterior">
       <Properties>
         <Property name="text" type="java.lang.String" value="Anterior"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnteriorActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lbNomeAlbum_5">
       <Properties>
@@ -527,9 +509,6 @@
           <Dimension value="[80, 80]"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlbum_4ActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnAlbum_5">
       <Properties>
@@ -553,9 +532,6 @@
           <Dimension value="[80, 80]"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlbum_5ActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnAlbum_6">
       <Properties>
@@ -579,17 +555,11 @@
           <Dimension value="[80, 80]"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlbum_6ActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnAdicionarAlbum">
       <Properties>
         <Property name="text" type="java.lang.String" value="+ Adicionar &#xc1;lbum"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdicionarAlbumActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lbPagina">
       <Properties>
@@ -609,9 +579,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Voltar"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVoltarActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbOrdenacao">
       <Properties>
@@ -619,9 +586,6 @@
           <StringArray count="0"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbOrdenacaoActionPerformed"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>

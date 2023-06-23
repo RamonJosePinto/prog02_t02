@@ -46,7 +46,8 @@ public class ManipularImagem {
             imagem = ImageIO.read(new File(caminhoImg));
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
-            Logger.getLogger(ManipularImagem.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(ManipularImagem.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
 
         //--- Obtém a largura da imagem ---  
