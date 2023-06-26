@@ -24,8 +24,10 @@ public abstract class Pessoa {
     protected int idPessoa;
     protected static int geradorIdPessoa = 0;
     protected static Pessoa usuarioLogado;
-    protected Path pathImagemPerfil;
+    protected String caminhoImagemPerfil;
 
+    public Pessoa(){}
+    
     public Pessoa(String username, String email, String senha, String nome, TipoPessoa tipoPessoa) {
         this.idPessoa = ++geradorIdPessoa;
         this.username = username;
@@ -34,24 +36,33 @@ public abstract class Pessoa {
         this.nome = nome;
         this.tipoPessoa = tipoPessoa;
     }
+    
+    public Pessoa(String username, String email, String senha, String nome) {
+        this.idPessoa = ++geradorIdPessoa;
+        this.username = username;
+        this.email = email;
+        this.senha = senha;
+        this.nome = nome;
+    }
 
-    public Pessoa(int id, String username, String email, String senha, String nome, TipoPessoa tipoPessoa) {
+    public Pessoa(int id, String username, String email, String senha, String nome, TipoPessoa tipoPessoa, String caminhoImagemPerfil) {
         this.idPessoa = id;
         this.username = username;
         this.email = email;
         this.senha = senha;
         this.nome = nome;
         this.tipoPessoa = tipoPessoa;
+        this.caminhoImagemPerfil = caminhoImagemPerfil;
     }
 
-    public Pessoa(String username, String email, String senha, String nome, TipoPessoa tipoPessoa, Path pathImagemPerfil) {
+    public Pessoa(String username, String email, String senha, String nome, TipoPessoa tipoPessoa, String caminhoImagemPerfil) {
         this.idPessoa = ++geradorIdPessoa;
         this.username = username;
         this.email = email;
         this.senha = senha;
         this.nome = nome;
         this.tipoPessoa = tipoPessoa;
-        this.pathImagemPerfil = pathImagemPerfil;
+        this.caminhoImagemPerfil = caminhoImagemPerfil;
     }
 
     // Enum
@@ -59,7 +70,7 @@ public abstract class Pessoa {
         ARTISTA,
         REVIEWER
     }
-
+    
     public static Pessoa login(String email, String senha) throws PessoaInexistenteException {
         PessoaDAO dao = new PessoaDAO();
         Pessoa p = dao.getPessoaEmail(email);
@@ -107,18 +118,18 @@ public abstract class Pessoa {
         return usuarioLogado;
     }
 
-    public Path getPathImagemPerfil() {
-        return pathImagemPerfil;
+    public String getCaminhoImagemPerfil() {
+        return caminhoImagemPerfil;
     }
 
-    public void setPathImagemPerfil(Path pathImagemPerfil) {
-        this.pathImagemPerfil = pathImagemPerfil;
+    public void setCaminhoImagemPerfil(String caminhoImagemPerfil) {
+        this.caminhoImagemPerfil = caminhoImagemPerfil;
     }
 
     public void setIdPessoa(int idPessoa) {
         this.idPessoa = idPessoa;
     }
-
+    
     @Override
     public String toString() {
         return "Pessoa{" + "username=" + username + ", email=" + email + ", senha=" + senha + ", nome=" + nome + ", tipoPessoa=" + tipoPessoa + ", idPessoa=" + idPessoa + '}';

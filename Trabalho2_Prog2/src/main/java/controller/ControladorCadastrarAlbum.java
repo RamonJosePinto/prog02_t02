@@ -5,7 +5,11 @@
 package controller;
 
 import dao.AlbumDAO;
+import dao.PessoaDAO;
 import exception.AlbumSemFaixaException;
+import exception.ImagemInexistenteException;
+import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Album;
@@ -13,6 +17,7 @@ import model.Artista;
 import model.Faixa;
 import model.Pessoa;
 import model.table.FaixasTableModel;
+import util.ManipularImagem;
 import view.TelaCadastroAlbum;
 import view.TelaCadastroAlbumFaixas;
 
@@ -24,12 +29,12 @@ public class ControladorCadastrarAlbum {
 
     private TelaCadastroAlbum telaCadastroAlbum;
     private FaixasTableModel faixasTableModel;
-    private Album alb;
+    private Album album;
 
-    public ControladorCadastrarAlbum(TelaCadastroAlbum telaCadastroAlbum, FaixasTableModel faixasTableModel, Album alb) {
+    public ControladorCadastrarAlbum(TelaCadastroAlbum telaCadastroAlbum, FaixasTableModel faixasTableModel, Album album) {
         this.telaCadastroAlbum = telaCadastroAlbum;
         this.faixasTableModel = faixasTableModel;
-        this.alb = alb;
+        this.album = album;
 
         setTableModel();
         inicializarBotoes();
@@ -40,21 +45,15 @@ public class ControladorCadastrarAlbum {
     }
 
     public void inicializarBotoes() {
-        telaCadastroAlbum.adicionarAcaoBotaoCancelar(acao -> {
-            acaoCancelar();
-        });
-        telaCadastroAlbum.adicionarAcaoBotaoEnviar(acao -> {
-            acaoEnviar();
-        });
-        telaCadastroAlbum.adicionarAcaoBotaoCadastrarFaixa(acao -> {
-            acaoCadastrarFaixas();
-        });
+        telaCadastroAlbum.adicionarAcaoBotaoCancelar(acao -> acaoCancelar());
+        telaCadastroAlbum.adicionarAcaoBotaoEnviar(acao -> acaoEnviar());
+        telaCadastroAlbum.adicionarAcaoBotaoCadastrarFaixa(acao -> acaoCadastrarFaixas());
+        telaCadastroAlbum.adicionarAcaoBotaoAtualizarCapa(acao -> atualizarCapa());
     }
 
     public void acaoCancelar() {
         //Faixa.faixaCadastrando.clear();
-        fecharTela();
-
+        telaCadastroAlbum.fecharTela();
     }
 
     public void acaoEnviar() {
@@ -63,7 +62,7 @@ public class ControladorCadastrarAlbum {
             String titulo = telaCadastroAlbum.getTituloAlbum();
             int anoLan = Integer.parseInt(telaCadastroAlbum.getAnoLancamentoAlbum());
             AlbumDAO albDao = new AlbumDAO();
-            albDao.salvarAlbum(this.alb);
+            albDao.salvarAlbum(this.album);
             telaCadastroAlbum.exibirMensagem("Album Cadastrado com sucesso");
             int opcao = telaCadastroAlbum.exibirMensagemConfirmacao("Você deseja cadastrar outro album?", "Confirmação");
             if (telaCadastroAlbum.opcaoSelecionada(opcao)) {
@@ -75,8 +74,7 @@ public class ControladorCadastrarAlbum {
             } else {
                 //Faixa.faixaCadastrando.clear();
                 //Album.setAlbumCadastrando();
-                fecharTela();
-
+                telaCadastroAlbum.fecharTela();
             }
         } catch (AlbumSemFaixaException ex) {
             telaCadastroAlbum.exibirMensagem(ex.getMessage());
@@ -93,25 +91,48 @@ public class ControladorCadastrarAlbum {
             String titulo = telaCadastroAlbum.getTituloAlbum();
             int anoLan = Integer.parseInt(telaCadastroAlbum.getAnoLancamentoAlbum());
             Artista art = (Artista) Pessoa.getUsuarioLogado();
-            this.alb = (new Album(titulo, anoLan, art));
+            this.album = (new Album(titulo, anoLan, art));
 
-            ControladorCadastrarAlbumFaixas controladorCadastroAlbumFaixas = new ControladorCadastrarAlbumFaixas(new TelaCadastroAlbumFaixas(), this.alb);
+            ControladorCadastrarAlbumFaixas controladorCadastroAlbumFaixas = new ControladorCadastrarAlbumFaixas(new TelaCadastroAlbumFaixas(), this.album);
             controladorCadastroAlbumFaixas.exibirTela();
-            fecharTela();
+            telaCadastroAlbum.fecharTela();
         }
     }
 
-    public void fecharTela() {
-        telaCadastroAlbum.fecharTela();
+    public void atualizarCapa() {
+        File arquivo = telaCadastroAlbum.subirImagemAlbum();
+        
+        String arquivoOrigem = arquivo.toPath().toString();
+        String nomeArquivo = Integer.toString(album.getIdAlbum());
+  
+        try {
+            String caminhoImagemPerfil = ManipularImagem.gravarImagemAlbum(arquivoOrigem, nomeArquivo, 125, 125);
+            
+            album.setCaminhoImagemCapa(caminhoImagemPerfil);
+            telaCadastroAlbum.exibirMensagem("Sua imagem de perfil foi atualizada.");
+            inicializarImagemCapa();
+        } catch (IOException ex) {
+            telaCadastroAlbum.exibirMensagem("Não foi possível fazer upload da imagem de perfil.");
+        }
     }
-
+    
+    private void inicializarImagemCapa() {
+        try {
+            telaCadastroAlbum.atualizarImagemCapa(ManipularImagem.buscarImagem(album.getCaminhoImagemCapa()));
+        }  catch (IOException ex) {
+            telaCadastroAlbum.exibirMensagem("Não foi possível carregar a capa do álbum. Por favor, faça upload novamente.");
+        } catch (ImagemInexistenteException ex) {
+            Logger.getLogger(ControladorTelaPerfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void exibirTela() {
         telaCadastroAlbum.exibirTela();
     }
     
     public void preencherInformacaoAposCadastroFaixa(){
-        telaCadastroAlbum.setTituloAlbum(this.alb.getTitulo());
-        telaCadastroAlbum.setAnoLancamentoAlbum(Integer.toString(this.alb.getAnoLancamento()));
+        telaCadastroAlbum.setTituloAlbum(this.album.getTitulo());
+        telaCadastroAlbum.setAnoLancamentoAlbum(Integer.toString(this.album.getAnoLancamento()));
     }
 
 }

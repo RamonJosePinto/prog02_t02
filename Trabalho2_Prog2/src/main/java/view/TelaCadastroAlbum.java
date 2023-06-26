@@ -4,7 +4,11 @@
  */
 package view;
 
+import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import model.table.FaixasTableModel;
 
@@ -29,6 +33,20 @@ public class TelaCadastroAlbum extends javax.swing.JFrame {
         setVisible(false);
     }
 
+    public void atualizarImagemCapa(Image imagem) {
+        this.btnCapa.setIcon(new ImageIcon(imagem));
+    }
+    
+    public File subirImagemAlbum() {
+        JFileChooser fileChooser = new JFileChooser();
+        int resposta = fileChooser.showOpenDialog(null);
+
+        if (resposta == JFileChooser.APPROVE_OPTION)
+            return fileChooser.getSelectedFile();
+            
+        return null;
+    }
+    
     public void setTableModel(FaixasTableModel faixasTableModel) {
         jTable.setModel(faixasTableModel);
     }
@@ -43,6 +61,10 @@ public class TelaCadastroAlbum extends javax.swing.JFrame {
 
     public void adicionarAcaoBotaoEnviar(ActionListener acao) {
         btn_EnviarCadastro.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoBotaoAtualizarCapa(ActionListener acao) {
+        btnCapa.addActionListener(acao);
     }
 
     public void exibirMensagem(String msg) {
@@ -85,7 +107,7 @@ public class TelaCadastroAlbum extends javax.swing.JFrame {
         lbl_Titulo = new javax.swing.JLabel();
         txt_AnoLancamento = new javax.swing.JTextField();
         lbl_AnoLancamento = new javax.swing.JLabel();
-        btnLogo = new javax.swing.JButton();
+        btnCapa = new javax.swing.JButton();
         txt_titulo = new javax.swing.JTextField();
         btn_EnviarCadastro = new javax.swing.JButton();
         btn_CancelarCadastro = new javax.swing.JButton();
@@ -101,33 +123,13 @@ public class TelaCadastroAlbum extends javax.swing.JFrame {
 
         lbl_AnoLancamento.setText("Ano de Lançamento");
 
-        btnLogo.setText("+ Adicionar Imagem \n         do Album");
-        btnLogo.setToolTipText("");
-        btnLogo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogoActionPerformed(evt);
-            }
-        });
-
-        txt_titulo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_tituloActionPerformed(evt);
-            }
-        });
+        btnCapa.setText("+ Adicionar Imagem \n         do Album");
+        btnCapa.setToolTipText("");
+        btnCapa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         btn_EnviarCadastro.setText("Enviar");
-        btn_EnviarCadastro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_EnviarCadastroActionPerformed(evt);
-            }
-        });
 
         btn_CancelarCadastro.setText("Cancelar");
-        btn_CancelarCadastro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_CancelarCadastroActionPerformed(evt);
-            }
-        });
 
         lbTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbTitle.setText("CADASTRO DE ALBUM");
@@ -155,112 +157,65 @@ public class TelaCadastroAlbum extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(118, 118, 118)
+                .addComponent(lbTitle)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(btnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(lbTitle)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lbl_Titulo)
-                    .addComponent(txt_titulo, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_CancelarCadastro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_EnviarCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                    .addComponent(txt_AnoLancamento)
-                    .addComponent(lbl_AnoLancamento))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50))
+                        .addComponent(btn_CancelarCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_EnviarCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(btnAdicionarFaixas, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(118, 118, 118))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(117, 117, 117))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAdicionarFaixas, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_Titulo)
+                            .addComponent(txt_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_AnoLancamento, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_AnoLancamento))))
+                .addGap(24, 24, 24))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(143, 143, 143)
+                .addComponent(btnCapa, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(lbTitle)
-                        .addGap(32, 32, 32)
-                        .addComponent(btnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_Titulo)
-                            .addComponent(lbl_AnoLancamento))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_AnoLancamento, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_CancelarCadastro)
-                            .addComponent(btn_EnviarCadastro)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAdicionarFaixas)))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(lbTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCapa, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_Titulo)
+                    .addComponent(lbl_AnoLancamento))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_AnoLancamento, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnAdicionarFaixas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_CancelarCadastro)
+                    .addComponent(btn_EnviarCadastro))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnLogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLogoActionPerformed
-
-    private void txt_tituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_tituloActionPerformed
-
-    }//GEN-LAST:event_txt_tituloActionPerformed
-
-    private void btn_EnviarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EnviarCadastroActionPerformed
-//        System.out.println(Faixa.faixaCadastrando);
-//        if (Faixa.faixaCadastrando.size() == 0) {
-//            JOptionPane.showMessageDialog(null, "Para cadastrar um album é preciso cadastrar pelo menos uma musica no mesmo");
-//        } else {
-//            String titulo = txt_titulo.getText();
-//            int anoLan = Integer.parseInt(txt_AnoLancamento.getText());
-//            AlbumDAO albDao = new AlbumDAO();
-//            albDao.salvarAlbum(Album.getAlbumCadastrando());
-//            JOptionPane.showMessageDialog(null, "Album Cadastrado com sucesso");
-//            int opcao = JOptionPane.showConfirmDialog(null, "Você deseja cadastrar outro album?", "Confirmação", JOptionPane.YES_NO_OPTION);
-//            if (opcao == JOptionPane.YES_OPTION) {
-//                txt_titulo.setText("");
-//                txt_AnoLancamento.setText("");
-//                Faixa.faixaCadastrando.clear();
-//                Album.setAlbumCadastrando();
-//
-//            } else {
-//                Faixa.faixaCadastrando.clear();
-//                Album.setAlbumCadastrando();
-//                this.setVisible(false);
-//
-//            }
-//        }
-
-    }//GEN-LAST:event_btn_EnviarCadastroActionPerformed
-
-    private void btn_CancelarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelarCadastroActionPerformed
-//        Faixa.faixaCadastrando.clear();
-//        this.setVisible(false);
-    }//GEN-LAST:event_btn_CancelarCadastroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,7 +254,7 @@ public class TelaCadastroAlbum extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarFaixas;
-    private javax.swing.JButton btnLogo;
+    private javax.swing.JButton btnCapa;
     private javax.swing.JButton btn_CancelarCadastro;
     private javax.swing.JButton btn_EnviarCadastro;
     private javax.swing.JLabel jLabel1;

@@ -77,12 +77,6 @@ public class TelaLogin extends javax.swing.JFrame {
         lbTitle.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         lbTitle.setText("Bem vindo ao {{Nome APP}}");
 
-        txtEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailActionPerformed(evt);
-            }
-        });
-
         lbEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbEmail.setText("Email");
 
@@ -90,27 +84,11 @@ public class TelaLogin extends javax.swing.JFrame {
         lbSenha.setText("Senha");
 
         btnEntrar.setText("Entrar");
-        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEntrarActionPerformed(evt);
-            }
-        });
 
         btnCadastrarPessoa.setBackground(new java.awt.Color(245, 245, 245));
         btnCadastrarPessoa.setText("Criar uma conta");
         btnCadastrarPessoa.setBorder(null);
         btnCadastrarPessoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCadastrarPessoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarPessoaActionPerformed(evt);
-            }
-        });
-
-        btnLogo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -164,21 +142,6 @@ public class TelaLogin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
-
-    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-
-    }//GEN-LAST:event_btnEntrarActionPerformed
-
-    private void btnCadastrarPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarPessoaActionPerformed
-    }//GEN-LAST:event_btnCadastrarPessoaActionPerformed
-
-    private void btnLogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLogoActionPerformed
 
     /**
      * @param args the command line arguments

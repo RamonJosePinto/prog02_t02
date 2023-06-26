@@ -15,12 +15,12 @@ public class Artista extends Pessoa {
         super(username, email, senha, nome, TipoPessoa.ARTISTA);
     }
 
-    public Artista(int id, String username, String email, String senha, String nome) {
-        super(id, username, email, senha, nome, TipoPessoa.ARTISTA);
+    public Artista(int id, String username, String email, String senha, String nome, String caminhoImagemPerfil) {
+        super(id, username, email, senha, nome, TipoPessoa.ARTISTA, caminhoImagemPerfil);
     }
 
-    public Artista(String username, String email, String senha, String nome, Path pathImagemPerfil) {
-        super(username, email, senha, nome, TipoPessoa.ARTISTA, pathImagemPerfil);
+    public Artista(String username, String email, String senha, String nome, String caminhoImagemPerfil) {
+        super(username, email, senha, nome, TipoPessoa.ARTISTA, caminhoImagemPerfil);
     }
 
     public boolean cadastrarAlbum(Album album) {

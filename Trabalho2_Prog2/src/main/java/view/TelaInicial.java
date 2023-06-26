@@ -4,14 +4,18 @@
  */
 package view;
 
+import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import model.Album;
 
 /**
  *
@@ -84,6 +88,45 @@ public class TelaInicial extends javax.swing.JFrame {
         componentesAlbum.add(album_5);
         componentesAlbum.add(album_6);
         //return componentesAlbum;
+    }
+    
+    public void carregarGridAlbuns(List<Album> albunsGrid, Map<Integer, Image> imagensGrid) {
+        int albunsCarregados = 0;
+
+        for (Album album : albunsGrid) {
+            Map<String, JComponent> componente = this.componentesAlbum.get(albunsCarregados);
+            JButton btnAlbum = (JButton) componente.get("btnAlbum");
+            JLabel lbNomeAlbum = (JLabel) componente.get("lbNomeAlbum");
+            JLabel lbNomeArtista = (JLabel) componente.get("lbNomeArtista");
+            JLabel lbAnoLancamento = (JLabel) componente.get("lbAnoLancamento");
+
+            btnAlbum.setVisible(true);
+            lbNomeAlbum.setVisible(true);
+            lbNomeArtista.setVisible(true);
+            lbAnoLancamento.setVisible(true);
+
+            lbNomeAlbum.setText(album.getTitulo());
+            lbNomeArtista.setText(album.getArtista().getNome());
+            lbAnoLancamento.setText(Integer.toString(album.getAnoLancamento()));
+            
+            try {
+                btnAlbum.setIcon(new ImageIcon(imagensGrid.get(album.getIdAlbum())));
+            } catch(NullPointerException ex) {
+                System.out.println(ex.getMessage());
+                btnAlbum.setIcon(null);
+                btnAlbum.setText(album.getTitulo());
+            }
+            
+            albunsCarregados++;
+        }
+    }
+    
+    public void atualizarImagemPerfil(Image imagem) {
+        btnFotoPerfil.setIcon(new ImageIcon(imagem));
+    }
+    
+    public void exibirMensagem(String msg) {
+        JOptionPane.showMessageDialog(null, msg);
     }
     
     public List<Map> getComponentesAlbum() {
@@ -187,33 +230,34 @@ public class TelaInicial extends javax.swing.JFrame {
         lbNomePessoaLogada = new javax.swing.JLabel();
         btnFotoPerfil = new javax.swing.JButton();
         lbTituloAlbunsRecentes = new javax.swing.JLabel();
-        btnAlbum_1 = new javax.swing.JButton();
-        btnAlbum_2 = new javax.swing.JButton();
-        btnAlbum_3 = new javax.swing.JButton();
-        lbNomeAlbum_1 = new javax.swing.JLabel();
-        lbNomeAlbum_2 = new javax.swing.JLabel();
-        lbNomeAlbum_3 = new javax.swing.JLabel();
-        lbNomeArtista_1 = new javax.swing.JLabel();
-        lbNomeArtista_2 = new javax.swing.JLabel();
-        lbNomeArtista_3 = new javax.swing.JLabel();
-        lbAnoLancamento_1 = new javax.swing.JLabel();
-        lbAnoLancamento_2 = new javax.swing.JLabel();
-        lbAnoLancamento_3 = new javax.swing.JLabel();
-        lbNomeAlbum_5 = new javax.swing.JLabel();
-        lbNomeAlbum_6 = new javax.swing.JLabel();
-        lbNomeArtista_4 = new javax.swing.JLabel();
-        lbNomeArtista_5 = new javax.swing.JLabel();
-        lbNomeArtista_6 = new javax.swing.JLabel();
-        lbAnoLancamento_4 = new javax.swing.JLabel();
-        lbAnoLancamento_5 = new javax.swing.JLabel();
-        lbAnoLancamento_6 = new javax.swing.JLabel();
-        btnAlbum_4 = new javax.swing.JButton();
-        btnAlbum_5 = new javax.swing.JButton();
-        btnAlbum_6 = new javax.swing.JButton();
-        lbNomeAlbum_4 = new javax.swing.JLabel();
         btnProxima = new javax.swing.JButton();
         btnAnterior = new javax.swing.JButton();
         lbPagina = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        lbAnoLancamento_6 = new javax.swing.JLabel();
+        lbNomeArtista_5 = new javax.swing.JLabel();
+        lbNomeArtista_3 = new javax.swing.JLabel();
+        btnAlbum_2 = new javax.swing.JButton();
+        btnAlbum_6 = new javax.swing.JButton();
+        lbNomeAlbum_4 = new javax.swing.JLabel();
+        lbNomeAlbum_1 = new javax.swing.JLabel();
+        btnAlbum_3 = new javax.swing.JButton();
+        lbNomeArtista_1 = new javax.swing.JLabel();
+        lbNomeArtista_4 = new javax.swing.JLabel();
+        lbAnoLancamento_2 = new javax.swing.JLabel();
+        lbAnoLancamento_1 = new javax.swing.JLabel();
+        btnAlbum_4 = new javax.swing.JButton();
+        lbNomeAlbum_3 = new javax.swing.JLabel();
+        btnAlbum_5 = new javax.swing.JButton();
+        lbAnoLancamento_4 = new javax.swing.JLabel();
+        lbNomeArtista_6 = new javax.swing.JLabel();
+        lbAnoLancamento_3 = new javax.swing.JLabel();
+        lbNomeAlbum_2 = new javax.swing.JLabel();
+        lbAnoLancamento_5 = new javax.swing.JLabel();
+        lbNomeAlbum_5 = new javax.swing.JLabel();
+        lbNomeArtista_2 = new javax.swing.JLabel();
+        lbNomeAlbum_6 = new javax.swing.JLabel();
+        btnAlbum_1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -233,84 +277,6 @@ public class TelaInicial extends javax.swing.JFrame {
         lbTituloAlbunsRecentes.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lbTituloAlbunsRecentes.setText("Álbuns mais recentes");
 
-        btnAlbum_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnAlbum_1.setFocusable(false);
-        btnAlbum_1.setMargin(null);
-        btnAlbum_1.setMaximumSize(new java.awt.Dimension(80, 80));
-        btnAlbum_1.setMinimumSize(new java.awt.Dimension(80, 80));
-        btnAlbum_1.setPreferredSize(new java.awt.Dimension(80, 80));
-
-        btnAlbum_2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnAlbum_2.setFocusable(false);
-        btnAlbum_2.setMargin(null);
-        btnAlbum_2.setMaximumSize(new java.awt.Dimension(80, 80));
-        btnAlbum_2.setMinimumSize(new java.awt.Dimension(80, 80));
-        btnAlbum_2.setPreferredSize(new java.awt.Dimension(80, 80));
-
-        btnAlbum_3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnAlbum_3.setFocusable(false);
-        btnAlbum_3.setMargin(null);
-        btnAlbum_3.setMaximumSize(new java.awt.Dimension(80, 80));
-        btnAlbum_3.setMinimumSize(new java.awt.Dimension(80, 80));
-        btnAlbum_3.setPreferredSize(new java.awt.Dimension(80, 80));
-
-        lbNomeAlbum_1.setText("lbNomeAlbum_1");
-
-        lbNomeAlbum_2.setText("lbNomeAlbum_2");
-
-        lbNomeAlbum_3.setText("lbNomeAlbum_3");
-
-        lbNomeArtista_1.setText("lbNomeArtista_1");
-
-        lbNomeArtista_2.setText("lbNomeArtista_2");
-
-        lbNomeArtista_3.setText("lbNomeArtista_3");
-
-        lbAnoLancamento_1.setText("lbAnoLancamento_1");
-
-        lbAnoLancamento_2.setText("lbAnoLancamento_2");
-
-        lbAnoLancamento_3.setText("lbAnoLancamento_3");
-
-        lbNomeAlbum_5.setText("lbNomeAlbum_5");
-
-        lbNomeAlbum_6.setText("lbNomeAlbum_6");
-
-        lbNomeArtista_4.setText("lbNomeArtista_4");
-
-        lbNomeArtista_5.setText("lbNomeArtista_5");
-
-        lbNomeArtista_6.setText("lbNomeArtista_6");
-
-        lbAnoLancamento_4.setText("lbAnoLancamento_4");
-
-        lbAnoLancamento_5.setText("lbAnoLancamento_5");
-
-        lbAnoLancamento_6.setText("lbAnoLancamento_6");
-
-        btnAlbum_4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnAlbum_4.setFocusable(false);
-        btnAlbum_4.setMargin(null);
-        btnAlbum_4.setMaximumSize(new java.awt.Dimension(80, 80));
-        btnAlbum_4.setMinimumSize(new java.awt.Dimension(80, 80));
-        btnAlbum_4.setPreferredSize(new java.awt.Dimension(80, 80));
-
-        btnAlbum_5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnAlbum_5.setFocusable(false);
-        btnAlbum_5.setMargin(null);
-        btnAlbum_5.setMaximumSize(new java.awt.Dimension(80, 80));
-        btnAlbum_5.setMinimumSize(new java.awt.Dimension(80, 80));
-        btnAlbum_5.setPreferredSize(new java.awt.Dimension(80, 80));
-
-        btnAlbum_6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnAlbum_6.setFocusable(false);
-        btnAlbum_6.setMargin(null);
-        btnAlbum_6.setMaximumSize(new java.awt.Dimension(80, 80));
-        btnAlbum_6.setMinimumSize(new java.awt.Dimension(80, 80));
-        btnAlbum_6.setPreferredSize(new java.awt.Dimension(80, 80));
-
-        lbNomeAlbum_4.setText("lbNomeAlbum_4");
-
         btnProxima.setText("Próxima");
         btnProxima.setEnabled(false);
 
@@ -320,6 +286,198 @@ public class TelaInicial extends javax.swing.JFrame {
         lbPagina.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbPagina.setText("---");
 
+        lbAnoLancamento_6.setText("lbAnoLancamento_6");
+
+        lbNomeArtista_5.setText("lbNomeArtista_5");
+
+        lbNomeArtista_3.setText("lbNomeArtista_3");
+
+        btnAlbum_2.setAlignmentY(0.0F);
+        btnAlbum_2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnAlbum_2.setFocusable(false);
+        btnAlbum_2.setIconTextGap(0);
+        btnAlbum_2.setMargin(null);
+        btnAlbum_2.setMaximumSize(new java.awt.Dimension(125, 125));
+        btnAlbum_2.setMinimumSize(new java.awt.Dimension(125, 125));
+        btnAlbum_2.setPreferredSize(new java.awt.Dimension(125, 125));
+
+        btnAlbum_6.setAlignmentY(0.0F);
+        btnAlbum_6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnAlbum_6.setFocusable(false);
+        btnAlbum_6.setIconTextGap(0);
+        btnAlbum_6.setMargin(null);
+        btnAlbum_6.setMaximumSize(new java.awt.Dimension(125, 125));
+        btnAlbum_6.setMinimumSize(new java.awt.Dimension(125, 125));
+        btnAlbum_6.setPreferredSize(new java.awt.Dimension(125, 125));
+
+        lbNomeAlbum_4.setText("lbNomeAlbum_4");
+
+        lbNomeAlbum_1.setText("lbNomeAlbum_1");
+
+        btnAlbum_3.setAlignmentY(0.0F);
+        btnAlbum_3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnAlbum_3.setFocusable(false);
+        btnAlbum_3.setIconTextGap(0);
+        btnAlbum_3.setMargin(null);
+        btnAlbum_3.setMaximumSize(new java.awt.Dimension(125, 125));
+        btnAlbum_3.setMinimumSize(new java.awt.Dimension(125, 125));
+        btnAlbum_3.setPreferredSize(new java.awt.Dimension(125, 125));
+
+        lbNomeArtista_1.setText("lbNomeArtista_1");
+
+        lbNomeArtista_4.setText("lbNomeArtista_4");
+
+        lbAnoLancamento_2.setText("lbAnoLancamento_2");
+
+        lbAnoLancamento_1.setText("lbAnoLancamento_1");
+
+        btnAlbum_4.setAlignmentY(0.0F);
+        btnAlbum_4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnAlbum_4.setFocusable(false);
+        btnAlbum_4.setIconTextGap(0);
+        btnAlbum_4.setMargin(null);
+        btnAlbum_4.setMaximumSize(new java.awt.Dimension(125, 125));
+        btnAlbum_4.setMinimumSize(new java.awt.Dimension(125, 125));
+        btnAlbum_4.setPreferredSize(new java.awt.Dimension(125, 125));
+
+        lbNomeAlbum_3.setText("lbNomeAlbum_3");
+
+        btnAlbum_5.setAlignmentY(0.0F);
+        btnAlbum_5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnAlbum_5.setFocusable(false);
+        btnAlbum_5.setIconTextGap(0);
+        btnAlbum_5.setMargin(null);
+        btnAlbum_5.setMaximumSize(new java.awt.Dimension(125, 125));
+        btnAlbum_5.setMinimumSize(new java.awt.Dimension(125, 125));
+        btnAlbum_5.setPreferredSize(new java.awt.Dimension(125, 125));
+
+        lbAnoLancamento_4.setText("lbAnoLancamento_4");
+
+        lbNomeArtista_6.setText("lbNomeArtista_6");
+
+        lbAnoLancamento_3.setText("lbAnoLancamento_3");
+
+        lbNomeAlbum_2.setText("lbNomeAlbum_2");
+
+        lbAnoLancamento_5.setText("lbAnoLancamento_5");
+
+        lbNomeAlbum_5.setText("lbNomeAlbum_5");
+
+        lbNomeArtista_2.setText("lbNomeArtista_2");
+
+        lbNomeAlbum_6.setText("lbNomeAlbum_6");
+
+        btnAlbum_1.setAlignmentY(0.0F);
+        btnAlbum_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnAlbum_1.setFocusable(false);
+        btnAlbum_1.setIconTextGap(0);
+        btnAlbum_1.setMargin(null);
+        btnAlbum_1.setMaximumSize(new java.awt.Dimension(125, 125));
+        btnAlbum_1.setMinimumSize(new java.awt.Dimension(125, 125));
+        btnAlbum_1.setPreferredSize(new java.awt.Dimension(125, 125));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnAlbum_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbNomeAlbum_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbNomeArtista_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbAnoLancamento_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnAlbum_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbNomeAlbum_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbNomeArtista_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbAnoLancamento_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnAlbum_5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbNomeAlbum_5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbNomeArtista_5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbAnoLancamento_5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnAlbum_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbNomeAlbum_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbNomeArtista_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbAnoLancamento_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(lbNomeArtista_6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAlbum_6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbNomeAlbum_6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbAnoLancamento_6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(lbNomeArtista_3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbNomeAlbum_3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAlbum_3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbAnoLancamento_3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(btnAlbum_2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lbNomeAlbum_2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lbNomeArtista_2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lbAnoLancamento_2)
+                            .addGap(67, 67, 67)
+                            .addComponent(btnAlbum_5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lbNomeAlbum_5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lbNomeArtista_5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lbAnoLancamento_5)
+                                .addComponent(lbAnoLancamento_6)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(btnAlbum_3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lbNomeAlbum_3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lbNomeArtista_3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lbAnoLancamento_3)
+                            .addGap(67, 67, 67)
+                            .addComponent(btnAlbum_6, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(22, 22, 22)
+                                    .addComponent(lbNomeArtista_6))
+                                .addComponent(lbNomeAlbum_6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnAlbum_1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbNomeAlbum_1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbNomeArtista_1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbAnoLancamento_1)
+                        .addGap(67, 67, 67)
+                        .addComponent(btnAlbum_4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbNomeAlbum_4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbNomeArtista_4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbAnoLancamento_4)))
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -328,49 +486,15 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnFotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnFotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbNomePessoaLogada, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lbBemVindo, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(btnAlbum_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbNomeAlbum_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbNomeArtista_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbAnoLancamento_4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(btnAlbum_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbNomeAlbum_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbNomeArtista_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbAnoLancamento_1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(btnAlbum_5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbNomeAlbum_5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbNomeArtista_5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbAnoLancamento_5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(btnAlbum_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbNomeAlbum_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbNomeArtista_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbAnoLancamento_2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(50, 50, 50)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(lbNomeArtista_6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnAlbum_6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbNomeAlbum_6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbAnoLancamento_6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(lbNomeArtista_3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbNomeAlbum_3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnAlbum_3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbAnoLancamento_3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbTituloAlbunsRecentes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(127, 127, 127)
                         .addComponent(btnAnterior)
@@ -379,76 +503,25 @@ public class TelaInicial extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(201, 201, 201)
                         .addComponent(lbPagina)))
-                .addGap(31, 31, 31))
-            .addComponent(lbTituloAlbunsRecentes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnFotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbBemVindo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbNomePessoaLogada)))
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(lbTituloAlbunsRecentes)
-                .addGap(67, 67, 67)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAlbum_1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbNomeAlbum_1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbNomeArtista_1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbAnoLancamento_1)
-                        .addGap(67, 67, 67)
-                        .addComponent(btnAlbum_4, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbNomeAlbum_4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbNomeArtista_4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbAnoLancamento_4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAlbum_2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbNomeAlbum_2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbNomeArtista_2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbAnoLancamento_2)
-                        .addGap(67, 67, 67)
-                        .addComponent(btnAlbum_5, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbNomeAlbum_5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbNomeArtista_5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbAnoLancamento_5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAlbum_3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbNomeAlbum_3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbNomeArtista_3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbAnoLancamento_3)
-                        .addGap(67, 67, 67)
-                        .addComponent(btnAlbum_6, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(lbNomeArtista_6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbAnoLancamento_6))
-                            .addComponent(lbNomeAlbum_6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbPagina)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
+                .addComponent(lbPagina)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnProxima, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -472,6 +545,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnFotoPerfil;
     private javax.swing.JButton btnProxima;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbAnoLancamento_1;
     private javax.swing.JLabel lbAnoLancamento_2;
     private javax.swing.JLabel lbAnoLancamento_3;

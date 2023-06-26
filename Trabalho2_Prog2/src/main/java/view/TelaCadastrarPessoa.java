@@ -4,9 +4,13 @@
  */
 package view;
 
+import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
@@ -16,6 +20,8 @@ import javax.swing.JRadioButton;
  */
 public class TelaCadastrarPessoa extends javax.swing.JFrame {
 
+    private String caminhoImagemPerfil = "";
+    
     /**
      * Creates new form TelaCadastrarPessoa
      */
@@ -23,6 +29,21 @@ public class TelaCadastrarPessoa extends javax.swing.JFrame {
         initComponents();
     }
 
+    public File subirImagemPerfil() {
+        JFileChooser fileChooser = new JFileChooser();
+        int resposta = fileChooser.showOpenDialog(null);
+
+        if (resposta == JFileChooser.APPROVE_OPTION)
+            return fileChooser.getSelectedFile();
+            
+        return null;
+    }
+    
+    public void atualizarImagemPerfil(Image imagem) {
+        this.btnImagemPerfil.setIcon(new ImageIcon(imagem));
+        this.btnImagemPerfil.setText("");
+    }
+    
     public String getNomePessoa() {
         return txtName.getText();
     }
@@ -47,14 +68,24 @@ public class TelaCadastrarPessoa extends javax.swing.JFrame {
         return JbArtista;
     }
 
+    public String getCaminhoImagemPerfil() {
+        return caminhoImagemPerfil;
+    }
+    
+    public void setCaminhoImagemPerfil(String caminhoImagemPerfil) {
+        this.caminhoImagemPerfil = caminhoImagemPerfil;
+    }
+    
+    public void adicionarAcaoBotaoImagemPerfil(ActionListener acao) {
+        btnImagemPerfil.addActionListener(acao);
+    }
+    
     public void adicionarAcaoBotaoCancelar(ActionListener acao) {
         btnCancelar.addActionListener(acao);
-
     }
     
     public void adicionarAcaoBotaoCadastrarPessoa(ActionListener acao) {
         btnSalvar.addActionListener(acao);
-
     }
     
     public void exibirMensagem(String msg) {
@@ -79,7 +110,7 @@ public class TelaCadastrarPessoa extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup2 = new javax.swing.ButtonGroup();
-        btnImage2 = new javax.swing.JButton();
+        btnImagemPerfil = new javax.swing.JButton();
         txtName = new javax.swing.JTextField();
         btnSalvar = new javax.swing.JButton();
         txtEmail = new javax.swing.JTextField();
@@ -96,38 +127,24 @@ public class TelaCadastrarPessoa extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnImage2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnImage2.setText("+");
-        btnImage2.setAlignmentX(2.0F);
-        btnImage2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnImage2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        btnImage2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        btnImage2.setMargin(new java.awt.Insets(15, 0, 0, 5));
-        btnImage2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        btnImage2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImage2ActionPerformed(evt);
-            }
-        });
-
-        txtName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNameActionPerformed(evt);
-            }
-        });
+        btnImagemPerfil.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnImagemPerfil.setText("+");
+        btnImagemPerfil.setActionCommand("");
+        btnImagemPerfil.setAlignmentY(0.0F);
+        btnImagemPerfil.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnImagemPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnImagemPerfil.setFocusPainted(false);
+        btnImagemPerfil.setFocusable(false);
+        btnImagemPerfil.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnImagemPerfil.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        btnImagemPerfil.setIconTextGap(0);
+        btnImagemPerfil.setMargin(null);
+        btnImagemPerfil.setMaximumSize(null);
+        btnImagemPerfil.setMinimumSize(null);
+        btnImagemPerfil.setPreferredSize(null);
+        btnImagemPerfil.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         btnSalvar.setText("Cadastrar");
-        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarActionPerformed(evt);
-            }
-        });
-
-        txtSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSenhaActionPerformed(evt);
-            }
-        });
 
         lbName.setText("Nome");
 
@@ -139,63 +156,49 @@ public class TelaCadastrarPessoa extends javax.swing.JFrame {
 
         buttonGroup2.add(JbArtista);
         JbArtista.setText("Artista");
-        JbArtista.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JbArtistaActionPerformed(evt);
-            }
-        });
 
         buttonGroup2.add(jbReviewer);
         jbReviewer.setText("Reviewer");
-        jbReviewer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbReviewerActionPerformed(evt);
-            }
-        });
 
         lbPessoa.setText("Tipo de Pessoa");
 
         btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(138, 138, 138)
-                .addComponent(btnImage2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 55, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lbPessoa)
-                    .addComponent(lbSenha)
-                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbUserName)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbEmail)
-                    .addComponent(lbName)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSenha)
-                    .addComponent(JbArtista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbReviewer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(54, 54, 54))
+                        .addGap(117, 117, 117)
+                        .addComponent(btnImagemPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbPessoa)
+                            .addComponent(lbSenha)
+                            .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbUserName)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbEmail)
+                            .addComponent(lbName)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSenha)
+                            .addComponent(JbArtista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbReviewer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(btnImage2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
+                .addGap(26, 26, 26)
+                .addComponent(btnImagemPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(lbName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -221,78 +224,13 @@ public class TelaCadastrarPessoa extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
+
+        btnImagemPerfil.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnImage2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImage2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnImage2ActionPerformed
-
-    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNameActionPerformed
-
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-//        if (txtName.getText().isEmpty() || txtEmail.getText().isEmpty() || txtSenha.getText().isEmpty() || txtUserName.getText().isEmpty() || buttonGroup2.getSelection() == null) {
-//            JOptionPane.showMessageDialog(null, "Há informações não preenchidas, favor preencher todos os campos para realizar o cadastro");
-//        } else {
-//            String nome = txtName.getText();
-//            String email = txtEmail.getText();
-//            String usuario = txtUserName.getText();
-//            String senha = txtSenha.getText();
-//
-//            Pessoa novaPessoa = JbArtista.isSelected() ? new Artista(usuario, email, senha, nome) : new Reviewer(usuario, email, senha, nome);
-//
-//            PessoaDAO pDao = new PessoaDAO();
-//
-//            boolean jaCadastrado = false;
-//            for (Pessoa p : pDao.getListaPessoas()) {
-//                if (p.getEmail().equals(email)) {
-//                    JOptionPane.showMessageDialog(null, "Já existe um usuário com essas credenciais.");
-//                    jaCadastrado = true;
-//                    break;
-//                }
-//            }
-//
-//            if (jaCadastrado == false) {
-//                pDao.salvarPessoa(novaPessoa);
-//
-//                System.out.println(pDao.getListaPessoas());
-//
-//                System.out.println(novaPessoa.toString());
-//
-//                if (Pessoa.login(email, senha) == null) {
-//                    JOptionPane.showMessageDialog(null, "Erro ao logar pessoa.");
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
-//                    TelaInicial telaInicial = new TelaInicial();
-//                    telaInicial.setVisible(true);
-//                    this.setVisible(false);
-//                }
-//            }
-//        }
-    }//GEN-LAST:event_btnSalvarActionPerformed
-
-    private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSenhaActionPerformed
-
-    private void JbArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbArtistaActionPerformed
-
-    }//GEN-LAST:event_JbArtistaActionPerformed
-
-    private void jbReviewerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbReviewerActionPerformed
-
-    }//GEN-LAST:event_jbReviewerActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-//        Login login = new Login();
-//        login.setVisible(true);
-//        this.setVisible(false);
-    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,7 +239,7 @@ public class TelaCadastrarPessoa extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton JbArtista;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnImage2;
+    private javax.swing.JButton btnImagemPerfil;
     private javax.swing.JButton btnSalvar;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JRadioButton jbReviewer;

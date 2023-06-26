@@ -7,11 +7,18 @@ package view;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import model.Album;
+import util.ManipularImagem;
 
 /**
  *
@@ -19,11 +26,105 @@ import javax.swing.JOptionPane;
  */
 public class TelaPerfil extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaPerfil
-     */
+    private List<Map> componentesAlbum = new ArrayList();
+    
     public TelaPerfil() {
         initComponents();
+    }
+    
+    public void limparGridAlbuns() {
+        for (Map m : this.componentesAlbum) {
+            JButton btnAlbum = (JButton) m.get("btnAlbum");
+            JLabel lbNomeAlbum = (JLabel) m.get("lbNomeAlbum");
+            JLabel lbScore = (JLabel) m.get("lbScore");
+            JLabel lbAnoLancamento = (JLabel) m.get("lbAnoLancamento");
+
+            btnAlbum.setVisible(false);
+            lbNomeAlbum.setVisible(false);
+            lbScore.setVisible(false);
+            lbAnoLancamento.setVisible(false);
+        }
+    }
+    
+    public void /*List<Map>*/ prepararGridAlbuns() {
+        // Preenche Map com JComponent 
+        Map<String, JComponent> album_1 = new HashMap();
+        album_1.put("btnAlbum", this.btnAlbum_1);
+        album_1.put("lbNomeAlbum", this.lbNomeAlbum_1);
+        album_1.put("lbScore", this.lbScore_1);
+        album_1.put("lbAnoLancamento", this.lbAnoLancamento_1);
+
+        Map<String, JComponent> album_2 = new HashMap();
+        album_2.put("btnAlbum", this.btnAlbum_2);
+        album_2.put("lbNomeAlbum", this.lbNomeAlbum_2);
+        album_2.put("lbScore", this.lbScore_2);
+        album_2.put("lbAnoLancamento", this.lbAnoLancamento_2);
+
+        Map<String, JComponent> album_3 = new HashMap();
+        album_3.put("btnAlbum", this.btnAlbum_3);
+        album_3.put("lbNomeAlbum", this.lbNomeAlbum_3);
+        album_3.put("lbScore", this.lbScore_3);
+        album_3.put("lbAnoLancamento", this.lbAnoLancamento_3);
+
+        Map<String, JComponent> album_4 = new HashMap();
+        album_4.put("btnAlbum", this.btnAlbum_4);
+        album_4.put("lbNomeAlbum", this.lbNomeAlbum_4);
+        album_4.put("lbScore", this.lbScore_4);
+        album_4.put("lbAnoLancamento", this.lbAnoLancamento_4);
+
+        Map<String, JComponent> album_5 = new HashMap();
+        album_5.put("btnAlbum", this.btnAlbum_5);
+        album_5.put("lbNomeAlbum", this.lbNomeAlbum_5);
+        album_5.put("lbScore", this.lbScore_5);
+        album_5.put("lbAnoLancamento", this.lbAnoLancamento_5);
+
+        Map<String, JComponent> album_6 = new HashMap();
+        album_6.put("btnAlbum", this.btnAlbum_6);
+        album_6.put("lbNomeAlbum", this.lbNomeAlbum_6);
+        album_6.put("lbScore", this.lbScore_6);
+        album_6.put("lbAnoLancamento", this.lbAnoLancamento_6);
+        
+        componentesAlbum.add(album_1);
+        componentesAlbum.add(album_2);
+        componentesAlbum.add(album_3);
+        componentesAlbum.add(album_4);
+        componentesAlbum.add(album_5);
+        componentesAlbum.add(album_6);
+        //return componentesAlbum;
+    }
+    
+    public void carregarGridAlbuns(List<Album> albunsGrid, Map<Integer, Image> imagensGrid) {
+        int albunsCarregados = 0;
+
+        for (Album album : albunsGrid) {
+            Map<String, JComponent> componente = this.componentesAlbum.get(albunsCarregados);
+            JButton btnAlbum = (JButton) componente.get("btnAlbum");
+            JLabel lbNomeAlbum = (JLabel) componente.get("lbNomeAlbum");
+            JLabel lbScore = (JLabel) componente.get("lbScore");
+            JLabel lbAnoLancamento = (JLabel) componente.get("lbAnoLancamento");
+
+            int score = album.calcularScore();
+
+            btnAlbum.setVisible(true);
+            lbNomeAlbum.setVisible(true);
+            lbScore.setVisible(true);
+            lbAnoLancamento.setVisible(true);
+
+            lbNomeAlbum.setText(album.getTitulo());
+            lbScore.setText((score < 0 ? "SN" : Integer.toString(score)));
+            lbAnoLancamento.setText(Integer.toString(album.getAnoLancamento()));
+            
+            try {
+                btnAlbum.setIcon(new ImageIcon(imagensGrid.get(album.getIdAlbum())));
+                btnAlbum.setText(null);
+            } catch(NullPointerException ex) {
+                System.out.println(ex.getMessage());
+                btnAlbum.setIcon(null);
+                btnAlbum.setText(album.getTitulo());
+            }
+            
+            albunsCarregados++;
+        }
     }
     
     public void esconderInformacoes() {
@@ -134,6 +235,10 @@ public class TelaPerfil extends javax.swing.JFrame {
     
     public void adicionarAcaoVoltar(ActionListener acao) {
         btnVoltar.addActionListener(acao);
+    }
+    
+    public List<Map> getComponentesAlbum() {
+        return componentesAlbum;
     }
     
     public JButton getAlbum_1() {
@@ -269,46 +374,52 @@ public class TelaPerfil extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lbExibindo = new javax.swing.JLabel();
+        cbOrdenacao = new javax.swing.JComboBox<>();
+        jPanel1 = new javax.swing.JPanel();
         btnFotoPerfil = new javax.swing.JButton();
-        lbUsernamePerfil = new javax.swing.JLabel();
         lbNomePerfil = new javax.swing.JLabel();
+        lbUsernamePerfil = new javax.swing.JLabel();
         lbScoreLabel = new javax.swing.JLabel();
-        lbReviewsLabel = new javax.swing.JLabel();
         lbScoreValor = new javax.swing.JLabel();
+        lbReviewsLabel = new javax.swing.JLabel();
         lbReviewsValor = new javax.swing.JLabel();
-        lbNomeAlbum_2 = new javax.swing.JLabel();
-        lbNomeAlbum_3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         lbScore_1 = new javax.swing.JLabel();
+        lbAnoLancamento_1 = new javax.swing.JLabel();
+        btnAlbum_1 = new javax.swing.JButton();
+        lbNomeAlbum_1 = new javax.swing.JLabel();
+        lbNomeAlbum_3 = new javax.swing.JLabel();
         lbScore_2 = new javax.swing.JLabel();
         lbScore_3 = new javax.swing.JLabel();
-        lbAnoLancamento_1 = new javax.swing.JLabel();
         lbAnoLancamento_2 = new javax.swing.JLabel();
         lbAnoLancamento_3 = new javax.swing.JLabel();
-        btnAlbum_1 = new javax.swing.JButton();
         btnAlbum_2 = new javax.swing.JButton();
         btnAlbum_3 = new javax.swing.JButton();
-        lbNomeAlbum_1 = new javax.swing.JLabel();
+        lbNomeAlbum_2 = new javax.swing.JLabel();
+        lbScore_4 = new javax.swing.JLabel();
+        lbAnoLancamento_4 = new javax.swing.JLabel();
+        btnAlbum_4 = new javax.swing.JButton();
         lbNomeAlbum_4 = new javax.swing.JLabel();
+        lbNomeAlbum_5 = new javax.swing.JLabel();
+        lbScore_5 = new javax.swing.JLabel();
+        lbAnoLancamento_5 = new javax.swing.JLabel();
+        btnAlbum_5 = new javax.swing.JButton();
+        lbNomeAlbum_6 = new javax.swing.JLabel();
+        lbScore_6 = new javax.swing.JLabel();
+        lbAnoLancamento_6 = new javax.swing.JLabel();
+        btnAlbum_6 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        btnVoltar = new javax.swing.JButton();
         btnProxima = new javax.swing.JButton();
         btnAnterior = new javax.swing.JButton();
-        lbNomeAlbum_5 = new javax.swing.JLabel();
-        lbNomeAlbum_6 = new javax.swing.JLabel();
-        lbScore_4 = new javax.swing.JLabel();
-        lbScore_5 = new javax.swing.JLabel();
-        lbScore_6 = new javax.swing.JLabel();
-        lbAnoLancamento_4 = new javax.swing.JLabel();
-        lbAnoLancamento_5 = new javax.swing.JLabel();
-        lbAnoLancamento_6 = new javax.swing.JLabel();
-        btnAlbum_4 = new javax.swing.JButton();
-        btnAlbum_5 = new javax.swing.JButton();
-        btnAlbum_6 = new javax.swing.JButton();
         btnAdicionarAlbum = new javax.swing.JButton();
         lbPagina = new javax.swing.JLabel();
-        lbExibindo = new javax.swing.JLabel();
-        btnVoltar = new javax.swing.JButton();
-        cbOrdenacao = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lbExibindo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbExibindo.setText("<EXIBINDO AGORA>");
 
         btnFotoPerfil.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnFotoPerfil.setFocusable(false);
@@ -316,42 +427,78 @@ public class TelaPerfil extends javax.swing.JFrame {
         btnFotoPerfil.setMinimumSize(new java.awt.Dimension(115, 115));
         btnFotoPerfil.setPreferredSize(new java.awt.Dimension(115, 115));
 
-        lbUsernamePerfil.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        lbUsernamePerfil.setText("@");
-
         lbNomePerfil.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbNomePerfil.setText("Nome");
 
+        lbUsernamePerfil.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        lbUsernamePerfil.setText("@");
+
         lbScoreLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbScoreLabel.setText("Score");
-
-        lbReviewsLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbReviewsLabel.setText("Reviews");
 
         lbScoreValor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbScoreValor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbScoreValor.setText("Score");
 
+        lbReviewsLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbReviewsLabel.setText("Reviews");
+
         lbReviewsValor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbReviewsValor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbReviewsValor.setText("Reviews");
 
-        lbNomeAlbum_2.setText("lbNomeAlbum_2");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnFotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(lbReviewsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbReviewsValor, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(lbScoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(60, 60, 60)
+                            .addComponent(lbScoreValor, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lbUsernamePerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbNomePerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnFotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(lbNomePerfil)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbUsernamePerfil)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbScoreLabel)
+                            .addComponent(lbScoreValor))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbReviewsLabel)
+                            .addComponent(lbReviewsValor))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        lbNomeAlbum_3.setText("lbNomeAlbum_3");
+        jPanel2.setMaximumSize(new java.awt.Dimension(413, 425));
+        jPanel2.setMinimumSize(new java.awt.Dimension(413, 425));
 
         lbScore_1.setText("lbScore_1");
         lbScore_1.setToolTipText("");
 
-        lbScore_2.setText("lbScore_2");
-
-        lbScore_3.setText("lbScore_3");
-
         lbAnoLancamento_1.setText("lbAnoLancamento_1");
-
-        lbAnoLancamento_2.setText("lbAnoLancamento_2");
-
-        lbAnoLancamento_3.setText("lbAnoLancamento_3");
 
         btnAlbum_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAlbum_1.setFocusable(false);
@@ -360,6 +507,18 @@ public class TelaPerfil extends javax.swing.JFrame {
         btnAlbum_1.setMinimumSize(new java.awt.Dimension(80, 80));
         btnAlbum_1.setName("btnAlbum_1"); // NOI18N
         btnAlbum_1.setPreferredSize(new java.awt.Dimension(115, 115));
+
+        lbNomeAlbum_1.setText("lbNomeAlbum_1");
+
+        lbNomeAlbum_3.setText("lbNomeAlbum_3");
+
+        lbScore_2.setText("lbScore_2");
+
+        lbScore_3.setText("lbScore_3");
+
+        lbAnoLancamento_2.setText("lbAnoLancamento_2");
+
+        lbAnoLancamento_3.setText("lbAnoLancamento_3");
 
         btnAlbum_2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAlbum_2.setFocusable(false);
@@ -377,31 +536,11 @@ public class TelaPerfil extends javax.swing.JFrame {
         btnAlbum_3.setName("btnAlbum_3"); // NOI18N
         btnAlbum_3.setPreferredSize(new java.awt.Dimension(115, 115));
 
-        lbNomeAlbum_1.setText("lbNomeAlbum_1");
-
-        lbNomeAlbum_4.setText("lbNomeAlbum_4");
-
-        btnProxima.setText("Próxima");
-        btnProxima.setEnabled(false);
-
-        btnAnterior.setText("Anterior");
-        btnAnterior.setEnabled(false);
-
-        lbNomeAlbum_5.setText("lbNomeAlbum_5");
-
-        lbNomeAlbum_6.setText("lbNomeAlbum_6");
+        lbNomeAlbum_2.setText("lbNomeAlbum_2");
 
         lbScore_4.setText("lbScore_4");
 
-        lbScore_5.setText("lbScore_5");
-
-        lbScore_6.setText("lbScore_6");
-
         lbAnoLancamento_4.setText("lbAnoLancamento_4");
-
-        lbAnoLancamento_5.setText("lbAnoLancamento_5");
-
-        lbAnoLancamento_6.setText("lbAnoLancamento_6");
 
         btnAlbum_4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAlbum_4.setFocusable(false);
@@ -411,6 +550,14 @@ public class TelaPerfil extends javax.swing.JFrame {
         btnAlbum_4.setName("btnAlbum_4"); // NOI18N
         btnAlbum_4.setPreferredSize(new java.awt.Dimension(80, 80));
 
+        lbNomeAlbum_4.setText("lbNomeAlbum_4");
+
+        lbNomeAlbum_5.setText("lbNomeAlbum_5");
+
+        lbScore_5.setText("lbScore_5");
+
+        lbAnoLancamento_5.setText("lbAnoLancamento_5");
+
         btnAlbum_5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAlbum_5.setFocusable(false);
         btnAlbum_5.setMargin(null);
@@ -418,6 +565,12 @@ public class TelaPerfil extends javax.swing.JFrame {
         btnAlbum_5.setMinimumSize(new java.awt.Dimension(115, 115));
         btnAlbum_5.setName("btnAlbum_5"); // NOI18N
         btnAlbum_5.setPreferredSize(new java.awt.Dimension(80, 80));
+
+        lbNomeAlbum_6.setText("lbNomeAlbum_6");
+
+        lbScore_6.setText("lbScore_6");
+
+        lbAnoLancamento_6.setText("lbAnoLancamento_6");
 
         btnAlbum_6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAlbum_6.setFocusable(false);
@@ -427,194 +580,183 @@ public class TelaPerfil extends javax.swing.JFrame {
         btnAlbum_6.setName("btnAlbum_6"); // NOI18N
         btnAlbum_6.setPreferredSize(new java.awt.Dimension(80, 80));
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnAlbum_4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(lbScore_1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAlbum_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbNomeAlbum_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbAnoLancamento_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbScore_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbAnoLancamento_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbNomeAlbum_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAlbum_2, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                    .addComponent(btnAlbum_5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbNomeAlbum_5, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                    .addComponent(lbNomeAlbum_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbScore_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbScore_5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbAnoLancamento_5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbAnoLancamento_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lbScore_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAlbum_3, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                        .addComponent(btnAlbum_6, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                        .addComponent(lbNomeAlbum_6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbScore_6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbAnoLancamento_6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbAnoLancamento_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbNomeAlbum_3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAlbum_2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnAlbum_3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(lbScore_3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbAnoLancamento_3))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnAlbum_1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbNomeAlbum_1)
+                            .addComponent(lbNomeAlbum_2)
+                            .addComponent(lbNomeAlbum_3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbScore_1)
+                            .addComponent(lbScore_2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbAnoLancamento_1)
+                            .addComponent(lbAnoLancamento_2))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnAlbum_6, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbNomeAlbum_6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbScore_6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbAnoLancamento_6))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnAlbum_4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbNomeAlbum_4))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnAlbum_5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbNomeAlbum_5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbScore_5)
+                            .addComponent(lbScore_4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbAnoLancamento_5)
+                            .addComponent(lbAnoLancamento_4))))
+                .addGap(70, 70, 70))
+        );
+
+        btnVoltar.setText("Voltar");
+
+        btnProxima.setText("Próxima");
+        btnProxima.setEnabled(false);
+
+        btnAnterior.setText("Anterior");
+        btnAnterior.setEnabled(false);
+
         btnAdicionarAlbum.setText("+ Adicionar Álbum");
 
         lbPagina.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbPagina.setText("---");
 
-        lbExibindo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbExibindo.setText("<EXIBINDO AGORA>");
-
-        btnVoltar.setText("Voltar");
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAdicionarAlbum)
+                .addGap(68, 68, 68))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(btnAnterior)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnProxima))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(lbPagina)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdicionarAlbum)
+                    .addComponent(btnVoltar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbPagina)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnProxima, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbReviewsValor, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbScoreValor, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lbExibindo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cbOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnFotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbReviewsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbScoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbNomePerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbUsernamePerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(2, 2, 2)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(lbNomeAlbum_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lbScore_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lbAnoLancamento_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(btnAlbum_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(btnAlbum_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbNomeAlbum_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbScore_4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lbAnoLancamento_4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(btnAlbum_5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbNomeAlbum_5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbScore_5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lbAnoLancamento_5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(2, 2, 2)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(btnAlbum_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lbNomeAlbum_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lbScore_2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lbAnoLancamento_2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(53, 53, 53)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(lbScore_6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbNomeAlbum_6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnAlbum_6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(lbAnoLancamento_6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(2, 2, 2)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lbAnoLancamento_3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(lbScore_3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btnAlbum_3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(lbNomeAlbum_3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))))))))
-                .addGap(17, 17, 17))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(btnAnterior)
-                        .addGap(0, 0, 0)
-                        .addComponent(lbPagina))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(226, 226, 226)
-                        .addComponent(btnProxima)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnAdicionarAlbum)
-                .addGap(103, 103, 103))
+                        .addComponent(lbExibindo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(lbNomePerfil)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbUsernamePerfil)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbScoreLabel)
-                            .addComponent(lbScoreValor))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbReviewsLabel)
-                            .addComponent(lbReviewsValor)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(btnFotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(lbExibindo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(cbOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnAlbum_1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lbNomeAlbum_1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lbScore_1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lbAnoLancamento_1)
-                            .addGap(31, 31, 31)
-                            .addComponent(btnAlbum_4, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lbNomeAlbum_4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lbScore_4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lbAnoLancamento_4))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(btnAlbum_2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lbNomeAlbum_2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lbScore_2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lbAnoLancamento_2)
-                            .addGap(31, 31, 31)
-                            .addComponent(btnAlbum_5, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lbNomeAlbum_5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lbScore_5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lbAnoLancamento_5)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAlbum_3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbNomeAlbum_3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbScore_3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbAnoLancamento_3)
-                        .addGap(31, 31, 31)
-                        .addComponent(btnAlbum_6, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbNomeAlbum_6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbScore_6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbAnoLancamento_6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdicionarAlbum)
-                    .addComponent(btnVoltar))
+                    .addComponent(lbExibindo)
+                    .addComponent(cbOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbPagina)
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProxima, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -668,6 +810,9 @@ public class TelaPerfil extends javax.swing.JFrame {
     private javax.swing.JButton btnProxima;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cbOrdenacao;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lbAnoLancamento_1;
     private javax.swing.JLabel lbAnoLancamento_2;
     private javax.swing.JLabel lbAnoLancamento_3;

@@ -18,12 +18,12 @@ public class Reviewer extends Pessoa {
         super(username, email, senha, nome, TipoPessoa.REVIEWER);
     }
 
-    public Reviewer(int id, String username, String email, String senha, String nome) {
-        super(id, username, email, senha, nome, TipoPessoa.REVIEWER);
+    public Reviewer(int id, String username, String email, String senha, String nome, String caminhoImagemPerfil) {
+        super(id, username, email, senha, nome, TipoPessoa.REVIEWER, caminhoImagemPerfil);
     }
 
-    public Reviewer(String username, String email, String senha, String nome, Path pathImagemPerfil) {
-        super(username, email, senha, nome, TipoPessoa.REVIEWER, pathImagemPerfil);
+    public Reviewer(String username, String email, String senha, String nome, String caminhoImagemPerfil) {
+        super(username, email, senha, nome, TipoPessoa.REVIEWER, caminhoImagemPerfil);
     }
 
     public void setIdPessoa(int idPessoa) {

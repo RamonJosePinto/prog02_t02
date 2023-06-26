@@ -23,4 +23,6 @@ public interface PessoaRepositorio {
 
     public boolean salvarPessoa(Pessoa pessoa);
 
+    public boolean atualizarImagemPessoa(int id, String caminhoImagem);
+    
 }

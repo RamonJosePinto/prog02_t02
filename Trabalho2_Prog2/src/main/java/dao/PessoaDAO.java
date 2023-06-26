@@ -14,6 +14,8 @@ import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Artista;
 import model.Pessoa;
 import model.Pessoa.TipoPessoa;
@@ -26,17 +28,21 @@ import repository.PessoaRepositorio;
  */
 public class PessoaDAO implements PessoaRepositorio {
 
+    public void PessoaDAO() {
+    }
+
     //   private static Set<Pessoa> pessoas = new HashSet();
     private static void createTable() {
         Connection connection = Conexao.getConnection();
-        String sqlCreate = "CREATE TABLE IF NOT EXISTS PESSOA"
-                + "   (id            SERIAL NOT NULL,"
-                + "   username            VARCHAR(255),"
-                + "   email           VARCHAR(255),"
-                + "   senha            VARCHAR(255),"
-                + "   nome           VARCHAR(255),"
-                + "   tipo_pessoa    VARCHAR(10),"
-                + "   PRIMARY KEY(id))"; // Parêntese de fechamento adicionado
+        String sqlCreate = "CREATE TABLE IF NOT EXISTS pessoa"  
+                + "(id            SERIAL NOT NULL,"
+                + "username       VARCHAR(255),"
+                + "email          VARCHAR(255),"
+                + "senha          VARCHAR(255),"
+                + "nome           VARCHAR(255),"
+                + "tipo_pessoa    VARCHAR(255),"
+                + "caminho_imagem VARCHAR(255),"
+                + "PRIMARY KEY(id))"; // Parêntese de fechamento adicionado
 
         Statement stmt = null;
         try {
@@ -47,15 +53,13 @@ public class PessoaDAO implements PessoaRepositorio {
         }
     }
 
-    public void PessoaDAO() {
-    }
 
     @Override
     public Set<Pessoa> getListaPessoas() {
         createTable();
         Set<Pessoa> pessoas = new HashSet<>();
         Connection connection = Conexao.getConnection();
-        String sql = "SELECT * FROM PESSOA";
+        String sql = "SELECT * FROM pessoa";
         Statement stmt;
 
         try {
@@ -70,16 +74,16 @@ public class PessoaDAO implements PessoaRepositorio {
                 String nome = resultado.getString("nome");
                 String tipoPessoaStr = resultado.getString("tipo_pessoa");
                 TipoPessoa tipoPessoa = TipoPessoa.valueOf(tipoPessoaStr);
+                String caminhoImagemPerfil = resultado.getString("caminho_imagem");
 
-                Pessoa pessoa = null;
+                Pessoa pessoa;
 
                 if (tipoPessoa == TipoPessoa.ARTISTA) {
-                    pessoa = new Artista(id, username, email, senha, nome);
-                } else if (tipoPessoa == TipoPessoa.REVIEWER) {
-                    pessoa = new Reviewer(id, username, email, senha, nome);
+                    pessoa = new Artista(id, username, email, senha, nome, caminhoImagemPerfil);
+//              } else if (tipoPessoa == TipoPessoa.REVIEWER) {
+                } else {
+                    pessoa = new Reviewer(id, username, email, senha, nome, caminhoImagemPerfil);
                 }
-
-                pessoa.setIdPessoa(id);
                 pessoas.add(pessoa);
             }
         } catch (SQLException e) {
@@ -93,7 +97,7 @@ public class PessoaDAO implements PessoaRepositorio {
     public Pessoa getPessoaId(int id) {
         createTable();
         Connection connection = Conexao.getConnection();
-        String sql = "SELECT * FROM PESSOA WHERE id = ?";
+        String sql = "SELECT * FROM pessoa WHERE id = ?";
         PreparedStatement pstmt;
         ResultSet resultado;
         try {
@@ -109,13 +113,14 @@ public class PessoaDAO implements PessoaRepositorio {
                 String nome = resultado.getString("nome");
                 String tipoPessoaStr = resultado.getString("tipo_pessoa");
                 TipoPessoa tipoPessoa = TipoPessoa.valueOf(tipoPessoaStr);
+                String caminhoImagemPerfil = resultado.getString("caminho_imagem");
 
                 Pessoa pessoa = null;
 
                 if (tipoPessoa == TipoPessoa.ARTISTA) {
-                    pessoa = new Artista(id, username, email, senha, nome);
+                    pessoa = new Artista(id, username, email, senha, nome, caminhoImagemPerfil);
                 } else if (tipoPessoa == TipoPessoa.REVIEWER) {
-                    pessoa = new Reviewer(id, username, email, senha, nome);
+                    pessoa = new Reviewer(id, username, email, senha, nome, caminhoImagemPerfil);
                 }
 
                 pessoa.setIdPessoa(idDB);
@@ -132,7 +137,7 @@ public class PessoaDAO implements PessoaRepositorio {
     public Pessoa getPessoaEmail(String email) {
         createTable();
         Connection connection = Conexao.getConnection();
-        String sql = "SELECT * FROM PESSOA WHERE email = ?";
+        String sql = "SELECT * FROM pessoa WHERE email = ?";
         PreparedStatement pstmt;
         ResultSet resultado;
         try {
@@ -148,13 +153,14 @@ public class PessoaDAO implements PessoaRepositorio {
                 String nome = resultado.getString("nome");
                 String tipoPessoaStr = resultado.getString("tipo_pessoa");
                 TipoPessoa tipoPessoa = TipoPessoa.valueOf(tipoPessoaStr);
+                String caminhoImagemPerfil = resultado.getString("caminho_imagem");
 
                 Pessoa pessoa = null;
 
                 if (tipoPessoa == TipoPessoa.ARTISTA) {
-                    pessoa = new Artista(id, username, email, senha, nome);
+                    pessoa = new Artista(id, username, email, senha, nome, caminhoImagemPerfil);
                 } else if (tipoPessoa == TipoPessoa.REVIEWER) {
-                    pessoa = new Reviewer(id, username, email, senha, nome);
+                    pessoa = new Reviewer(id, username, email, senha, nome, caminhoImagemPerfil);
                 }
 
                 pessoa.setIdPessoa(id);
@@ -169,19 +175,19 @@ public class PessoaDAO implements PessoaRepositorio {
 
     @Override
     public void carregarPessoas() {
-        Pessoa p1 = new Artista(1, "art", "art", "123", "Linkin Park");
-        Pessoa p2 = new Artista(2, "joao123", "joao123@email.com", "12345", "João Silva");
-        Pessoa p3 = new Artista(3, "maria456", "maria456@email.com", "67890", "Maria Souza");
-        Pessoa p4 = new Artista(4, "pedro789", "pedro789@email.com", "24680", "Pedro Ferreira");
-        Pessoa p5 = new Artista(5, "ana456", "ana456@email.com", "13579", "Ana Clara");
-        Pessoa p6 = new Artista(6, "carlos123", "carlos123@email.com", "98765", "Carlos Santos");
-        Pessoa p7 = new Reviewer(7, "ycholinho", "a", "a", "yCholinho");
+        Pessoa p1 = new Artista(1, "art", "art", "123", "Linkin Park", "imagens/pessoa/1");
+        Pessoa p2 = new Artista(2, "joao123", "joao123@email.com", "12345", "João Silva", "");
+        Pessoa p3 = new Artista(3, "maria456", "maria456@email.com", "67890", "Maria Souza", "");
+        Pessoa p4 = new Artista(4, "pedro789", "pedro789@email.com", "24680", "Pedro Ferreira", "");
+        Pessoa p5 = new Artista(5, "ana456", "ana456@email.com", "13579", "Ana Clara", "");
+        Pessoa p6 = new Artista(6, "carlos123", "carlos123@email.com", "98765", "Carlos Santos", "");
+        Pessoa p7 = new Reviewer(7, "ycholinho", "a", "a", "yCholinho", "");
 
-        Pessoa p8 = new Reviewer(8, "john123", "john123@email.com", "12345", "John Silva");
-        Pessoa p9 = new Reviewer(9, "mary456", "mary456@email.com", "67890", "Mary Souza");
-        Pessoa p10 = new Reviewer(10, "peter789", "peter789@email.com", "24680", "Peter Ferreira");
-        Pessoa p11 = new Reviewer(11, "anna456", "anna456@email.com", "13579", "Anna Clara");
-        Pessoa p12 = new Reviewer(12, "carl123", "carl123@email.com", "98765", "Carl Santos");
+        Pessoa p8 = new Reviewer(8, "john123", "john123@email.com", "12345", "John Silva", "");
+        Pessoa p9 = new Reviewer(9, "mary456", "mary456@email.com", "67890", "Mary Souza", "");
+        Pessoa p10 = new Reviewer(10, "peter789", "peter789@email.com", "24680", "Peter Ferreira", "");
+        Pessoa p11 = new Reviewer(11, "anna456", "anna456@email.com", "13579", "Anna Clara", "");
+        Pessoa p12 = new Reviewer(12, "carl123", "carl123@email.com", "98765", "Carl Santos", "");
 
         salvarPessoasCarregadas(p1);
         salvarPessoasCarregadas(p2);
@@ -195,25 +201,28 @@ public class PessoaDAO implements PessoaRepositorio {
         salvarPessoasCarregadas(p10);
         salvarPessoasCarregadas(p11);
         salvarPessoasCarregadas(p12);
+        
+        atualizarSequence();
     }
 
     public void salvarPessoasCarregadas(Pessoa pessoa) {
         createTable();
         Connection connection = Conexao.getConnection();
-        String sql = "INSERT INTO PESSOA (id, username, email, senha, nome, tipo_pessoa) "
+        String sql = "INSERT INTO pessoa (username, email, senha, nome, tipo_pessoa, caminho_imagem) "
                 + "SELECT ?, ?, ?, ?, ?, ? "
-                + "WHERE NOT EXISTS (SELECT 1 FROM PESSOA WHERE id = ?)";
+                + "WHERE NOT EXISTS (SELECT 1 FROM pessoa WHERE id = ?)";
+        
         PreparedStatement pstmt;
 
         try {
             pstmt = connection.prepareStatement(sql);
-            pstmt = connection.prepareStatement(sql);
-            pstmt.setInt(1, pessoa.getIdPessoa());
-            pstmt.setString(2, pessoa.getUsername());
-            pstmt.setString(3, pessoa.getEmail());
-            pstmt.setString(4, pessoa.getSenha());
-            pstmt.setString(5, pessoa.getNome());
-            pstmt.setString(6, pessoa.getTipoPessoa().toString());
+//            pstmt.setInt(1, pessoa.getIdPessoa());
+            pstmt.setString(1, pessoa.getUsername());
+            pstmt.setString(2, pessoa.getEmail());
+            pstmt.setString(3, pessoa.getSenha());
+            pstmt.setString(4, pessoa.getNome());
+            pstmt.setString(5, pessoa.getTipoPessoa().toString());
+            pstmt.setString(6, pessoa.getCaminhoImagemPerfil());
             pstmt.setInt(7, pessoa.getIdPessoa());
 
             pstmt.execute();
@@ -230,16 +239,18 @@ public class PessoaDAO implements PessoaRepositorio {
     public boolean salvarPessoa(Pessoa pessoa) {
         createTable();
         Connection connection = Conexao.getConnection();
-        String sql = "INSERT INTO PESSOA (username ,email ,senha, nome, tipo_pessoa) VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pessoa (username, email, senha, nome, tipo_pessoa, caminho_imagem) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement pstmt;
 
         try {
             pstmt = connection.prepareStatement(sql);
+ //         pstmt.setInt(1, pessoa.getIdPessoa());
             pstmt.setString(1, pessoa.getUsername());
             pstmt.setString(2, pessoa.getEmail());
             pstmt.setString(3, pessoa.getSenha());
             pstmt.setString(4, pessoa.getNome());
             pstmt.setString(5, pessoa.getTipoPessoa().toString());
+            pstmt.setString(6, pessoa.getCaminhoImagemPerfil());
 
             pstmt.execute();
 
@@ -257,4 +268,35 @@ public class PessoaDAO implements PessoaRepositorio {
             return false;
         }
     }
+    
+    @Override
+    public boolean atualizarImagemPessoa(int id, String caminhoImagemPerfil) {
+        Connection connection = Conexao.getConnection();
+        String sql = "UPDATE pessoa SET caminho_imagem = ? WHERE id = ?";
+        PreparedStatement pstmt;
+        
+        try {
+            pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1, caminhoImagemPerfil);
+            pstmt.setInt(2, id);
+            pstmt.execute();
+            
+            System.out.println("Novo caminho da imagem da pessoa " + id + ": " + caminhoImagemPerfil);
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+    public void atualizarSequence() {
+        Connection connection = Conexao.getConnection();
+        String sql = "SELECT setval('pessoa_id_seq', (SELECT max(id) FROM pessoa), TRUE)";
+        try {
+            connection.prepareStatement(sql).execute();
+        } catch (SQLException ex) {
+            System.out.println("Não foi possível atualizar a sequence do ID da pessoa.");
+        }
+    }
+    
 }

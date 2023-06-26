@@ -27,6 +27,8 @@ public class App {
         ReviewDAO reviewDAO = new ReviewDAO();
         FaixaDAO faixaDAO = new FaixaDAO();
 
+        //PessoaDAO.createTable();
+        
         pessoaDAO.carregarPessoas();
         albumDAO.carregarAlbums();
         reviewDAO.carregarReviews();

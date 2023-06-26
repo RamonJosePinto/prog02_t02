@@ -6,6 +6,7 @@
 package model;
 
 import dao.ReviewDAO;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +21,35 @@ public class Album implements Comparable<Album> {
     private int anoLancamento;
     private Artista artista;
     private List<Faixa> faixas = new ArrayList();
-    protected static Album albumCadastrando;
-    protected static int geradorIdAlbum = 0;
-
+    private String caminhoImagemCapa;
+    private static int geradorIdAlbum = 0;
+    //protected static Album albumCadastrando;
+    
+    public Album() {}
+    
+    public Album(int idAlbum, String titulo, int anoLancamento, Artista artista, String caminhoImagemCapa) {
+        this.idAlbum = idAlbum;
+        this.titulo = titulo;
+        this.anoLancamento = anoLancamento;
+        this.artista = artista;
+        this.caminhoImagemCapa = caminhoImagemCapa;
+    }
+    
+    public Album(String titulo, int anoLancamento, Artista artista) {
+        this.idAlbum = ++geradorIdAlbum;
+        this.titulo = titulo;
+        this.anoLancamento = anoLancamento;
+        this.artista = artista;
+    }
+    
+    public Album(String titulo, int anoLancamento, Artista artista, String caminhoImagemCapa) {
+        this.idAlbum = ++geradorIdAlbum;
+        this.titulo = titulo;
+        this.anoLancamento = anoLancamento;
+        this.artista = artista;
+        this.caminhoImagemCapa = caminhoImagemCapa;
+    }
+    
     public List<Faixa> getFaixas() {
         return faixas;
     }
@@ -31,36 +58,17 @@ public class Album implements Comparable<Album> {
         this.faixas.add(faixas);
     }
 
-    public static Album getAlbumCadastrando() {
-        return albumCadastrando;
-    }
-
-    public static void setAlbumCadastrando(Album albumCadastrando) {
-        Album.albumCadastrando = albumCadastrando;
-    }
-
-    public static void setAlbumCadastrando() {
-
-    }
-
-    public static int getGeradorIdAlbum() {
-        return geradorIdAlbum;
-    }
-
-    public static void setGeradorIdAlbum(int geradorIdAlbum) {
-        Album.geradorIdAlbum = geradorIdAlbum;
-    }
-
-    public Album(String titulo, int anoLancamento, Artista artista) {
-        this.idAlbum = ++geradorIdAlbum;
-        this.titulo = titulo;
-        this.anoLancamento = anoLancamento;
-        this.artista = artista;
-    }
-
-    public Album() {
-
-    }
+//    public static Album getAlbumCadastrando() {
+//        return albumCadastrando;
+//    }
+//
+//    public static void setAlbumCadastrando(Album albumCadastrando) {
+//        Album.albumCadastrando = albumCadastrando;
+//    }
+//
+//    public static void setAlbumCadastrando() {
+//
+//    }
 
     /*    public boolean cadastrarFaixa(Album album, int duracao, int numero) {
         Faixa f = new Faixa(album, duracao, numero);
@@ -133,6 +141,14 @@ public class Album implements Comparable<Album> {
         this.artista = artista;
     }
 
+    public String getCaminhoImagemCapa() {
+        return caminhoImagemCapa;
+    }
+
+    public void setCaminhoImagemCapa(String caminhoImagemCapa) {
+        this.caminhoImagemCapa = caminhoImagemCapa;
+    }
+    
     @Override
     public String toString() {
         return "Album{" + "idAlbum=" + idAlbum + ", titulo=" + titulo + ", anoLancamento=" + anoLancamento + ", artista=" + artista.getIdPessoa();

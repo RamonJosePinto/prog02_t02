@@ -33,17 +33,12 @@ public class ControladorTelaLogin {
     }
 
     public void inicializarBotoes() {
-        telaLogin.adicionarAcaoBotaoCadastrarPessoa(acao -> {
-            acaoCadastrarPessoa();
-        });
-
-        telaLogin.adicionarAcaoBotaoValidarLogin(acao -> {
-            acaoValidarLogin();
-        });
+        telaLogin.adicionarAcaoBotaoCadastrarPessoa(acao -> acaoCadastrarPessoa());
+        telaLogin.adicionarAcaoBotaoValidarLogin(acao -> acaoValidarLogin());
     }
 
     public void acaoCadastrarPessoa() {
-        ControladorCadastrarPessoa controladorTelaCadastrarPessoa = new ControladorCadastrarPessoa(new TelaCadastrarPessoa(), null);
+        ControladorCadastrarPessoa controladorTelaCadastrarPessoa = new ControladorCadastrarPessoa(new TelaCadastrarPessoa());
         controladorTelaCadastrarPessoa.exibirTela();
         telaLogin.fecharTela();
     }

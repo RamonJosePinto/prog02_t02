@@ -5,17 +5,23 @@
 package controller;
 
 import dao.AlbumDAO;
+import exception.ImagemInexistenteException;
+import java.awt.Image;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import model.Album;
 import model.Pessoa;
 import model.table.FaixasTableModel;
+import util.ManipularImagem;
 import view.TelaInicial;
 import view.TelaListaFaixas;
 import view.TelaPerfil;
@@ -40,11 +46,12 @@ public class ControladorTelaInicial {
         Collections.sort(albuns);
 
         this.telaInicial.prepararGridAlbuns();
-        carregarGridAlbuns(paginaAtual);
+        selecionarAlbuns(paginaAtual);
         controlarBotoesPaginacao();
 
         this.telaInicial.setNomePessoaLogada(pessoa.getNome());
         inicializarBotoes();
+        inicializarImagemPefil();
     }
 
     private void controlarBotoesPaginacao() {
@@ -71,7 +78,7 @@ public class ControladorTelaInicial {
         return (divisaoInteiro < divisao ? (divisaoInteiro + 1) : divisaoInteiro);
     }
 
-    private void carregarGridAlbuns(int index) {
+    private void selecionarAlbuns(int index) {
         telaInicial.limparGridAlbuns();
 
         // Pegar trecho da lista de álbuns correspondente ao index de início, pegando no máximo 6 álbuns ou até o fim da lista.
@@ -88,30 +95,40 @@ public class ControladorTelaInicial {
                 break;
             }
         }
-
-        int indexAlbunsCarregados = 0;
-
-        for (Album album : albunsGrid) {
-            Map<String, JComponent> componente = telaInicial.getComponentesAlbum().get(indexAlbunsCarregados);
-            JButton btnAlbum = (JButton) componente.get("btnAlbum");
-            JLabel lbNomeAlbum = (JLabel) componente.get("lbNomeAlbum");
-            JLabel lbNomeArtista = (JLabel) componente.get("lbNomeArtista");
-            JLabel lbAnoLancamento = (JLabel) componente.get("lbAnoLancamento");
-
-            btnAlbum.setVisible(true);
-            lbNomeAlbum.setVisible(true);
-            lbNomeArtista.setVisible(true);
-            lbAnoLancamento.setVisible(true);
-
-            btnAlbum.setText(album.getTitulo());
-            lbNomeAlbum.setText(album.getTitulo());
-            lbNomeArtista.setText(album.getArtista().getNome());
-            lbAnoLancamento.setText(Integer.toString(album.getAnoLancamento()));
-
-            indexAlbunsCarregados++;
-        }
+        
+        telaInicial.carregarGridAlbuns(albunsGrid, inicializarImagemAlbunsGrid(albunsGrid));
     }
 
+    private Map<Integer, Image> inicializarImagemAlbunsGrid(List<Album> albunsGrid) {     // ADICIONAR PARÂMETRO PARA RECEBER O ÁLBUM
+        Map<Integer, Image> imagensGrid = new HashMap();
+        
+        for (Album album : albunsGrid) {
+            try {
+                imagensGrid.put(album.getIdAlbum(), ManipularImagem.buscarImagem(album.getCaminhoImagemCapa()));
+            } catch(NullPointerException ex) {
+                System.out.println("");
+            }  catch (IOException ex) {
+                System.out.println("");
+            } catch (ImagemInexistenteException ex) {
+                System.out.println("");
+            }
+        }
+
+        return imagensGrid;
+    }
+    
+    private void inicializarImagemPefil() {
+        try {
+            telaInicial.atualizarImagemPerfil(ManipularImagem.buscarImagem(pessoa.getCaminhoImagemPerfil()));
+        } catch(NullPointerException ex) {
+            System.out.println("O usuário não tem foto de perfil cadastrada.");
+        }  catch (IOException ex) {
+            telaInicial.exibirMensagem("Não foi possível carregar sua imagem de perfil. Por favor, faça upload novamente.");
+        } catch (ImagemInexistenteException ex) {
+            Logger.getLogger(ControladorTelaPerfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void inicializarBotoes() {
         telaInicial.adicionarAcaoBotaoProximo(acao -> acaoProximo());
         telaInicial.adicionarAcaoBotaoAnterior(acao -> acaoAnterior());
@@ -130,17 +147,17 @@ public class ControladorTelaInicial {
         telaInicial.fecharTela();
     }
 
-    public void acaoAnterior() {
+    private void acaoAnterior() {
         paginaAtual--;
         int index = (paginaAtual - 1) * 6;
-        carregarGridAlbuns(index);
+        selecionarAlbuns(index);
         controlarBotoesPaginacao();
     }
 
-    public void acaoProximo() {
+    private void acaoProximo() {
         paginaAtual++;
         int index = (paginaAtual - 1) * 6;
-        carregarGridAlbuns(index);
+        selecionarAlbuns(index);
         controlarBotoesPaginacao();
     }
 
