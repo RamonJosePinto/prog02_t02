@@ -88,8 +88,10 @@ public class ControladorCadastrarAlbum {
             String titulo = telaCadastroAlbum.getTituloAlbum();
             int anoLan = Integer.parseInt(telaCadastroAlbum.getAnoLancamentoAlbum());
             Artista art = (Artista) Pessoa.getUsuarioLogado();
-            this.album = (new Album(titulo, anoLan, art));
+            this.album = (new Album(titulo, anoLan, art, album.getCaminhoImagemCapa()));
 
+            System.out.println(album.toString());
+            
             ControladorCadastrarAlbumFaixas controladorCadastroAlbumFaixas = new ControladorCadastrarAlbumFaixas(new TelaCadastroAlbumFaixas(), this.album);
             controladorCadastroAlbumFaixas.exibirTela();
             telaCadastroAlbum.fecharTela();
