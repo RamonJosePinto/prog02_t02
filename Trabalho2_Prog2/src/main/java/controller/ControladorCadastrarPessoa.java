@@ -5,7 +5,6 @@
 package controller;
 
 import dao.PessoaDAO;
-import exception.ImagemInexistenteException;
 import exception.PessoaInexistenteException;
 import java.io.File;
 import java.io.IOException;
@@ -96,7 +95,7 @@ public class ControladorCadastrarPessoa {
     private void inicializarImagemPefil() {
         try {
             telaCadastrarPessoa.atualizarImagemPerfil(ManipularImagem.buscarImagem(telaCadastrarPessoa.getCaminhoImagemPerfil()));
-        }  catch (IOException | ImagemInexistenteException ex) {
+        }  catch (IOException ex) {
             telaCadastrarPessoa.exibirMensagem("Não foi possível carregar sua imagem de perfil. Por favor, faça upload novamente.");
         }
     }

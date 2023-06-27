@@ -23,11 +23,11 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="btnFotoPerfil" min="-2" pref="135" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -36,19 +36,13 @@
                                   <Component id="lbBemVindo" alignment="0" min="-2" pref="236" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbTituloAlbunsRecentes" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lbTituloAlbunsRecentes" alignment="0" min="-2" pref="423" max="-2" attributes="0"/>
+                          <Component id="jPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
-                      <Component id="btnAnterior" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnProxima" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
-                      <Component id="lbPagina" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
+                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="17" max="32767" attributes="0"/>
@@ -67,18 +61,13 @@
                       <Component id="lbNomePessoaLogada" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="33" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Component id="lbTituloAlbunsRecentes" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="17" max="32767" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="lbPagina" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnAnterior" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                  <Component id="btnProxima" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              <Component id="jPanel2" max="32767" attributes="0"/>
+              <EmptySpace pref="16" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -130,24 +119,6 @@
         <Property name="text" type="java.lang.String" value="&#xc1;lbuns mais recentes"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnProxima">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Pr&#xf3;xima"/>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnAnterior">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Anterior"/>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbPagina">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="---"/>
-      </Properties>
-    </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
 
       <Layout>
@@ -156,118 +127,122 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnAlbum_4" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbNomeAlbum_4" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbNomeArtista_4" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbAnoLancamento_4" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnAlbum_4" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lbNomeAlbum_4" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lbNomeArtista_4" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="btnAlbum_1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lbNomeAlbum_1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lbNomeArtista_1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lbAnoLancamento_1" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnAlbum_1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbNomeAlbum_1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbNomeArtista_1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbAnoLancamento_1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lbAnoLancamento_4" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnAlbum_5" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lbNomeAlbum_5" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lbNomeArtista_5" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="btnAlbum_2" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lbNomeAlbum_2" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lbNomeArtista_2" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lbAnoLancamento_2" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
+                      <Component id="lbAnoLancamento_5" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnAlbum_5" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbNomeAlbum_5" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbNomeArtista_5" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbAnoLancamento_5" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnAlbum_6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lbNomeAlbum_6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lbNomeArtista_6" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="lbNomeArtista_3" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lbNomeAlbum_3" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnAlbum_3" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lbAnoLancamento_3" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnAlbum_2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbNomeAlbum_2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbNomeArtista_2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbAnoLancamento_2" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="lbAnoLancamento_6" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="lbNomeArtista_6" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnAlbum_6" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbNomeAlbum_6" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbAnoLancamento_6" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="lbNomeArtista_3" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbNomeAlbum_3" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnAlbum_3" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbAnoLancamento_3" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnAlbum_2" min="-2" pref="125" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbNomeAlbum_2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbNomeArtista_2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbAnoLancamento_2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                              <Component id="btnAlbum_5" min="-2" pref="125" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbNomeAlbum_5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbNomeArtista_5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lbAnoLancamento_5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbAnoLancamento_6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="btnAlbum_2" min="-2" pref="125" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lbNomeAlbum_2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lbNomeArtista_2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lbAnoLancamento_2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="btnAlbum_1" min="-2" pref="125" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lbNomeAlbum_1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lbNomeArtista_1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lbAnoLancamento_1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="btnAlbum_5" min="-2" pref="125" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="btnAlbum_4" min="-2" pref="125" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="lbNomeAlbum_4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbNomeAlbum_5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbNomeAlbum_6" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Component id="btnAlbum_6" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lbNomeArtista_5" alignment="0" min="-2" pref="16" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="lbNomeArtista_4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbNomeArtista_6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnAlbum_3" min="-2" pref="125" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbNomeAlbum_3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbNomeArtista_3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbAnoLancamento_3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                              <Component id="btnAlbum_6" min="-2" pref="125" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
-                                      <Component id="lbNomeArtista_6" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="lbNomeAlbum_6" alignment="0" min="-2" pref="16" max="-2" attributes="0"/>
-                              </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lbAnoLancamento_4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbAnoLancamento_5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbAnoLancamento_6" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="btnAlbum_1" min="-2" pref="125" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="btnAlbum_3" min="-2" pref="125" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lbNomeAlbum_1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbNomeAlbum_3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lbNomeArtista_1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbNomeArtista_3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lbAnoLancamento_1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                          <Component id="btnAlbum_4" min="-2" pref="125" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lbNomeAlbum_4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lbNomeArtista_4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lbAnoLancamento_4" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbAnoLancamento_3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="37" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -505,6 +480,64 @@
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[125, 125]"/>
             </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel2">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="btnAnterior" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnProxima" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                          <Component id="lbPagina" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="lbPagina" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnAnterior" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                      <Component id="btnProxima" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="btnAnterior">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Anterior"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbPagina">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="---"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnProxima">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Pr&#xf3;xima"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>

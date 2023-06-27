@@ -17,7 +17,7 @@ import model.table.FaixasTableModel;
  * @author Usuario
  */
 public class TelaCadastroAlbum extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form TelaCadastroAlbum
      */

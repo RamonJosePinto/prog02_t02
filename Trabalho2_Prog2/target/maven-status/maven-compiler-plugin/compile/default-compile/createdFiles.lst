@@ -30,7 +30,6 @@ controller\ControladorCadastrarReview.class
 controller\ControladorTelaReviews$1.class
 repository\PessoaRepositorio.class
 controller\ControladorTelaReviews$4.class
-exception\ImagemInexistenteException.class
 view\TelaCadastroReview.class
 controller\ControladorTelaLogin.class
 controller\ControladorTelaReviews$3.class

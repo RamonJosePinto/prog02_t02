@@ -148,10 +148,14 @@ public class Album implements Comparable<Album> {
     public void setCaminhoImagemCapa(String caminhoImagemCapa) {
         this.caminhoImagemCapa = caminhoImagemCapa;
     }
-    
+
+    public static int getGeradorIdAlbum() {
+        return geradorIdAlbum;
+    }
+
     @Override
     public String toString() {
-        return "Album{" + "idAlbum=" + idAlbum + ", titulo=" + titulo + ", anoLancamento=" + anoLancamento + ", artista=" + artista.getIdPessoa();
+        return "Album{" + "idAlbum=" + idAlbum + ", titulo=" + titulo + ", anoLancamento=" + anoLancamento + ", artista=" + artista + ", caminhoImagemCapa=" + caminhoImagemCapa + '}';
     }
 
     @Override   // Vai ordenar pelo ID - indica ordem de cadastro

@@ -7,7 +7,6 @@ package controller;
 import dao.AlbumDAO;
 import dao.FaixaDAO;
 import dao.PessoaDAO;
-import exception.ImagemInexistenteException;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -219,11 +218,9 @@ public class ControladorTelaPerfil {
         for (Album album : albunsGrid) {
             try {
                 imagensGrid.put(album.getIdAlbum(), ManipularImagem.buscarImagem(album.getCaminhoImagemCapa()));
-            } catch(NullPointerException ex) {
-                System.out.println("");
+/*            } catch(NullPointerException ex) {
+                System.out.println("");*/
             }  catch (IOException ex) {
-                System.out.println("");
-            } catch (ImagemInexistenteException ex) {
                 System.out.println("");
             }
         }
@@ -238,8 +235,6 @@ public class ControladorTelaPerfil {
             System.out.println("O usuário não tem foto de perfil cadastrada.");
         }  catch (IOException ex) {
             telaPerfil.exibirMensagem("Não foi possível carregar sua imagem de perfil. Por favor, faça upload novamente.");
-        } catch (ImagemInexistenteException ex) {
-            Logger.getLogger(ControladorTelaPerfil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -260,10 +255,9 @@ public class ControladorTelaPerfil {
             } else {
                 telaPerfil.exibirMensagem("Não foi possível fazer upload da imagem de perfil.");
             }
-        } catch (IOException ex) {
+        } catch (IOException | NullPointerException ex) {
             telaPerfil.exibirMensagem("Não foi possível fazer upload da imagem de perfil.");
         }
-
     }
     
     private void inicializarBotoes() {

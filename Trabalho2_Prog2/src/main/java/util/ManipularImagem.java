@@ -5,7 +5,6 @@
  */
 package util;
 
-import exception.ImagemInexistenteException;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -30,7 +29,8 @@ public class ManipularImagem {
 
     public static final String BASE_CAMINHO_IMAGENS = "imagens/";
 
-    public static BufferedImage buscarImagem(String caminho) throws ImagemInexistenteException, IOException {
+    public static BufferedImage buscarImagem(String caminho) throws IOException {
+        System.out.println("BUSCANDO IMAGEM " + caminho + "!!!!!");
         Path path = Paths.get(caminho);
         File arquivo = path.toFile();
         BufferedImage imagem = ImageIO.read(arquivo);

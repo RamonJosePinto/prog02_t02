@@ -5,7 +5,6 @@
 package controller;
 
 import dao.AlbumDAO;
-import exception.ImagemInexistenteException;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -109,8 +108,6 @@ public class ControladorTelaInicial {
                 System.out.println("");
             }  catch (IOException ex) {
                 System.out.println("");
-            } catch (ImagemInexistenteException ex) {
-                System.out.println("");
             }
         }
 
@@ -124,8 +121,6 @@ public class ControladorTelaInicial {
             System.out.println("O usuário não tem foto de perfil cadastrada.");
         }  catch (IOException ex) {
             telaInicial.exibirMensagem("Não foi possível carregar sua imagem de perfil. Por favor, faça upload novamente.");
-        } catch (ImagemInexistenteException ex) {
-            Logger.getLogger(ControladorTelaPerfil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

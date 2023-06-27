@@ -5,16 +5,11 @@
 package controller;
 
 import dao.AlbumDAO;
-import dao.PessoaDAO;
 import exception.AlbumSemFaixaException;
-import exception.ImagemInexistenteException;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Album;
 import model.Artista;
-import model.Faixa;
 import model.Pessoa;
 import model.table.FaixasTableModel;
 import util.ManipularImagem;
@@ -38,6 +33,7 @@ public class ControladorCadastrarAlbum {
 
         setTableModel();
         inicializarBotoes();
+        inicializarImagemCapa();
     }
 
     public void setTableModel() {
@@ -59,12 +55,13 @@ public class ControladorCadastrarAlbum {
     public void acaoEnviar() {
         try {
             //System.out.println(Faixa.faixaCadastrando);
-            String titulo = telaCadastroAlbum.getTituloAlbum();
-            int anoLan = Integer.parseInt(telaCadastroAlbum.getAnoLancamentoAlbum());
-            AlbumDAO albDao = new AlbumDAO();
-            albDao.salvarAlbum(this.album);
-            telaCadastroAlbum.exibirMensagem("Album Cadastrado com sucesso");
+            album.setTitulo(telaCadastroAlbum.getTituloAlbum());
+            album.setAnoLancamento(Integer.parseInt(telaCadastroAlbum.getAnoLancamentoAlbum()));
+            new AlbumDAO().salvarAlbum(album);
+            
+            telaCadastroAlbum.exibirMensagem("Álbum cadastrado com sucesso");
             int opcao = telaCadastroAlbum.exibirMensagemConfirmacao("Você deseja cadastrar outro album?", "Confirmação");
+            
             if (telaCadastroAlbum.opcaoSelecionada(opcao)) {
                 telaCadastroAlbum.setTituloAlbum("");
                 telaCadastroAlbum.setAnoLancamentoAlbum("");
@@ -79,14 +76,14 @@ public class ControladorCadastrarAlbum {
         } catch (AlbumSemFaixaException ex) {
             telaCadastroAlbum.exibirMensagem(ex.getMessage());
         } catch(NumberFormatException ex){
-            telaCadastroAlbum.exibirMensagem("Por favor informe valores válidos para o ano de lançamento da faixa");
+            telaCadastroAlbum.exibirMensagem("Por favor informe valores válidos para o ano de lançamento da faixa.");
         }
         
     }
 
     public void acaoCadastrarFaixas() {
         if ((telaCadastroAlbum.getTituloAlbum().isEmpty()) || (telaCadastroAlbum.getAnoLancamentoAlbum().isEmpty())) {
-            telaCadastroAlbum.exibirMensagem("Antes criar uma faixa, por favor preencha o nome e ano do album");
+            telaCadastroAlbum.exibirMensagem("Antes criar uma faixa, por favor preencha o nome e ano do álbum.");
         } else {
             String titulo = telaCadastroAlbum.getTituloAlbum();
             int anoLan = Integer.parseInt(telaCadastroAlbum.getAnoLancamentoAlbum());
@@ -103,7 +100,7 @@ public class ControladorCadastrarAlbum {
         File arquivo = telaCadastroAlbum.subirImagemAlbum();
         
         String arquivoOrigem = arquivo.toPath().toString();
-        String nomeArquivo = Integer.toString(album.getIdAlbum());
+        String nomeArquivo = Integer.toString(Album.getGeradorIdAlbum());
   
         try {
             String caminhoImagemPerfil = ManipularImagem.gravarImagemAlbum(arquivoOrigem, nomeArquivo, 125, 125);
@@ -119,10 +116,8 @@ public class ControladorCadastrarAlbum {
     private void inicializarImagemCapa() {
         try {
             telaCadastroAlbum.atualizarImagemCapa(ManipularImagem.buscarImagem(album.getCaminhoImagemCapa()));
-        }  catch (IOException ex) {
+        }  catch (NullPointerException | IOException ex) {
             telaCadastroAlbum.exibirMensagem("Não foi possível carregar a capa do álbum. Por favor, faça upload novamente.");
-        } catch (ImagemInexistenteException ex) {
-            Logger.getLogger(ControladorTelaPerfil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -133,6 +128,8 @@ public class ControladorCadastrarAlbum {
     public void preencherInformacaoAposCadastroFaixa(){
         telaCadastroAlbum.setTituloAlbum(this.album.getTitulo());
         telaCadastroAlbum.setAnoLancamentoAlbum(Integer.toString(this.album.getAnoLancamento()));
+        System.out.println(album.toString());
+        inicializarImagemCapa();
     }
 
 }

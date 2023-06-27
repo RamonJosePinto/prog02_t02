@@ -22,13 +22,13 @@ import view.TelaCadastroAlbumFaixas;
 public class ControladorCadastrarAlbumFaixas {
 
     private TelaCadastroAlbumFaixas telaCadastroAlbumFaixas;
-    private Album alb;
+    private Album album;
     private int contNumero = 1;
 
-    public ControladorCadastrarAlbumFaixas(TelaCadastroAlbumFaixas telaCadastroAlbumFaixas, Album alb) {
+    public ControladorCadastrarAlbumFaixas(TelaCadastroAlbumFaixas telaCadastroAlbumFaixas, Album album) {
         this.telaCadastroAlbumFaixas = telaCadastroAlbumFaixas;
-        this.alb = alb;
-
+        this.album = album;
+        System.out.println(album.toString());
         inicializarBotoes();
     }
 
@@ -41,38 +41,32 @@ public class ControladorCadastrarAlbumFaixas {
     }
 
     public void inicializarBotoes() {
-        telaCadastroAlbumFaixas.adicioanarAcaoBotaoCadastrar(acao -> {
-            acaoCadastrar();
-        });
-        telaCadastroAlbumFaixas.adicioanarAcaoBotaoVoltar(acao -> {
-            acaoVoltar();
-        });
+        telaCadastroAlbumFaixas.adicioanarAcaoBotaoCadastrar(acao -> acaoCadastrar());
+        telaCadastroAlbumFaixas.adicioanarAcaoBotaoVoltar(acao -> acaoVoltar());
     }
 
     public void acaoCadastrar() {
         try {
             String nome = telaCadastroAlbumFaixas.getNomeFaixa();
             int duracao = Integer.parseInt(telaCadastroAlbumFaixas.getDuracaoFaixa());
-            Faixa f = new Faixa(nome, alb, duracao, contNumero);
-            contNumero++;
-            alb.getFaixas().add(f);
+            Faixa f = new Faixa(nome, album, duracao, contNumero);
+            album.getFaixas().add(f);
             FaixaDAO faixaDAO = new FaixaDAO();
             faixaDAO.salvarFaixa(f);
-            System.out.println(faixaDAO.getListaFaixas());
-            //Faixa.faixaCadastrando.add(f);
-            telaCadastroAlbumFaixas.exibirMensagem("Faixa cadastrada com sucesso");
-            int opcao = telaCadastroAlbumFaixas.exibirMensagemConfirmacao("Você deseja cadastrar outra faixa?", "Confirmação");
+            contNumero++;
+            
+            telaCadastroAlbumFaixas.exibirMensagem("Faixa cadastrada com sucesso.");
+            int opcao = telaCadastroAlbumFaixas.exibirMensagemConfirmacao("Você deseja cadastrar outra faixa?", "Cadastro de faixas");
+            
             if (telaCadastroAlbumFaixas.opcaoSelecionada(opcao)) {
                 telaCadastroAlbumFaixas.setNomeFaixa("");
                 telaCadastroAlbumFaixas.setDuracaoFaixa("");
-
             } else {
                 fecharTela();
-                ControladorCadastrarAlbum controladorCadastroAlbum = new ControladorCadastrarAlbum(new TelaCadastroAlbum(), new FaixasTableModel(this.alb.getFaixas()), this.alb);
+                ControladorCadastrarAlbum controladorCadastroAlbum = new ControladorCadastrarAlbum(new TelaCadastroAlbum(), new FaixasTableModel(this.album.getFaixas()), this.album);
                 controladorCadastroAlbum.preencherInformacaoAposCadastroFaixa();
                 controladorCadastroAlbum.exibirTela();
             }
-
         } catch (NumberFormatException ex) {
             telaCadastroAlbumFaixas.exibirMensagem("Por favor informe valores válidos para o campo duração da faixa");
         } catch (CampoVazioCadastroFaixaException ex) {
@@ -82,7 +76,7 @@ public class ControladorCadastrarAlbumFaixas {
 
     public void acaoVoltar() {
         fecharTela();
-        ControladorCadastrarAlbum controladorCadastroAlbum = new ControladorCadastrarAlbum(new TelaCadastroAlbum(), new FaixasTableModel(this.alb.getFaixas()), this.alb);
+        ControladorCadastrarAlbum controladorCadastroAlbum = new ControladorCadastrarAlbum(new TelaCadastroAlbum(), new FaixasTableModel(this.album.getFaixas()), this.album);
         controladorCadastroAlbum.preencherInformacaoAposCadastroFaixa();
         controladorCadastroAlbum.exibirTela();
     }

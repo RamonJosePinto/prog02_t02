@@ -18,7 +18,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import model.Album;
-import util.ManipularImagem;
 
 /**
  *
@@ -26,7 +25,7 @@ import util.ManipularImagem;
  */
 public class TelaPerfil extends javax.swing.JFrame {
 
-    private List<Map> componentesAlbum = new ArrayList();
+    private final List<Map> componentesAlbum = new ArrayList();
     
     public TelaPerfil() {
         initComponents();
@@ -721,7 +720,7 @@ public class TelaPerfil extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbPagina)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnProxima, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12))
