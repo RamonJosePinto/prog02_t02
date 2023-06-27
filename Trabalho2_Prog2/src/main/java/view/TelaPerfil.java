@@ -502,10 +502,10 @@ public class TelaPerfil extends javax.swing.JFrame {
         btnAlbum_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAlbum_1.setFocusable(false);
         btnAlbum_1.setMargin(null);
-        btnAlbum_1.setMaximumSize(new java.awt.Dimension(80, 80));
-        btnAlbum_1.setMinimumSize(new java.awt.Dimension(80, 80));
+        btnAlbum_1.setMaximumSize(new java.awt.Dimension(125, 125));
+        btnAlbum_1.setMinimumSize(new java.awt.Dimension(125, 125));
         btnAlbum_1.setName("btnAlbum_1"); // NOI18N
-        btnAlbum_1.setPreferredSize(new java.awt.Dimension(115, 115));
+        btnAlbum_1.setPreferredSize(new java.awt.Dimension(125, 125));
 
         lbNomeAlbum_1.setText("lbNomeAlbum_1");
 

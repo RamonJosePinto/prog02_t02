@@ -5,6 +5,7 @@
 package controller;
 
 import dao.ReviewDAO;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,6 +14,7 @@ import javax.swing.JFrame;
 import model.Album;
 import model.Review;
 import model.table.ReviewTableModel;
+import util.ManipularImagem;
 import view.TelaReviews;
 
 /**
@@ -63,7 +65,12 @@ public class ControladorTelaReviews {
         telaReviews.setReviewsValor((reviews < 0 ? "SN" : Integer.toString(reviews)));
 
         reviewsDoAlbumAtual = new ReviewDAO().getReviewsAlbum(this.alb.getIdAlbum());
-
+        
+        try {
+            telaReviews.atualizarCapa(ManipularImagem.buscarImagem(alb.getCaminhoImagemCapa()));
+        } catch (NullPointerException | IOException ex) {
+        }
+        
         ordenarReviews();
         setTableModel();
 //        telaReviews.setTextArea(apresentarReviewAlbum(reviewsDoAlbumAtual));

@@ -4,7 +4,9 @@
  */
 package view;
 
+import java.awt.Image;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import model.table.ReviewTableModel;
 
@@ -46,6 +48,10 @@ public class TelaReviews extends javax.swing.JFrame {
         setVisible(false);
     }
 
+    public void atualizarCapa(Image imagem) {
+        this.btnAlbum.setIcon(new ImageIcon(imagem));
+    }
+    
     public void addItemsComboBox(String text) {
         cbOrdenacao.addItem(text);
     }
@@ -78,7 +84,7 @@ public class TelaReviews extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnFotoPerfil1 = new javax.swing.JButton();
+        btnAlbum = new javax.swing.JButton();
         lbNomeAlbum = new javax.swing.JLabel();
         lbArtistaNome = new javax.swing.JLabel();
         lbScoreValor = new javax.swing.JLabel();
@@ -93,14 +99,14 @@ public class TelaReviews extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnFotoPerfil1.setBorder(javax.swing.BorderFactory.createLineBorder(null));
-        btnFotoPerfil1.setFocusable(false);
-        btnFotoPerfil1.setMaximumSize(new java.awt.Dimension(115, 115));
-        btnFotoPerfil1.setMinimumSize(new java.awt.Dimension(115, 115));
-        btnFotoPerfil1.setPreferredSize(new java.awt.Dimension(115, 115));
-        btnFotoPerfil1.addActionListener(new java.awt.event.ActionListener() {
+        btnAlbum.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnAlbum.setFocusable(false);
+        btnAlbum.setMaximumSize(new java.awt.Dimension(115, 115));
+        btnAlbum.setMinimumSize(new java.awt.Dimension(115, 115));
+        btnAlbum.setPreferredSize(new java.awt.Dimension(115, 115));
+        btnAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFotoPerfil1ActionPerformed(evt);
+                btnAlbumActionPerformed(evt);
             }
         });
 
@@ -160,7 +166,7 @@ public class TelaReviews extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(btnFotoPerfil1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -192,7 +198,7 @@ public class TelaReviews extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnFotoPerfil1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(lbNomeAlbum)
@@ -220,9 +226,9 @@ public class TelaReviews extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnFotoPerfil1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFotoPerfil1ActionPerformed
+    private void btnAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlbumActionPerformed
 
-    }//GEN-LAST:event_btnFotoPerfil1ActionPerformed
+    }//GEN-LAST:event_btnAlbumActionPerformed
 
     private void cbOrdenacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOrdenacaoActionPerformed
 //        ordenarReviews();
@@ -270,7 +276,7 @@ public class TelaReviews extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnFotoPerfil1;
+    private javax.swing.JButton btnAlbum;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cbOrdenacao;
     private javax.swing.JScrollPane jScrollPane2;

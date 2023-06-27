@@ -5,7 +5,10 @@
 package controller;
 
 import dao.ReviewDAO;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import model.Album;
 import model.Artista;
@@ -13,6 +16,7 @@ import model.Faixa;
 import model.Pessoa;
 import model.table.FaixasTableModel;
 import model.table.ReviewTableModel;
+import util.ManipularImagem;
 import view.TelaCadastroReview;
 import view.TelaListaFaixas;
 import view.TelaReviews;
@@ -59,6 +63,11 @@ public class ControladorTelaListaFaixas {
 //        telaListaFaixas.setFaixasArea(apresentarFaixas());
         telaListaFaixas.setScoreAlbum((score < 0 ? "SN" : Integer.toString(score)));
         telaListaFaixas.setValorAlbum((reviews < 0 ? "SN" : Integer.toString(reviews)));
+        
+        try {
+            telaListaFaixas.atualizarCapa(ManipularImagem.buscarImagem(alb.getCaminhoImagemCapa()));
+        } catch (NullPointerException | IOException ex) {
+        }
     }
 
     public String apresentarFaixas() {

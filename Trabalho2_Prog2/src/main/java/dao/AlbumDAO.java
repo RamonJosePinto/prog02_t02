@@ -66,18 +66,18 @@ public class AlbumDAO implements AlbumRepositorio {
         albuns.add(new Album("One More Light", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/7"));
         albuns.add(new Album("TESTE 1", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/8"));
         albuns.add(new Album("TESTE 2", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/9"));
-        albuns.add(new Album("TESTE 3", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/10"));
-        albuns.add(new Album("TESTE 4", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/11"));
-        albuns.add(new Album("TESTE 5", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/12"));
-        albuns.add(new Album("TESTE 6", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/13"));
-        albuns.add(new Album("TESTE 7", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/14"));
-        albuns.add(new Album("TESTE 8", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/15"));
-        albuns.add(new Album("TESTE 9", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/16"));
-        albuns.add(new Album("TESTE 10", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/17"));
-        albuns.add(new Album("TESTE 11", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/18"));
-        albuns.add(new Album("TESTE 12", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/19"));
-        albuns.add(new Album("TESTE 13", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/20"));
-        albuns.add(new Album("TESTE 14", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/21"));
+//        albuns.add(new Album("TESTE 3", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/10"));
+//        albuns.add(new Album("TESTE 4", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/11"));
+//        albuns.add(new Album("TESTE 5", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/12"));
+//        albuns.add(new Album("TESTE 6", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/13"));
+//        albuns.add(new Album("TESTE 7", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/14"));
+//        albuns.add(new Album("TESTE 8", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/15"));
+//        albuns.add(new Album("TESTE 9", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/16"));
+//        albuns.add(new Album("TESTE 10", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/17"));
+//        albuns.add(new Album("TESTE 11", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/18"));
+//        albuns.add(new Album("TESTE 12", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/19"));
+//        albuns.add(new Album("TESTE 13", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/20"));
+//        albuns.add(new Album("TESTE 14", 2017, (Artista) pessoaDAO.getPessoaId(1), "imagens/album/21"));
     }
 
     @Override
