@@ -37,7 +37,7 @@ public class App {
         Conexao.getConnection();
         
         
-        ControladorTelaLogin controladorTelaLogin = new ControladorTelaLogin(new TelaLogin());
+        ControladorTelaLogin controladorTelaLogin = new ControladorTelaLogin(new TelaLogin(), null);
         controladorTelaLogin.exibirTela();
     }
 }

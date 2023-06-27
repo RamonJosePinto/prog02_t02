@@ -58,16 +58,36 @@ public class ControladorTelaPerfil {
     public ControladorTelaPerfil(TelaPerfil telaPerfil, JFrame telaAnterior, Pessoa pessoaAcessando) {
         this.telaAnterior = telaAnterior;
         this.telaPerfil = telaPerfil;
-        this.pessoa = Pessoa.getUsuarioLogado();
+        this.pessoa = pessoaAcessando;
 
         // Continuação do código
         this.telaPerfil.esconderInformacoes();
-        
-        Pessoa usuarioLogado = Pessoa.getUsuarioLogado();
+
+        //Pessoa usuarioLogado = pessoa;
         this.telaPerfil.setNomePerfil(pessoa.getNome());
         this.telaPerfil.setUserName("@" + pessoa.getUsername());
         inicializarImagemPefil();
 
+        exibirPerfilPessoa();
+        
+        if (albuns == null) {
+            albuns = new ArrayList<>();
+        }
+
+        // Grid de álbuns
+        this.numeroPaginas = calcularPaginas();
+        this.telaPerfil.prepararGridAlbuns();
+        selecionarAlbuns(0);
+        //ordenarAlbuns();
+        //this.telaPerfil.carregarGridAlbuns(albuns);
+
+        controlarBotoesPaginacao();
+        carregarComboBoxOrdenacao();
+        this.telaPerfil.exibirOpcaoCombo();
+        inicializarBotoes();
+    }
+
+    public void exibirPerfilPessoa() {
         if (pessoa.getTipoPessoa() == TipoPessoa.ARTISTA) {    // é perfil de artista
             Artista artistaAcessando = (Artista) pessoa;
             this.telaPerfil.setExibindo("Álbuns do artista");
@@ -75,13 +95,13 @@ public class ControladorTelaPerfil {
             this.telaPerfil.setScoreValor(Integer.toString(artistaAcessando.calcularScore()));
             this.telaPerfil.setReviewsValor(Integer.toString(artistaAcessando.contarReviews()));
 
-            if (pessoaAcessando.equals(usuarioLogado)) {
-                this.telaPerfil.exibirBotaoAdicionarAlbum();
-            }
+            //if (pessoa.equals(usuarioLogado)) {
+            this.telaPerfil.exibirBotaoAdicionarAlbum();
+            //}
 
             albuns = artistaAcessando.getAlbuns();
         } else {                                                        // é perfil de reviewer
-            Reviewer reviewerAcessando = (Reviewer) pessoaAcessando;
+            Reviewer reviewerAcessando = (Reviewer) pessoa;
             this.telaPerfil.setExibindo("Reviews do usuário");
             this.telaPerfil.setReviewsValor(Integer.toString(reviewerAcessando.contarReviews()));
 
@@ -90,24 +110,8 @@ public class ControladorTelaPerfil {
                 albuns.add(r.getAlbum());
             }
         }
-
-        if (albuns == null) {
-            albuns = new ArrayList<>();
-        }
-        
-        // Grid de álbuns
-        this.numeroPaginas = calcularPaginas();
-        this.telaPerfil.prepararGridAlbuns();
-        selecionarAlbuns(0);
-        //ordenarAlbuns();
-        //this.telaPerfil.carregarGridAlbuns(albuns);
-        
-        controlarBotoesPaginacao();
-        carregarComboBoxOrdenacao();
-        this.telaPerfil.exibirOpcaoCombo();
-        inicializarBotoes();
     }
-    
+
     private void selecionarAlbuns(int index) {
         telaPerfil.limparGridAlbuns();
 
@@ -125,7 +129,7 @@ public class ControladorTelaPerfil {
                 break;
             }
         }
-        
+
         telaPerfil.carregarGridAlbuns(albunsGrid, inicializarImagemAlbunsGrid(albunsGrid));
     }
 
@@ -214,40 +218,40 @@ public class ControladorTelaPerfil {
 
     private Map<Integer, Image> inicializarImagemAlbunsGrid(List<Album> albunsGrid) {     // ADICIONAR PARÂMETRO PARA RECEBER O ÁLBUM
         Map<Integer, Image> imagensGrid = new HashMap();
-        
+
         for (Album album : albunsGrid) {
             try {
                 imagensGrid.put(album.getIdAlbum(), ManipularImagem.buscarImagem(album.getCaminhoImagemCapa()));
-/*            } catch(NullPointerException ex) {
+                /*            } catch(NullPointerException ex) {
                 System.out.println("");*/
-            }  catch (IOException ex) {
+            } catch (IOException ex) {
                 System.out.println("");
             }
         }
 
         return imagensGrid;
     }
-    
+
     private void inicializarImagemPefil() {
         try {
             telaPerfil.atualizarImagemPerfil(ManipularImagem.buscarImagem(pessoa.getCaminhoImagemPerfil()));
-        } catch(NullPointerException ex) {
+        } catch (NullPointerException ex) {
             System.out.println("O usuário não tem foto de perfil cadastrada.");
-        }  catch (IOException ex) {
+        } catch (IOException ex) {
             telaPerfil.exibirMensagem("Não foi possível carregar sua imagem de perfil. Por favor, faça upload novamente.");
         }
     }
-    
+
     private void acaoAtualizarImagemPerfil() {
         File arquivo = telaPerfil.subirImagemPerfil();
-        
+
         String arquivoOrigem = arquivo.toPath().toString();
-                
+
         String nomeArquivo = Integer.toString(pessoa.getIdPessoa());
-  
+
         try {
             String caminhoImagemPerfil = ManipularImagem.gravarImagemPerfil(arquivoOrigem, nomeArquivo, 135, 135);
-            
+
             if (new PessoaDAO().atualizarImagemPessoa(pessoa.getIdPessoa(), caminhoImagemPerfil)) {
                 pessoa.setCaminhoImagemPerfil(caminhoImagemPerfil);
                 telaPerfil.exibirMensagem("Sua imagem de perfil foi atualizada.");
@@ -259,7 +263,7 @@ public class ControladorTelaPerfil {
             telaPerfil.exibirMensagem("Não foi possível fazer upload da imagem de perfil.");
         }
     }
-    
+
     private void inicializarBotoes() {
         telaPerfil.adicionarAcaoBotaoPerfil(acao -> acaoAtualizarImagemPerfil());
         telaPerfil.adicionarAcaoBotaoProximo(acao -> acaoProximo());
@@ -274,7 +278,7 @@ public class ControladorTelaPerfil {
         telaPerfil.adicionarAcaoBotaoAlbum_6(acao -> acaoAlbum_6());
         telaPerfil.adicionarAcaoBotaoCadastrarAlbum(acao -> acaoCadastrarAlbum());
     }
-    
+
     private void acaoCadastrarAlbum() {
         Album novoAlb = new Album();
         ControladorCadastrarAlbum controladorCadastroAlbum = new ControladorCadastrarAlbum(new TelaCadastroAlbum(), new FaixasTableModel(novoAlb.getFaixas()), novoAlb);
@@ -336,7 +340,7 @@ public class ControladorTelaPerfil {
 
     private void acaoVoltar() {
         telaPerfil.fecharTela();
-        ControladorTelaInicial controladorTelaInicial = new ControladorTelaInicial(new TelaInicial());
+        ControladorTelaInicial controladorTelaInicial = new ControladorTelaInicial(new TelaInicial(), pessoa);
         controladorTelaInicial.exibirTela();
 
     }

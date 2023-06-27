@@ -79,7 +79,7 @@ public abstract class Pessoa {
             Pessoa.usuarioLogado = p;
             return usuarioLogado;
         } else {
-            throw new PessoaInexistenteException("Usuário não encontrado");
+            throw new PessoaInexistenteException("Email ou senha inválidos. Por favor, verifique suas credenciais.");
             //return null;
         }
     }

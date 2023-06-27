@@ -38,9 +38,9 @@ public class ControladorTelaInicial {
     private int numeroPaginas;
     private int paginaAtual = 1;
 
-    public ControladorTelaInicial(TelaInicial telaInicial) {
+    public ControladorTelaInicial(TelaInicial telaInicial, Pessoa pessoa) {
         this.telaInicial = telaInicial;
-        this.pessoa = Pessoa.getUsuarioLogado();
+        this.pessoa = pessoa;
         this.albuns = new AlbumDAO().getListaAlbuns();
         Collections.sort(albuns);
 

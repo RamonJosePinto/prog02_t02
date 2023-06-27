@@ -99,7 +99,7 @@ public class ControladorTelaListaFaixas {
     }
 
     public void acaoFazerReviews() {
-        ControladorCadastrarReview controladorTelaCadastroReview = new ControladorCadastrarReview(new TelaCadastroReview(), alb, telaAnterior);
+        ControladorCadastrarReview controladorTelaCadastroReview = new ControladorCadastrarReview(new TelaCadastroReview(), alb, telaListaFaixas);
         controladorTelaCadastroReview.exibirTela();
         fecharTela();
     }

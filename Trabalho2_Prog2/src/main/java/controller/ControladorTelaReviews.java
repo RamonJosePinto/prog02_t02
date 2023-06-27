@@ -32,7 +32,6 @@ public class ControladorTelaReviews {
         this.alb = alb;
         this.janelaAnterior = janelaAnterior;
         this.reviewsTableModel = reviewTableModel;
-
         carregarComboBoxOrdenacao();
         apresentarInformacoes();
         inicializarBotoes();

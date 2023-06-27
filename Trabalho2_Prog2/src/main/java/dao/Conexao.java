@@ -18,7 +18,7 @@ public class Conexao {
     static final String DB_URL = "jdbc:postgresql://localhost:5432/Prog2-T2";
 
     static final String USER = "postgres";
-    static final String PASS = "@Alienigena1";
+    static final String PASS = "Ronin@kami";
 
     public static Connection conectar() {
         try {

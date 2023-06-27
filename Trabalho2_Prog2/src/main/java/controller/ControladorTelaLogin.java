@@ -22,8 +22,9 @@ public class ControladorTelaLogin {
     private TelaLogin telaLogin;
     private Pessoa pessoa;
 
-    public ControladorTelaLogin(TelaLogin telaLogin) {
+    public ControladorTelaLogin(TelaLogin telaLogin, Pessoa pessoa) {
         this.telaLogin = telaLogin;
+        this.pessoa = pessoa;
 
         inicializarBotoes();
     }
@@ -38,7 +39,7 @@ public class ControladorTelaLogin {
     }
 
     public void acaoCadastrarPessoa() {
-        ControladorCadastrarPessoa controladorTelaCadastrarPessoa = new ControladorCadastrarPessoa(new TelaCadastrarPessoa());
+        ControladorCadastrarPessoa controladorTelaCadastrarPessoa = new ControladorCadastrarPessoa(new TelaCadastrarPessoa(), pessoa);
         controladorTelaCadastrarPessoa.exibirTela();
         telaLogin.fecharTela();
     }
@@ -50,9 +51,9 @@ public class ControladorTelaLogin {
             String senha = telaLogin.getSenhaUsuario();
 
             //Chamada do metodo login de pessoa
-            Pessoa p = Pessoa.login(email, senha);
+            pessoa = Pessoa.login(email, senha);
             telaLogin.exibirMensagem("Login feito com sucesso !");
-            ControladorTelaInicial controladorTelaInicial = new ControladorTelaInicial(new TelaInicial());
+            ControladorTelaInicial controladorTelaInicial = new ControladorTelaInicial(new TelaInicial(), pessoa);
             controladorTelaInicial.exibirTela();
             telaLogin.fecharTela();
 

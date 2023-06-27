@@ -28,9 +28,9 @@ public class ControladorCadastrarPessoa {
     private TelaCadastrarPessoa telaCadastrarPessoa;
     private Pessoa pessoa;
 
-    public ControladorCadastrarPessoa(TelaCadastrarPessoa telaCadastrarPessoa) {
+    public ControladorCadastrarPessoa(TelaCadastrarPessoa telaCadastrarPessoa, Pessoa pessoa) {
         this.telaCadastrarPessoa = telaCadastrarPessoa;
-        this.pessoa = null;
+        this.pessoa = pessoa;
 
         inicializarBotoes();
     }
@@ -42,7 +42,7 @@ public class ControladorCadastrarPessoa {
     }
 
     public void acaoCancelar() {
-        ControladorTelaLogin controladorTelaLogin = new ControladorTelaLogin(new TelaLogin());
+        ControladorTelaLogin controladorTelaLogin = new ControladorTelaLogin(new TelaLogin(), pessoa);
         controladorTelaLogin.exibirTela();
         telaCadastrarPessoa.fecharTela();
     }
@@ -57,7 +57,7 @@ public class ControladorCadastrarPessoa {
             String senha = telaCadastrarPessoa.getSenhaPessoa();
             String caminoImagemPerfil = telaCadastrarPessoa.getCaminhoImagemPerfil();
 
-            Pessoa novaPessoa = telaCadastrarPessoa.getRadioArtista().isSelected() ? new Artista(usuario, email, senha, nome,caminoImagemPerfil) : new Reviewer(usuario, email, senha, nome,caminoImagemPerfil);
+            pessoa = telaCadastrarPessoa.getRadioArtista().isSelected() ? new Artista(usuario, email, senha, nome,caminoImagemPerfil) : new Reviewer(usuario, email, senha, nome,caminoImagemPerfil);
 
             PessoaDAO pDao = new PessoaDAO();
 
@@ -73,16 +73,16 @@ public class ControladorCadastrarPessoa {
             if (jaCadastrado == false) {
                 try {
      
-                    pDao.salvarPessoa(novaPessoa);
+                    pDao.salvarPessoa(pessoa);
 
                     System.out.println(pDao.getListaPessoas());
-                    System.out.println(novaPessoa.toString());
+                    System.out.println(pessoa.toString());
 
           
                     Pessoa.login(email, senha);
                  
                     telaCadastrarPessoa.exibirMensagem("Cadastro realizado com sucesso!");
-                    ControladorTelaInicial controladorTelaInicial = new ControladorTelaInicial(new TelaInicial());
+                    ControladorTelaInicial controladorTelaInicial = new ControladorTelaInicial(new TelaInicial(), pessoa);
                     controladorTelaInicial.exibirTela();
                     telaCadastrarPessoa.fecharTela();
                 } catch (PessoaInexistenteException ex) {

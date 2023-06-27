@@ -45,16 +45,20 @@ public class ControladorCadastrarReview {
         int nota = telaCadastroReview.getNota();
         System.out.println(nota);
         String descricao = telaCadastroReview.getDescricao();
-        ReviewDAO daoReview = new ReviewDAO();
-        // gravar review
-        Review review = new Review((Reviewer) Pessoa.getUsuarioLogado(), alb, nota, descricao);
-        ReviewDAO reviewDao = new ReviewDAO();
-        reviewDao.salvarReview(review);
-        // apresnetar joptionpane
-        telaCadastroReview.exibirMensagem("Review Cadastrada com sucesso");
-        ControladorJFrame controladorJFrame = new ControladorJFrame(janelaAnterior);
-        controladorJFrame.ExibirTela();
-        fecharTela();
+        if (nota < 0 || descricao.isEmpty()) {
+            telaCadastroReview.exibirMensagem("Por favor, informe uma descrição para a review e utilize apenas notas positivas");
+        } else {
+            ReviewDAO daoReview = new ReviewDAO();
+            // gravar review
+            Review review = new Review((Reviewer) Pessoa.getUsuarioLogado(), alb, nota, descricao);
+            ReviewDAO reviewDao = new ReviewDAO();
+            reviewDao.salvarReview(review);
+            // apresnetar joptionpane
+            telaCadastroReview.exibirMensagem("Review Cadastrada com sucesso");
+            ControladorJFrame controladorJFrame = new ControladorJFrame(janelaAnterior);
+            controladorJFrame.ExibirTela();
+            fecharTela();
+        }
     }
 
     public void acaoVoltar() {
